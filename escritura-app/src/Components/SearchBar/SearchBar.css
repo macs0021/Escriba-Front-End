@@ -1,0 +1,12 @@
+.bar-container{
+    display: flex;
+    background-color: red;
+    height: 5rem;
+    align-items: center;
+    
+}
+.search-bar{
+    height: 2rem;
+    width: 20rem;
+    right: 5rem;
+}

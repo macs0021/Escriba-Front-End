@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "boostrap": "^2.0.0",
+    "cdbreact": "^1.5.4",
+    "react-quill": "^2.0.0"
+  }
+}

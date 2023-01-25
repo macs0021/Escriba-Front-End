@@ -1,0 +1,6 @@
+.galery-container {
+    display: grid;
+    gap: 3rem;
+    margin: auto;
+    grid-template-columns: repeat(5, 2fr);
+}

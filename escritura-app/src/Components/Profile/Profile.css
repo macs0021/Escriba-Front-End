@@ -1,0 +1,101 @@
+.portrait {
+    display: flex;
+    background-color: #333;
+    height: 15rem;
+    width: 15rem;
+    margin: auto;
+    margin-top: 2rem;
+    box-shadow: 0px 0px 5px 0px #333;
+}
+.top-side{
+    display: flex;
+}
+
+.bot-side{
+    margin-top: 10rem;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.contrainer {
+    display: flex;
+}
+
+.user-data {
+    background-color: #f3f3f3;
+    display: flex;
+    height: 15rem;
+    width: 70rem;
+    box-shadow: 0px 0px 5px 0px #333;
+    margin-top: 2rem;
+}
+
+.profile-img {
+    border-radius: 50%;
+    border: 5px solid #333;
+    max-width: 8rem;
+}
+
+.center-data {
+    margin: auto;
+    height: 100%;
+    width: 50%;
+    /*background-color: yellow;*/
+}
+
+.data-container {
+    display: flex;
+    justify-content: center;
+    color: #333;
+}
+
+.img-container {
+    display: flex;
+    margin: auto;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.user-name {
+    font-size: 2rem;
+    margin-top: 2%;
+    justify-content: center;
+}
+
+.stats-container {
+    display: flex;
+    /*background-color: red;*/
+    height: 100%;
+    width: 50%;
+}
+
+.user-stat {
+    margin: auto;
+    margin-top: 6rem;
+    height: 6.5rem;
+
+}
+
+.stat {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    border-bottom: 2px solid #333;
+    height: 25%;
+    width: 85%;
+}
+
+.stat-value {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    height: 25%;
+    width: 85%;
+}
