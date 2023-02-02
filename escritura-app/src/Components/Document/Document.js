@@ -3,11 +3,9 @@ import 'quill/dist/quill.snow.css';
 import { Quill } from "react-quill";
 import { useParams } from 'react-router-dom';
 import 'quill-divider';
-import ReactDOMServer from 'react-dom/server';
 
 
-export default function TextEditor() {
-
+export default function Document() {
   const [port, setPort] = useState();
   const [quill, setQuill] = useState();
   const [data, setData] = useState();
@@ -15,61 +13,40 @@ export default function TextEditor() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const toolBar = {
-    container: [
-      [{ 'font': [] }, { 'size': [] }],
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      [{ 'margin': [10, 20, 30, 40] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ 'color': [] }, { 'background': [] }],
-      [{ 'script': 'super' }, { 'script': 'sub' }],
-      [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block'],
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-      ['direction', { 'align': [] }],
-      ['link', 'image', 'video', 'formula'],
-      ['clean'],
-      ['divider'],
-    ]
-  }
-
-  function Html() {
-    return (
-      <>
-        <div class="bar-container"></div>
-        <div class="center-div">
-          <div class="side-holder left"></div>
-          <div class="editor"></div>
-          <div class="side-holder right">
-            <div class="bubble-comment-holder">
-
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
-
   const reference = useCallback((refe) => {
     if (refe == null) return;
 
-    refe.innerHTML = ReactDOMServer.renderToString(<Html />);
+    refe.innerHTML = "";
 
-    const editor = refe.querySelector('.editor');
+    const leftDiv = document.createElement('div');
+    const editor = document.createElement('div');
+    const centerDiv = document.createElement('div');
+    const rightDiv = document.createElement('div');
+    const barContaier = document.createElement('div');
+
+    leftDiv.className = "side-holder right";
+    rightDiv.className = "side-holder left";
+    centerDiv.className = "center-div";
+
+    centerDiv.appendChild(leftDiv);
+    centerDiv.appendChild(editor);
+    centerDiv.appendChild(rightDiv);
+    refe.append(barContaier);
+    refe.append(centerDiv);
 
     const quill = new Quill(editor, {
       theme: 'snow',
       modules: {
-        'toolbar': toolBar
-      }
+        'toolbar': false
+      },
+      readOnly: true,
     });
-    var toolbar = document.querySelector('.ql-toolbar');
-    refe.querySelector('.bar-container').appendChild(toolbar);
+    
     setQuill(quill);
   }, []);
 
-  //Recojo datos del servidor
-  useEffect(() => {
-    console.log(documentId);
+   useEffect(() => {
+    console.log("Pidiendo " + documentId);
     fetch(`http://localhost:8080/api/documents/${encodeURIComponent(documentId)}`)
       .then(response => response.json())
       .then(data => {
@@ -82,11 +59,11 @@ export default function TextEditor() {
   }, [quill]);
 
   //Enviando datos cada 5s
-  useEffect(() => {
+  /*useEffect(() => {
     const interval = setInterval(async () => {
       setIsLoading(true);
       if (quill == null) return;
-      const docuData = { "id": documentId, "privateText": quill.root.innerHTML };
+      const docuData = { "id": documentId, "text": quill.root.innerHTML };
       console.log("enviando datos: " + quill.root.innerHTML);
       const options = {
         method: 'POST',
@@ -105,7 +82,7 @@ export default function TextEditor() {
       }
     }, 5000);
     return () => clearInterval(interval);
-  }, [quill]);
+  }, [quill]);*/
 
   return <div className="container" ref={reference}></div>;
 };

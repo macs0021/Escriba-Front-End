@@ -4,22 +4,26 @@
     box-sizing: border-box;
 }
 
+
+/*editor*/
+
 body {
     background-color: #F3F3F3;
     margin: 0;
 }
-
-.container {
-    background-color: #F3F3F3;
-}
-
+    
 .container .ql-editor {
     width: 21cm;
     min-height: 29.7cm;
     padding: 1in;
-    margin: 1rem;
+    margin-top: 1rem;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
     background-color: white;
+    font-size: 1rem;
+}
+.center-div{
+    display: flex;
+    justify-content: center;
 }
 
 .container .ql-container.ql-snow {
@@ -31,13 +35,28 @@ body {
 .container .ql-toolbar.ql-snow {
     display: flex;
     justify-content: center;
-    position: sticky;
-    top: 3.25rem;
     z-index: 1;
+    width: 100%;
     background-color: #F3F3F3;
     border: none;
     box-shadow: 0 5px 2px -2px rgba(0, 0, 0, 0.5);
 
+}
+.bar-container{
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    position: sticky;
+    top: 3.20rem;
+    z-index: 1;
+}
+
+.side-holder {
+    display: flex;
+    margin-top: 1rem;
+    min-height: 100%;
+    width: 10rem;
+    background-color: red;
 }
 
 .page-divider {
@@ -45,6 +64,12 @@ body {
     margin-bottom: 1in;
 }
 
+.bubble-comment-holder{
+    background-color: purple;
+    height: 100%;
+    width: 100%;
+
+}
 
 @page {
     margin: 1in;
