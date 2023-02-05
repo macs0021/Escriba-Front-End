@@ -4,11 +4,8 @@
     box-sizing: border-box;
 }
 
-
-/*editor*/
-
 body {
-    background-color: #F3F3F3;
+    background-color: white;
     margin: 0;
 }
     
@@ -56,7 +53,6 @@ body {
     margin-top: 1rem;
     min-height: 100%;
     width: 10rem;
-    background-color: red;
 }
 
 .page-divider {
@@ -65,7 +61,6 @@ body {
 }
 
 .bubble-comment-holder{
-    background-color: purple;
     height: 100%;
     width: 100%;
 

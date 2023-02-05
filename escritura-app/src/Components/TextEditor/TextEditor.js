@@ -35,12 +35,12 @@ export default function TextEditor() {
   function Html() {
     return (
       <>
-        <div class="bar-container"></div>
-        <div class="center-div">
-          <div class="side-holder left"></div>
-          <div class="editor"></div>
-          <div class="side-holder right">
-            <div class="bubble-comment-holder">
+        <div className="bar-container"></div>
+        <div className="center-div">
+          <div className="side-holder left"></div>
+          <div className="editor"></div>
+          <div className="side-holder right">
+            <div className="bubble-comment-holder">
 
             </div>
           </div>

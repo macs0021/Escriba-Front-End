@@ -5,21 +5,18 @@ import Galery from '../Galery/Galery'
 import SearchBar from "../SearchBar/SearchBar";
 
 function Tab(props) {
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(props.tabs[0].id);
 
   const toggleTab = (index) => {
     setActiveTab(index);
   };
 
-  const tabs = [
-    { id: 1, title: 'Tab 1', content: 'Contenido del Tab 1' },
-    { id: 2, title: 'Tab 2', content: 'Contenido del Tab 2' },
-    { id: 3, title: 'Tab 3', content: 'Contenido del Tab 3' },
-  ];
+  const tabs = props.tabs;
 
   return (
     <div className="tab-container">
       <div className="bloc-tabs">
+      <div className="separator"></div>
         {tabs.map((tab) => (
           <button key={tab.id} className={`tabs ${activeTab === tab.id ? 'active-tabs' : ''}`} onClick={() => toggleTab(tab.id)}>
             {tab.title}
@@ -34,9 +31,7 @@ function Tab(props) {
               <div key={tab.id} className={`content ${activeTab === tab.id ? 'active-content' : ''}`}>
                 <h2>Content {tab.id}</h2>
                 <hr />
-                <p>
-                  <Galery />
-                </p>
+                  {tab.content}
               </div>
             );
           }

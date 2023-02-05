@@ -1,8 +1,26 @@
 import './Profile.css'
 import profileHolder from '../../files/profile-holder.jpg'
 import Galery from '../Galery/Galery'
+import Tab from '../Tab/Tab'
 
 export default function Profile() {
+
+    const cards = [
+        { title: 'Caperucita roja', reviewAverage: 4.2, comments: 10 },
+        { title: 'El lobo feroz', reviewAverage: 4.9, comments: 20 },
+        { title: 'Transformers', reviewAverage: 2.3, comments: 7 },
+    ];
+
+    const cards2 = [
+        { title: 'Caperucita roja2', reviewAverage: 4.2, comments: 10 },
+        { title: 'El lobo feroz2', reviewAverage: 4.9, comments: 20 },
+        { title: 'Transformers2', reviewAverage: 2.3, comments: 7 },
+    ];
+    const tabs = [
+        { id: 4, title: 'Tab 1', content: <Galery cards={cards} /> },
+        { id: 5, title: 'Tab 2', content: <Galery cards={cards2} /> },
+    ];
+
     return (
         <>
             <div className='top-side'>
@@ -73,7 +91,7 @@ export default function Profile() {
                 <div className='portrait right'></div>
             </div>
             <div className='bot-side'>
-                <Galery/>
+                <Tab tabs={tabs}></Tab>
             </div>
 
         </>
