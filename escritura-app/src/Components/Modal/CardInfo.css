@@ -1,0 +1,20 @@
+.content-line{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+.listed-content{
+    padding-bottom: 1rem;
+    margin-left: 0;
+}
+.listed-element{
+    margin-bottom: 0.5rem;
+}
+.text-line{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    max-height:500px;
+    word-break: initial;
+}

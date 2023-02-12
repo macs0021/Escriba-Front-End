@@ -1,0 +1,27 @@
+.button-div{
+    display: flex;
+    justify-content: center;
+    height: 7rem;
+}
+.create-button{
+    margin: auto;
+    margin-bottom: 1rem;
+    width: 20rem;
+    height: 2rem;
+    background-color: #F3F3F3;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+.tittle-div{
+    margin: auto;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    font-size: 100px;
+    width: 90%;
+}
+.tittle{
+    position: relative;
+    top:50%;
+}

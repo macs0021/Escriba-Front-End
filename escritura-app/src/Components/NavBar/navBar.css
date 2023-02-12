@@ -26,6 +26,7 @@
     list-style: none;
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 
 .main-tittle {
@@ -39,6 +40,10 @@
 .nav li:hover {
     background-color: #F3F3F3;
     color: #333;
+}
+
+.item{
+    margin: auto;
 }
 
 @media print {

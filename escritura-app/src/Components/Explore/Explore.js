@@ -1,5 +1,6 @@
 import Tab from '../Tab/Tab'
 import Galery from '../Galery/Galery'
+import ImageGeneratorForm from '../TextEditor/ImageGeneratorForm';
 export default function Explore() {
 
 
@@ -14,7 +15,7 @@ export default function Explore() {
 
     const tabs = [
         { id: 1, title: 'Tab 1', content: tab1() },
-        { id: 2, title: 'Tab 2', content: 'Contenido del Tab 2' },
+        { id: 2, title: 'Tab 2', content: <ImageGeneratorForm/> },
         { id: 3, title: 'Hola', content: 'Contenido del Tab 3' },
     ];
 

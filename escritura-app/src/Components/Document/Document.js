@@ -3,7 +3,8 @@ import 'quill/dist/quill.snow.css';
 import { Quill } from "react-quill";
 import { useParams } from 'react-router-dom';
 import 'quill-divider';
-
+import './Document.css';
+import documentService from '../../Services/DocumentService'
 
 export default function Document() {
   const [port, setPort] = useState();
@@ -24,9 +25,9 @@ export default function Document() {
     const rightDiv = document.createElement('div');
     const barContaier = document.createElement('div');
 
-    leftDiv.className = "side-holder right";
-    rightDiv.className = "side-holder left";
-    centerDiv.className = "center-div";
+    leftDiv.className = "side-holder-reader right";
+    rightDiv.className = "side-holder-reader left";
+    centerDiv.className = "center-div-reader";
 
     centerDiv.appendChild(leftDiv);
     centerDiv.appendChild(editor);
@@ -45,44 +46,15 @@ export default function Document() {
     setQuill(quill);
   }, []);
 
-   useEffect(() => {
-    console.log("Pidiendo " + documentId);
-    fetch(`http://localhost:8080/api/documents/${encodeURIComponent(documentId)}`)
-      .then(response => response.json())
-      .then(data => {
-        setData(data);
-        console.log(data.privateText);
-        if (quill != null) {
-          quill.root.innerHTML = data.privateText;
-        }
+  //Recibo datos al inicial Quill.
+  useEffect(() => {
+    if (quill != null) {
+      documentService.getDocumentById(documentId).then(data => {
+        quill.root.innerHTML = data.privateText;
       });
+    }
   }, [quill]);
 
-  //Enviando datos cada 5s
-  /*useEffect(() => {
-    const interval = setInterval(async () => {
-      setIsLoading(true);
-      if (quill == null) return;
-      const docuData = { "id": documentId, "text": quill.root.innerHTML };
-      console.log("enviando datos: " + quill.root.innerHTML);
-      const options = {
-        method: 'POST',
-        body: JSON.stringify(docuData),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      try {
-        const response = await fetch('http://localhost:8080/api/documents', options);
-        const result = await response.json();
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-        setIsLoading(false);
-      }
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [quill]);*/
-
+  
   return <div className="container" ref={reference}></div>;
 };

@@ -1,19 +1,30 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import 'quill/dist/quill.snow.css';
-import { Quill } from "react-quill";
+import { Quill, Delta } from "react-quill";
 import { useParams } from 'react-router-dom';
 import 'quill-divider';
 import ReactDOMServer from 'react-dom/server';
+import './TextEditor.css';
+import documentService from '../../Services/DocumentService'
+import ImageGeneratorForm from "./ImageGeneratorForm";
 
+import ImageResize from 'quill-image-resize-module-react';
+import { textAlign } from "@mui/system";
+import ImageGeneratorService from '../../Services/ImageGeneratorService';
+
+
+Quill.register('modules/imageResize', ImageResize);
 
 export default function TextEditor() {
 
-  const [port, setPort] = useState();
   const [quill, setQuill] = useState();
   const [data, setData] = useState();
   const { id: documentId } = useParams();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [lastSelection, setLastSelection] = useState(0);
+  const [actualImage, setActualImage] = useState(null);
+
 
   const toolBar = {
     container: [
@@ -32,80 +43,112 @@ export default function TextEditor() {
     ]
   }
 
-  function Html() {
-    return (
-      <>
-        <div className="bar-container"></div>
-        <div className="center-div">
-          <div className="side-holder left"></div>
-          <div className="editor"></div>
-          <div className="side-holder right">
-            <div className="bubble-comment-holder">
-
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
 
   const reference = useCallback((refe) => {
     if (refe == null) return;
+    refe.innerHTML = "";
 
-    refe.innerHTML = ReactDOMServer.renderToString(<Html />);
+    const editor = document.createElement("div");
 
-    const editor = refe.querySelector('.editor');
+    refe.append(editor);
 
     const quill = new Quill(editor, {
       theme: 'snow',
       modules: {
-        'toolbar': toolBar
+        'toolbar': toolBar,
+        imageResize: {
+          modules: ['Resize']
+        }
       }
     });
-    var toolbar = document.querySelector('.ql-toolbar');
-    refe.querySelector('.bar-container').appendChild(toolbar);
+
+    quill.on('editor-change', () => {
+      console.log("hola");
+      if (quill.getSelection() != null)
+        setLastSelection(quill.getSelection().index);
+
+    });
+
     setQuill(quill);
   }, []);
 
   //Recojo datos del servidor
   useEffect(() => {
-    console.log(documentId);
-    fetch(`http://localhost:8080/api/documents/${encodeURIComponent(documentId)}`)
-      .then(response => response.json())
-      .then(data => {
-        setData(data);
-        console.log(data.privateText);
-        if (quill != null) {
-          quill.root.innerHTML = data.privateText;
-        }
+    if (quill != null) {
+      documentService.getDocumentById(documentId).then(data => {
+        quill.root.innerHTML = data.privateText;
       });
+    }
   }, [quill]);
 
   //Enviando datos cada 5s
   useEffect(() => {
     const interval = setInterval(async () => {
       setIsLoading(true);
+
       if (quill == null) return;
-      const docuData = { "id": documentId, "privateText": quill.root.innerHTML };
+
+      const document = { "id": documentId, "privateText": quill.root.innerHTML };
+
       console.log("enviando datos: " + quill.root.innerHTML);
-      const options = {
-        method: 'POST',
-        body: JSON.stringify(docuData),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      try {
-        const response = await fetch('http://localhost:8080/api/documents', options);
-        const result = await response.json();
+
+      documentService.putDocument(document).then(data => {
         setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-        setIsLoading(false);
-      }
+      })
+
     }, 5000);
     return () => clearInterval(interval);
   }, [quill]);
 
-  return <div className="container" ref={reference}></div>;
+  const handleButtonClick = ({ imagePrompt, width, height }) => {
+    console.log("prompt: " + imagePrompt);
+    console.log("width: " + width);
+    console.log("height: " + height);
+    const imgData = {
+      "prompt": imagePrompt,
+      "negative_prompt": "string",
+      "scheduler": "EulerAncestralDiscreteScheduler",
+      "image_height": height,
+      "image_width": width,
+      "num_images": 1,
+      "guidance_scale": 7,
+      "steps": 50,
+      "seed": Math.floor(Math.random() * 999999) + 1
+    }
+    ImageGeneratorService.postImg(imgData).then(data => {
+      console.log(data.images[0]);
+      const base64Image = data.images[0];
+      const index = lastSelection;
+      setActualImage(quill.insertEmbed(index, 'image', `data:image/png;base64,${base64Image}`));
+      console.log(actualImage);
+    })
+  };
+  
+  const reloadOnButtonClick = ({ imagePrompt, width, height }) => {
+    /*if (actualImage == null) return;
+  
+    const imgData = {
+      "prompt": imagePrompt,
+      "negative_prompt": "string",
+      "scheduler": "EulerAncestralDiscreteScheduler",
+      "image_height": height,
+      "image_width": width,
+      "num_images": 1,
+      "guidance_scale": 7,
+      "steps": 50,
+      "seed": Math.floor(Math.random() * 999999) + 1
+    }
+    ImageGeneratorService.postImg(imgData).then(data => {
+      console.log(data.images[0]);
+      if (actualImage == null) return;
+      const base64Image = data.images[0];
+      quill.updateEmbed(actualImage, { src: `data:image/png;base64,${base64Image}` });
+    })*/
+  };
+
+
+  return (<>
+    <div className="container" ref={reference}></div>
+    <ImageGeneratorForm execute={handleButtonClick} reload={reloadOnButtonClick}></ImageGeneratorForm>
+  </>);
 };

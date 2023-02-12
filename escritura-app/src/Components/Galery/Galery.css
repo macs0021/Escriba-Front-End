@@ -1,10 +1,11 @@
 .galery-container {
     display: grid;
-    gap: 3rem;
     margin-bottom: 3rem;
-    margin-top: 3rem;
-    grid-template-columns: repeat(5, 2fr);
-    width: 95%;
+    margin-top: 0.5rem;
+    grid-auto-rows: 27rem;
+    grid-template-columns: repeat(auto-fit, minmax(0rem,19rem));
+    width: 100%;
+    justify-content: center;
 }
 .galery-center{
     display: flex;

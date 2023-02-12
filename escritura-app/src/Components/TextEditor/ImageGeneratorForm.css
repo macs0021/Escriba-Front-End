@@ -1,0 +1,44 @@
+.image-generator {
+    margin: auto;
+    position: fixed;
+    top: 10rem;
+    right: 6rem;
+    width: 20rem;
+    height: 10rem;
+    background-color: #F3F3F3;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+.top-image-container {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.image-prompt-input {
+    display: flex;
+    margin: auto;
+    margin-top: 1rem;
+    height: 1.5rem;
+    width: 80%;
+}
+
+.input-button {
+    background-color: white;
+    color: #333;
+    height: 1.5rem;
+    margin: auto;
+    margin-top: 1rem;
+    width: 5rem;
+    border: 1px solid #333;
+}
+.size-input-container{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    width: 80%;
+}
+.input-button-container{
+    display: flex;
+}
