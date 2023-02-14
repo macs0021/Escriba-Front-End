@@ -1,0 +1,25 @@
+.unselected-chip {
+    display: flex;
+    align-items: center;
+    background-color: #f3f3f3;
+    color: #333;
+    border-radius: 16px;
+    padding: 2px 8px;
+    margin: 4px;
+    width: auto;
+}
+
+.selected-chip {
+    display: inline-flex;
+    align-items: center;
+    background-color: #333;
+    color: #f3f3f3;
+    border-radius: 16px;
+    padding: 2px 8px;
+    margin: 4px;
+}
+
+.selectable {
+    cursor: pointer;
+    user-select: none;
+}

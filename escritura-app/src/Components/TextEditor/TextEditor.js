@@ -101,9 +101,13 @@ export default function TextEditor() {
   }, [quill]);
 
   const handleButtonClick = ({ imagePrompt, width, height }) => {
+
     console.log("prompt: " + imagePrompt);
     console.log("width: " + width);
     console.log("height: " + height);
+    
+    const seed = Math.floor(Math.random() * 999999) + 1;
+
     const imgData = {
       "prompt": imagePrompt,
       "negative_prompt": "string",
@@ -113,7 +117,7 @@ export default function TextEditor() {
       "num_images": 1,
       "guidance_scale": 7,
       "steps": 50,
-      "seed": Math.floor(Math.random() * 999999) + 1
+      "seed": seed,
     }
     ImageGeneratorService.postImg(imgData).then(data => {
       console.log(data.images[0]);
@@ -125,7 +129,7 @@ export default function TextEditor() {
   };
   
   const reloadOnButtonClick = ({ imagePrompt, width, height }) => {
-    /*if (actualImage == null) return;
+    if (actualImage == null) return;
   
     const imgData = {
       "prompt": imagePrompt,
@@ -143,7 +147,7 @@ export default function TextEditor() {
       if (actualImage == null) return;
       const base64Image = data.images[0];
       quill.updateEmbed(actualImage, { src: `data:image/png;base64,${base64Image}` });
-    })*/
+    })
   };
 
 

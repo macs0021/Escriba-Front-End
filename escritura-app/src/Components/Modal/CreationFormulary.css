@@ -1,0 +1,41 @@
+.chip-container{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    max-width: 30rem;
+    justify-content: center;
+}
+.formulary-line{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.create-form-label{
+    display: flex;
+}
+.create-form-input{
+    display: flex;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    width: 30rem;
+}
+.cover-portrait{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.cover{
+    width: 50%;
+}
+.center-element{
+    display: flex;
+    justify-content: center;
+}
+.create-document-button{
+    background-color: #f3f3f3;
+    width: 5rem;
+    height: 2.5rem;
+    cursor: pointer;
+
+}

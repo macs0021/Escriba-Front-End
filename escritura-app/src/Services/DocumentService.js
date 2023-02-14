@@ -5,6 +5,22 @@ async function getDocumentById(id) {
 
 async function putDocument(document) {
     const options = {
+        method: 'PUT',
+        body: JSON.stringify(document),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    try {
+        const response = await fetch('http://localhost:8080/api/documents', options);
+        return response?.json();
+    } catch (error) {
+        return error;
+    }
+}
+
+async function postDocument(document) {
+    const options = {
         method: 'POST',
         body: JSON.stringify(document),
         headers: {
@@ -20,5 +36,5 @@ async function putDocument(document) {
 }
 
 export default {
-    getDocumentById, putDocument,
+    getDocumentById, putDocument,postDocument,
 };
