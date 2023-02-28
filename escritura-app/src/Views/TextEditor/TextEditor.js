@@ -6,7 +6,7 @@ import 'quill-divider';
 import ReactDOMServer from 'react-dom/server';
 import './TextEditor.css';
 import documentService from '../../Services/DocumentService'
-import ImageGeneratorForm from "./ImageGeneratorForm";
+import ImageGeneratorForm from "../../Components/TextEditor/ImageGeneratorForm";
 
 import ImageResize from 'quill-image-resize-module-react';
 import { textAlign } from "@mui/system";
@@ -18,7 +18,7 @@ Quill.register('modules/imageResize', ImageResize);
 export default function TextEditor() {
 
   const [quill, setQuill] = useState();
-  const [data, setData] = useState();
+  const [docuData, setDocuData] = useState();
   const { id: documentId } = useParams();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -63,7 +63,6 @@ export default function TextEditor() {
     });
 
     quill.on('editor-change', () => {
-      console.log("hola");
       if (quill.getSelection() != null)
         setLastSelection(quill.getSelection().index);
 
@@ -77,6 +76,7 @@ export default function TextEditor() {
     if (quill != null) {
       documentService.getDocumentById(documentId).then(data => {
         quill.root.innerHTML = data.privateText;
+        setDocuData(data);
       });
     }
   }, [quill]);
@@ -87,8 +87,13 @@ export default function TextEditor() {
       setIsLoading(true);
 
       if (quill == null) return;
-
-      const document = { "id": documentId, "privateText": quill.root.innerHTML };
+      
+      const document = { "id": documentId, 
+                        "privateText": quill.root.innerHTML,
+                        "cover": docuData.cover,
+                        "tittle": docuData.tittle,
+                        "synopsis": docuData.synopsis
+                        };
 
       console.log("enviando datos: " + quill.root.innerHTML);
 
@@ -98,7 +103,7 @@ export default function TextEditor() {
 
     }, 5000);
     return () => clearInterval(interval);
-  }, [quill]);
+  }, [quill,docuData]);
 
   const handleButtonClick = ({ imagePrompt, width, height }) => {
 

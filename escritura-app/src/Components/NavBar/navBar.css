@@ -9,6 +9,7 @@
     position: sticky;
     top: 0px;
     z-index: 1;
+    width: 100%;
 }
 
 .nav a {

@@ -17,6 +17,7 @@ const CreationFormulary = () => {
     const [image, setImage] = useState('');
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [tags, setTags] = useState('');
+    const [synopsis,setSynopsis] = useState("");
 
     const [cover, setCover] = useState(sizeImage);
 
@@ -37,13 +38,17 @@ const CreationFormulary = () => {
 
         event.preventDefault();
 
-        const document = { "privateText": "","cover": cover,"tittle":title };
+        console.log("cover: " + cover);
+        
+        const document = { "privateText": "", "cover": cover, "tittle": title, "synopsis": synopsis };
 
         DocumentService.postDocument(document).then(data => {
             console.log("hola" + JSON.stringify(data));
             navigate('/documents/' + data);
         });
     }
+
+    
 
     const generateCover = (event) => {
 
@@ -86,9 +91,16 @@ const CreationFormulary = () => {
                 <input className='create-form-input' type="text" value={image} onChange={(event) => setImage(event.target.value)} />
                 <button onClick={generateCover}> Generate </button>
             </div>
+
             <div className='cover-portrait'>
                 <img className='cover' src={cover}></img>
             </div>
+
+            <div className='center-element vertical'>
+                <p>Sinopsis</p>
+                <textarea onChange={(event) => setSynopsis(event.target.value)} className='sinopsis-input'></textarea>
+            </div>
+
             <div className='center-element'>
                 <div className='chip-container'>
                     {genres.map((genre) => (

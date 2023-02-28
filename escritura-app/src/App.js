@@ -1,9 +1,9 @@
 import './App.css';
-import TextEditor from './Components/TextEditor/TextEditor';
-import Explore from './Components/Explore/Explore';
-import Profile from './Components/Profile/Profile';
-import Writting from './Components/Writting/Writting'
-import Home from './Components/Home/Home';
+import TextEditor from './Views/TextEditor/TextEditor';
+import Explore from './Views/Explore/Explore';
+import Profile from './Views/Profile/Profile';
+import Writting from './Views/Writting/Writting'
+import Home from './Views/Home/Home';
 import Document from './Components/Document/Document'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar/navBar';

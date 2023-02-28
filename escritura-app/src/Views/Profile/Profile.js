@@ -1,21 +1,31 @@
 import './Profile.css'
 import profileHolder from '../../files/profile-holder.jpg'
-import Galery from '../Galery/Galery'
-import Tab from '../Tab/Tab'
-import Modal from '../Modal/Modal'
+import Galery from '../../Components/Galery/Galery'
+import Tab from '../../Components/Tab/Tab'
+import Modal from '../../Components/Modal/Modal'
+import Cover from '../../files/sizeImage.png'
 
 export default function Profile() {
 
     const cards = [
-        { id: 4,title: 'Caperucita roja5', reviewAverage: 4.2, comments: 10 },
-        { id: 5,title: 'El lobo feroz5', reviewAverage: 4.9, comments: 20 },
-        { id: 6,title: 'Transformers5', reviewAverage: 2.3, comments: 7 },
+        { id: 4,title: 'Caperucita roja5',cover: Cover, reviewAverage: 4.2, comments: 10 },
+        { id: 5,title: 'El lobo feroz5',cover: Cover, reviewAverage: 4.9, comments: 20 },
+        { id: 6,title: 'Transformers5',cover: Cover,  reviewAverage: 2.3, comments: 7 },
+        { id: 15,title: 'Transformers8', cover: Cover, reviewAverage: 2.3, comments: 7 },
+        { id: 16,title: 'Transformers8', cover: Cover, reviewAverage: 2.3, comments: 7 },
+        { id: 17,title: 'Transformers8', cover: Cover, reviewAverage: 2.3, comments: 7 },
+        { id: 18,title: 'Transformers8', cover: Cover, reviewAverage: 2.3, comments: 7 }
     ];
 
     const cards2 = [
-        { id: 7,title: 'Caperucita roja8', reviewAverage: 4.2, comments: 10 },
-        { id: 8,title: 'El lobo feroz8', reviewAverage: 4.9, comments: 20 },
-        { id: 9,title: 'Transformers8', reviewAverage: 2.3, comments: 7 },
+        { id: 7,title: 'Caperucita roja8',cover: Cover, reviewAverage: 4.2, comments: 10 },
+        { id: 8,title: 'El lobo feroz8',cover: Cover, reviewAverage: 4.9, comments: 20 },
+        { id: 9,title: 'Transformers8', cover: Cover, reviewAverage: 2.3, comments: 7 },
+        { id: 10,title: 'Transformers8', cover: Cover, reviewAverage: 2.3, comments: 7 },
+        { id: 11,title: 'Transformers8', cover: Cover, reviewAverage: 2.3, comments: 7 },
+        { id: 12,title: 'Transformers8', cover: Cover, reviewAverage: 2.3, comments: 7 },
+        { id: 13,title: 'Transformers8', cover: Cover, reviewAverage: 2.3, comments: 7 },
+        { id: 14,title: 'Transformers8', cover: Cover, reviewAverage: 2.3, comments: 7 },
     ];
     const tabs = [
         { id: 4, title: 'Tab 1', content: <Galery cards={cards} /> },
@@ -25,7 +35,6 @@ export default function Profile() {
     return (
         <>
             <div className='top-side'>
-                <div className='portrait left'></div>
                 <div className="user-data">
                     <div className='stats-container'>
                         <div className='user-stat'>
@@ -89,7 +98,6 @@ export default function Profile() {
                         </div>
                     </div>
                 </div>
-                <div className='portrait right'></div>
             </div>
             <div className='bot-side'>
                 <Tab tabs={tabs}></Tab>

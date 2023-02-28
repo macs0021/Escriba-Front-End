@@ -32,10 +32,19 @@
     display: flex;
     justify-content: center;
 }
+.vertical{
+    flex-direction: column;
+}
 .create-document-button{
     background-color: #f3f3f3;
     width: 5rem;
     height: 2.5rem;
     cursor: pointer;
 
+}
+.sinopsis-input{
+    display: flex;
+    width: 100%;
+    min-height: 30rem;
+    overflow: auto;
 }

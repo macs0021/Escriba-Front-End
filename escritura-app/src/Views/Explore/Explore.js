@@ -1,6 +1,6 @@
-import Tab from '../Tab/Tab'
-import Galery from '../Galery/Galery'
-import ImageGeneratorForm from '../TextEditor/ImageGeneratorForm';
+import Tab from '../../Components/Tab/Tab'
+import Galery from '../../Components/Galery/Galery'
+import ImageGeneratorForm from '../../Components/TextEditor/ImageGeneratorForm';
 export default function Explore() {
 
 

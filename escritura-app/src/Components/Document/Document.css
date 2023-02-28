@@ -4,11 +4,6 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: white;
-    margin: 0;
-}
-    
 .container .ql-editor {
     width: 21cm;
     min-height: 29.7cm;

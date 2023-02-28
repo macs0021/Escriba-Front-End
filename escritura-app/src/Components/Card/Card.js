@@ -26,14 +26,14 @@ export default function Card(props) {
                     <ChatBubbleOutlineIcon className='card-icon' />
                     <div className='icon-number'>{props.card.comments}</div>
                 </div>
-                <img className="galery-cover" src={sizeImage} />
+                <img className="galery-cover" src={props.card.cover} />
                 <div className="cover-title">
-                    <h2 className='book-title'>{props.card.title}</h2>
+                    <h2 className='book-title'>{props.card.tittle}</h2>
                 </div>
             </div>
             <Modal modalState={modalState} setModalState={setModalState}>
                 <div className='modal-content'>
-                    <CardInfo/>
+                    <CardInfo data={props.card}/>
                 </div>
             </Modal>
         </>
