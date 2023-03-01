@@ -1,47 +1,37 @@
+import Interceptor from './Interceptor';
+import TokenService from './TokenService';
 
 const registerUrl = "http://localhost:8080/user";
 const loginUrl = "http://localhost:8080/login";
 
 async function registerUser(user) {
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(user),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
     try {
-        const response = await fetch(registerUrl, options);
-        return response?.json();
+        const response = await Interceptor.post(registerUrl, user);
+        return response;
     } catch (error) {
         return error;
     }
 }
-async function loginUser(user) {
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(user),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
-    try {
 
-        const response = await fetch(loginUrl, options);
-        const bearerToken = response.headers.get('Authorization');
-        console.log("token: " + bearerToken)
+async function loginUser(user) {
+    try {
+        const response = await Interceptor.post(loginUrl, user);
+        const bearerToken = response.headers.authorization;
+
         const token = bearerToken.replace("Bearer ","");
 
-        localStorage.setItem('token',token);
-        
+        TokenService.setToken(token);
+
+        TokenService.getUsername();
+
         return response;
-        
+
     } catch (error) {
         return error;
     }
 }
 
-
 export default {
-    registerUser, loginUser,
+    registerUser,
+    loginUser,
 };

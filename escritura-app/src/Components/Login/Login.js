@@ -10,7 +10,7 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const userObject = {"username": user, "password":password};
+        const userObject = {"username": user, "password": password};
 
         AuthService.loginUser(userObject).then(data => {
             console.log(data);

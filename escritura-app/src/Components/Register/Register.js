@@ -1,17 +1,26 @@
 import { useState } from "react";
 import './Register.css'
+import AuthService from "../../Services/AuthService";
 
 const Register = () => {
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`Name: ${name}, Email: ${email}, Password: ${password},  Confirm Password: ${confirmPassword}`);
-    // Aquí puedes enviar los datos del formulario a un servidor para su procesamiento
+
+    const userObject = { "username": name, "password": password };
+
+    console.log("REGISTRO DE " + JSON.stringify(userObject));
+
+    AuthService.registerUser(userObject).then(data => {
+      console.log(data);
+    })
+
   };
 
 
@@ -34,7 +43,7 @@ const Register = () => {
 
         <p className="register-form-error"></p>
         <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
-        
+
         <button type="submit" className="register-button">Registrarse</button>
 
       </form>

@@ -4,6 +4,7 @@ import sizeImage from '../../files/sizeImage.png'
 import ImageGeneratorService from '../../Services/ImageGeneratorService';
 import DocumentService from '../../Services/DocumentService';
 import { useNavigate } from 'react-router-dom';
+import TokenService from '../../Services/TokenService';
 
 import React, { useState } from 'react';
 
@@ -40,7 +41,8 @@ const CreationFormulary = () => {
 
         console.log("cover: " + cover);
         
-        const document = { "privateText": "", "cover": cover, "tittle": title, "synopsis": synopsis };
+        const document = { "privateText": "", "cover": cover, "tittle": title, "synopsis": synopsis, "creatorUsername":TokenService.getUsername()};
+        console.log("User: " + TokenService.getUsername());
 
         DocumentService.postDocument(document).then(data => {
             console.log("hola" + JSON.stringify(data));

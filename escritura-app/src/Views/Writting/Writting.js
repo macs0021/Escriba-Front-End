@@ -4,6 +4,7 @@ import DocumentService from '../../Services/DocumentService';
 import CreationFormulary from '../../Components/Modal/CreationFormulary';
 import Modal from '../../Components/Modal/Modal';
 import { useState, useEffect } from 'react';
+import TokenService from '../../Services/TokenService';
 
 export default function Writting() {
 
@@ -15,7 +16,7 @@ export default function Writting() {
     }
 
     useEffect(() => {
-        DocumentService.getAllDocuments().then(data => {
+        DocumentService.getDocumentsByUsername(TokenService.getUsername()).then(data => {
             console.log(JSON.stringify(books));
             setBooks(data);
         })
