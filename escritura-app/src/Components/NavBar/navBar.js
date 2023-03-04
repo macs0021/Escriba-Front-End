@@ -3,10 +3,22 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './navBar.css'
 import { Link } from 'react-router-dom';
+import TokenService from '../../Services/TokenService';
+import { useNavigate } from 'react-router-dom';
 
 function NavBar() {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // borra el token aquí
+    TokenService.dropToken();
+    navigate("/authentication")
+  };
+
+
   return <nav className='nav'>
-    <Link to="/home" className='main-tittle'>Home</Link>
+    <Link to="/" className='main-tittle'>Home</Link>
     <ul>
       <li>
         <CustomLink to="/reading" className='item'>Reading</CustomLink>
@@ -19,6 +31,9 @@ function NavBar() {
       </li>
       <li>
         <CustomLink to="/explore" className='item'>Explore</CustomLink>
+      </li>
+      <li>
+        <button onClick={handleLogout}>Logout</button>
       </li>
     </ul>
   </nav>

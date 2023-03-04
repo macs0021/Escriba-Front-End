@@ -20,7 +20,10 @@ function getUsername() {
 
     return decodedToken.sub;
 }
+function dropToken() {
+    localStorage.removeItem('token');
+}
 
 export default {
-    setToken, Logged, getToken, getUsername,
+    setToken, Logged, getToken, getUsername, dropToken,
 };

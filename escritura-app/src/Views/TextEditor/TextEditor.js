@@ -11,6 +11,7 @@ import ImageGeneratorForm from "../../Components/TextEditor/ImageGeneratorForm";
 import ImageResize from 'quill-image-resize-module-react';
 import { textAlign } from "@mui/system";
 import ImageGeneratorService from '../../Services/ImageGeneratorService';
+import TokenService from "../../Services/TokenService";
 
 
 Quill.register('modules/imageResize', ImageResize);
@@ -87,13 +88,16 @@ export default function TextEditor() {
       setIsLoading(true);
 
       if (quill == null) return;
-      
-      const document = { "id": documentId, 
-                        "privateText": quill.root.innerHTML,
-                        "cover": docuData.cover,
-                        "tittle": docuData.tittle,
-                        "synopsis": docuData.synopsis
-                        };
+
+
+      const document = {
+        "id": documentId,
+        "privateText": quill.root.innerHTML,
+        "cover": docuData.cover,
+        "tittle": docuData.tittle,
+        "synopsis": docuData.synopsis,
+        "creatorUsername": TokenService.getUsername()
+      };
 
       console.log("enviando datos: " + quill.root.innerHTML);
 
@@ -103,14 +107,14 @@ export default function TextEditor() {
 
     }, 5000);
     return () => clearInterval(interval);
-  }, [quill,docuData]);
+  }, [quill, docuData]);
 
   const handleButtonClick = ({ imagePrompt, width, height }) => {
 
     console.log("prompt: " + imagePrompt);
     console.log("width: " + width);
     console.log("height: " + height);
-    
+
     const seed = Math.floor(Math.random() * 999999) + 1;
 
     const imgData = {
@@ -132,10 +136,10 @@ export default function TextEditor() {
       console.log(actualImage);
     })
   };
-  
+
   const reloadOnButtonClick = ({ imagePrompt, width, height }) => {
     if (actualImage == null) return;
-  
+
     const imgData = {
       "prompt": imagePrompt,
       "negative_prompt": "string",

@@ -1,42 +1,43 @@
 .galery-card {
     margin: auto;
-    width: 17rem;
     background-color: #f3f3f3;
-    box-shadow: 0px 0px 5px 0px #333;
     position: relative;
     cursor: pointer;
-    transition: .2s linear;
-}
-.galery-card:hover{
-    width: 18rem;
-    transition: .2s linear;
+    width: 17rem;
+    display: flex;
+    justify-content: center;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
 }
 
+
 .galery-cover {
-    margin-top: 2%;
-    margin-left: 2%;
-    margin-bottom: 1%;
-    width: 96%;
-    border: 2px solid #333;
+    width: auto;
+    width: 16.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .cover-title {
     text-align: center;
     vertical-align: middle;
-    margin-left: 21%;
     position: absolute;
-    top: 10%;
-    width: 60%;
-    height: 10%;
-    background-color: #f3f3f3;
-    border: 2px solid #333;
+    top: 15%;
+
+    background: rgba(1, 1, 1, 0.28);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    max-width: 85%;
 }
 
-.book-title{
-    margin-top: 0.5rem;
+.book-title {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     font-size: 100%;
-    color: #333;
-    bottom: 0;
+    color: #f3f3f3;
+    word-wrap: break-word;
 }
 
 .icon-holder {
@@ -68,4 +69,65 @@
     margin-bottom: 5%;
     font-weight: bold;
 
+}
+
+.dots-container {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    cursor: pointer;
+    background-color: red;
+    padding: 0.5rem;
+
+    background: rgba(1, 1, 1, 0.28);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+}
+
+.dots {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 1.5rem;
+}
+
+.dot {
+    height: 2px;
+    width: 2px;
+    background-color: #f3f3f3;
+    border-radius: 50%;
+}
+
+.dropdown-container {
+    position: absolute;
+    top: 3.5rem;
+    right: 0;
+    height: 4.5rem;
+    background-color: #f3f3f3;
+    border-radius: 0.25rem;
+    z-index: 1;
+    cursor: auto;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.dropdown-icon {
+    color: #333;
+    cursor: pointer;
+
+}
+
+.dropdown-icon:hover {
+    background-color: #333;
+    color: #f3f3f3;
+    border-radius: 5px;
 }

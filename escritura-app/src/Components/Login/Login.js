@@ -1,21 +1,29 @@
 import { useState } from "react";
 import './Login.css'
 import AuthService from "../../Services/AuthService";
+import TokenService from "../../Services/TokenService";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
+    const navigate = useNavigate();
+
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
+    const [redirect, setRedirect] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const userObject = {"username": user, "password": password};
+        const userObject = { "username": user, "password": password };
 
         AuthService.loginUser(userObject).then(data => {
-            console.log(data);
-          })
-    
+            if (TokenService.Logged) {
+                navigate('/');
+            }
+
+        })
+
     };
 
     return (

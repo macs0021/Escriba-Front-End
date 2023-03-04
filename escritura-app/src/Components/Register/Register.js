@@ -2,7 +2,7 @@ import { useState } from "react";
 import './Register.css'
 import AuthService from "../../Services/AuthService";
 
-const Register = () => {
+const Register = (props) => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -10,7 +10,9 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (event) => {
+    
     event.preventDefault();
+
     console.log(`Name: ${name}, Email: ${email}, Password: ${password},  Confirm Password: ${confirmPassword}`);
 
     const userObject = { "username": name, "password": password };
@@ -19,6 +21,7 @@ const Register = () => {
 
     AuthService.registerUser(userObject).then(data => {
       console.log(data);
+      props.setInRegister(false);
     })
 
   };

@@ -7,13 +7,13 @@
   pointer-events: none;
 }
 body{
-  background-color: #b1cbbb;
+  background-color: #f3f3f3;
 }
 .container {
-  background-color: #b1cbbb;
+  background-color: #f3f3f3;
 }
 .root{
-  background-color: #b1cbbb;
+  background-color: #f3f3f3;
 }
 
 @media (prefers-reduced-motion: no-preference) {

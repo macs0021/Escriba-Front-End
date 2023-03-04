@@ -51,10 +51,22 @@ async function getDocumentsByUsername(username) {
     }
 }
 
+async function deleteDocument(documentId) {
+    console.log("BORRANDO");
+    try {
+        const response = await Interceptor.delete(url + "/" + documentId);
+        console.log("BORRANDO: " + documentId);
+        return;
+    } catch (error) {
+        return;
+    }
+}
+
 export default {
     getDocumentById,
     putDocument,
     postDocument,
     getAllDocuments,
     getDocumentsByUsername,
+    deleteDocument,
 };

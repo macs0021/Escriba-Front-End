@@ -31,7 +31,12 @@ async function loginUser(user) {
     }
 }
 
+function logoutUser(){
+    TokenService.dropToken();
+}
+
 export default {
     registerUser,
     loginUser,
+    logoutUser,
 };

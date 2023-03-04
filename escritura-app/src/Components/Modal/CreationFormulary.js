@@ -18,7 +18,7 @@ const CreationFormulary = () => {
     const [image, setImage] = useState('');
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [tags, setTags] = useState('');
-    const [synopsis,setSynopsis] = useState("");
+    const [synopsis, setSynopsis] = useState("");
 
     const [cover, setCover] = useState(sizeImage);
 
@@ -39,18 +39,17 @@ const CreationFormulary = () => {
 
         event.preventDefault();
 
-        console.log("cover: " + cover);
-        
-        const document = { "privateText": "", "cover": cover, "tittle": title, "synopsis": synopsis, "creatorUsername":TokenService.getUsername()};
+        console.log("Synopsis: " + synopsis);
+
+        const document = { "privateText": "", "cover": cover, "tittle": title, "synopsis": synopsis, "creatorUsername": TokenService.getUsername() };
         console.log("User: " + TokenService.getUsername());
 
         DocumentService.postDocument(document).then(data => {
-            console.log("hola" + JSON.stringify(data));
             navigate('/documents/' + data);
         });
     }
 
-    
+
 
     const generateCover = (event) => {
 
@@ -80,18 +79,20 @@ const CreationFormulary = () => {
 
     return (<>
         <form>
-            <div className='formulary-line'>
+            <div className=' formulary-line'>
                 <label className='create-form-label'>
                     Tittle:
                 </label>
-                <input className='create-form-input' type="text" value={title} onChange={(event) => setTitle(event.target.value)} />
+                <input className='create-form-input create-form-two-grid' type="text" value={title} onChange={(event) => setTitle(event.target.value)} />
             </div>
             <div className='formulary-line'>
-                <label className='create-form-label'>
+                <label className='create-form-label '>
                     Cover:
                 </label>
+                <div className='create-form-two-grid'>
                 <input className='create-form-input' type="text" value={image} onChange={(event) => setImage(event.target.value)} />
-                <button onClick={generateCover}> Generate </button>
+                <button className='create-form-cover-button' onClick={generateCover}> Generate </button>
+                </div>
             </div>
 
             <div className='cover-portrait'>
@@ -118,9 +119,9 @@ const CreationFormulary = () => {
                 <input className='create-form-input' type="text" value={tags} onChange={(event) => setTags(event.target.value)} />
             </div>
             <div className='center-element'>
-                <div className='formulary-line'>
-                    <button onClick={createDocument} className='create-document-button'>Enviar</button>
-                </div>
+
+                <button onClick={createDocument} className='create-document-button'>Enviar</button>
+
             </div>
         </form>
     </>);
