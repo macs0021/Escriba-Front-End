@@ -5,6 +5,7 @@ import ImageGeneratorService from '../../Services/ImageGeneratorService';
 import DocumentService from '../../Services/DocumentService';
 import { useNavigate } from 'react-router-dom';
 import TokenService from '../../Services/TokenService';
+import loadingImg from '../../files/cargaV3.gif';
 
 import React, { useState } from 'react';
 
@@ -21,40 +22,39 @@ const CreationFormulary = () => {
     const [synopsis, setSynopsis] = useState("");
 
     const [cover, setCover] = useState(sizeImage);
+    const [tempCover, setTemCover] = useState(sizeImage);
 
     const [prompt, setPrompt] = useState("");
 
-    const handleGenreChange = (event) => {
-        const { value, checked } = event.target;
-        setSelectedGenres((prevSelectedGenres) =>
-            checked ? [...prevSelectedGenres, value] : prevSelectedGenres.filter((genre) => genre !== value)
-        );
+
+    //Gestión de los géneros
+    const handleGenreClick = (genre) => {
+        if (selectedGenres.includes(genre)) {
+            setSelectedGenres(selectedGenres.filter((g) => g !== genre));
+        } else {
+            setSelectedGenres(selectedGenres.concat([genre]));
+        }
     };
 
-    const handleGenreDelete = (genre) => {
-        setSelectedGenres((prevSelectedGenres) => prevSelectedGenres.filter((selectedGenre) => selectedGenre !== genre));
-    };
-
+    //Creación del documento
     const createDocument = (event) => {
 
         event.preventDefault();
 
-        console.log("Synopsis: " + synopsis);
+        console.log(selectedGenres);
 
-        const document = { "privateText": "", "cover": cover, "tittle": title, "synopsis": synopsis, "creatorUsername": TokenService.getUsername() };
+        const document = { "privateText": "", "cover": cover, "tittle": title, "synopsis": synopsis, "creatorUsername": TokenService.getUsername(), "genres": selectedGenres };
         console.log("User: " + TokenService.getUsername());
 
         DocumentService.postDocument(document).then(data => {
             navigate('/documents/' + data);
         });
     }
-
-
-
+    //Generador de portada
     const generateCover = (event) => {
-
         event.preventDefault();
 
+        setTemCover(loadingImg);
         const seed = Math.floor(Math.random() * 999999) + 1;
 
         const imgData = {
@@ -70,12 +70,10 @@ const CreationFormulary = () => {
         }
         ImageGeneratorService.postImg(imgData).then(data => {
             console.log("imagen generada: " + data.images[0])
+            setTemCover(`data:image/png;base64,${data.images[0]}`);
             setCover(`data:image/png;base64,${data.images[0]}`);
-            console.log("cover: " + cover);
         })
     };
-
-
 
     return (<>
         <form>
@@ -90,13 +88,13 @@ const CreationFormulary = () => {
                     Cover:
                 </label>
                 <div className='create-form-two-grid'>
-                <input className='create-form-input' type="text" value={image} onChange={(event) => setImage(event.target.value)} />
-                <button className='create-form-cover-button' onClick={generateCover}> Generate </button>
+                    <input className='create-form-input' type="text" value={image} onChange={(event) => setImage(event.target.value)} />
+                    <button className='create-form-cover-button' onClick={generateCover}> Generate </button>
                 </div>
             </div>
 
             <div className='cover-portrait'>
-                <img className='cover' src={cover}></img>
+                <img className='cover' src={tempCover}></img>
             </div>
 
             <div className='center-element vertical'>
@@ -107,7 +105,7 @@ const CreationFormulary = () => {
             <div className='center-element'>
                 <div className='chip-container'>
                     {genres.map((genre) => (
-                        <Chip key={genre} data={genre} onDelete={() => handleGenreDelete(genre)} />
+                        <Chip key={genre} data={genre} onClick={handleGenreClick} />
                     ))}
                 </div>
             </div>
@@ -116,12 +114,10 @@ const CreationFormulary = () => {
                 <label className='create-form-label'>
                     Etiquetas:
                 </label>
-                <input className='create-form-input' type="text" value={tags} onChange={(event) => setTags(event.target.value)} />
+                <input className='create-form-input create-form-two-grid' type="text" value={tags} onChange={(event) => setTags(event.target.value)} />
             </div>
             <div className='center-element'>
-
                 <button onClick={createDocument} className='create-document-button'>Enviar</button>
-
             </div>
         </form>
     </>);

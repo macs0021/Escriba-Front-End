@@ -12,6 +12,7 @@ import ImageResize from 'quill-image-resize-module-react';
 import { textAlign } from "@mui/system";
 import ImageGeneratorService from '../../Services/ImageGeneratorService';
 import TokenService from "../../Services/TokenService";
+import loadingImg from '../../files/cargaV3.gif'
 
 
 Quill.register('modules/imageResize', ImageResize);
@@ -128,12 +129,24 @@ export default function TextEditor() {
       "steps": 50,
       "seed": seed,
     }
+
+    const index = lastSelection;
+    quill.insertEmbed(index, 'image', loadingImg);
+    let img = quill.container.querySelector(`img[src="${loadingImg}"]`);
+    img.setAttribute('id', 'mi-imagen');
+    img.width = width;
+    img.className = 'loading-img';
+    img.style.aspectRatio = `${width} / ${height}`;
+
     ImageGeneratorService.postImg(imgData).then(data => {
       console.log(data.images[0]);
       const base64Image = data.images[0];
-      const index = lastSelection;
-      setActualImage(quill.insertEmbed(index, 'image', `data:image/png;base64,${base64Image}`));
-      console.log(actualImage);
+      let miImagen = document.getElementById('mi-imagen');
+      console.log(miImagen);
+      miImagen.src = `data:image/png;base64,${base64Image}`;
+      miImagen.className = "";
+
+      //quill.insertEmbed(index, 'image', `data:image/png;base64,${base64Image}`,{ id: 'mi-imagen' });
     })
   };
 

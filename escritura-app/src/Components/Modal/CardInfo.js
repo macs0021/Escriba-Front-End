@@ -6,13 +6,14 @@ import { useNavigate } from 'react-router-dom';
 const CardInfo = (data) => {
 
     const navigate = useNavigate();
+    console.log(JSON.stringify(data.data));
 
-    const read = () =>{
+    const read = () => {
         navigate('/documents/read/' + data.data.id);
     }
 
-    const save = () =>{
-        
+    const save = () => {
+
     }
 
     return (<>
@@ -21,7 +22,12 @@ const CardInfo = (data) => {
         </div>
         <div className='listed-content'>
             <div className='listed-element'>Tags: Prueba-1 Prueba-2 Prueba-3 </div>
-            <div className='listed-element'>Genero: </div>
+            <div className='listed-element'>Genero:
+                {data.data.genres.map(genre => (
+                    <span key={genre} style={{ marginLeft: 10 }}>{genre}</span>
+                ))}
+
+            </div>
         </div>
         <div className='text-line'>
             <p>
