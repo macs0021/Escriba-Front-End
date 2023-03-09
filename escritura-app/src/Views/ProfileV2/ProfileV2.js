@@ -79,6 +79,7 @@ const ProfileV2 = () => {
                         <button className='follow-button'>Follow</button>
                     </div>
                 </div>
+                {(written.length!==0||read.length!==0) &&
                 <div className="right__col">
                     <nav>
                         <ul>
@@ -90,7 +91,7 @@ const ProfileV2 = () => {
                     <div className="photos">
                         <Galery cards={written}></Galery>
                     </div>
-                </div>
+                </div>}
             </div>
         </div>
 

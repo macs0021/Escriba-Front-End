@@ -130,23 +130,34 @@ export default function TextEditor() {
       "seed": seed,
     }
 
+    //Busco la posicion donde insertar la imagen
     const index = lastSelection;
+
+    //Inserto la imagen con el elemento de carga
     quill.insertEmbed(index, 'image', loadingImg);
+
+    //Busco la imagen insertada
     let img = quill.container.querySelector(`img[src="${loadingImg}"]`);
+
+    //Le coloco un id para buscarla
     img.setAttribute('id', 'mi-imagen');
+
+    //Le aplico el tamaño que se necesita
     img.width = width;
     img.className = 'loading-img';
     img.style.aspectRatio = `${width} / ${height}`;
+    img.style.shapeOutside = 'content-box';
 
     ImageGeneratorService.postImg(imgData).then(data => {
-      console.log(data.images[0]);
+      //Obtengo el src de la imagen
       const base64Image = data.images[0];
+
+      //Busco la imagen
       let miImagen = document.getElementById('mi-imagen');
-      console.log(miImagen);
+
+      //Le pongo el src y le quito la clase de estilos
       miImagen.src = `data:image/png;base64,${base64Image}`;
       miImagen.className = "";
-
-      //quill.insertEmbed(index, 'image', `data:image/png;base64,${base64Image}`,{ id: 'mi-imagen' });
     })
   };
 
