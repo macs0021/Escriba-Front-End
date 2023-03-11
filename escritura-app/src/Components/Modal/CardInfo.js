@@ -21,7 +21,6 @@ const CardInfo = (data) => {
             <h1>{data.data.tittle}</h1>
         </div>
         <div className='listed-content'>
-            <div className='listed-element'>Tags: Prueba-1 Prueba-2 Prueba-3 </div>
             <div className='listed-element'>Genero:
                 {data.data.genres.map(genre => (
                     <span key={genre} style={{ marginLeft: 10 }}>{genre}</span>

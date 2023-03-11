@@ -97,11 +97,17 @@ const CreationFormulary = () => {
                 <img className='cover' src={tempCover}></img>
             </div>
 
+            <label className='create-form-label'>
+                Sinopsis:
+            </label>
             <div className='center-element vertical'>
-                <p>Sinopsis</p>
                 <textarea onChange={(event) => setSynopsis(event.target.value)} className='sinopsis-input'></textarea>
             </div>
 
+            <label className='create-form-label'>
+                Genres:
+            </label>
+            
             <div className='center-element'>
                 <div className='chip-container'>
                     {genres.map((genre) => (

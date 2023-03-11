@@ -1,12 +1,11 @@
 import Interceptor from './Interceptor';
 import TokenService from './TokenService';
 
-const registerUrl = "http://localhost:8080/user";
-const loginUrl = "http://localhost:8080/login";
+const authUrl = "http://localhost:8080/auth";
 
 async function registerUser(user) {
     try {
-        const response = await Interceptor.post(registerUrl, user);
+        const response = await Interceptor.post(authUrl + "/register", user);
         return response;
     } catch (error) {
         return error;
@@ -15,10 +14,9 @@ async function registerUser(user) {
 
 async function loginUser(user) {
     try {
-        const response = await Interceptor.post(loginUrl, user);
-        const bearerToken = response.headers.authorization;
-
-        const token = bearerToken.replace("Bearer ","");
+        const response = await Interceptor.post(authUrl + "/login", user);
+        const token = response.data.token;
+        console.log(response.data.token);
 
         TokenService.setToken(token);
 

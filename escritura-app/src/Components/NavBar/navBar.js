@@ -60,7 +60,7 @@ function NavBar() {
           <CustomLink to="/explore" className='item' onClick={linkClick}><SearchIcon className='button-icon'></SearchIcon>Explore</CustomLink>
         </div>
         <div className='logout-button-container'>
-          <LogoutIcon className='logout-button'> boton</LogoutIcon>
+          <LogoutIcon className='logout-button' onClick={handleLogout}> boton</LogoutIcon>
         </div>
       </div>
       <div className='burguer-container'>
