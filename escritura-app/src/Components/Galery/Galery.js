@@ -4,18 +4,15 @@ import Modal from '../Modal/Modal'
 import { useState } from 'react';
 
 
-export default function Galery(props) {
-
-    const cards = props.cards;
-
+export default function Galery({ children }) {
 
     return (
         <>
             <div className="galery-center">
                 <div className="galery-container">
-                    {cards.map((card) => <Card card={card} key={card.id} />)}
+                    {children}
                 </div>
-            
+
             </div>
         </>
     );

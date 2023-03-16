@@ -3,7 +3,7 @@ import 'quill/dist/quill.snow.css';
 import { Quill } from "react-quill";
 import { useParams } from 'react-router-dom';
 import 'quill-divider';
-import './Document.css';
+import '../../Views/TextEditor/TextEditor.css';
 import documentService from '../../Services/DocumentService'
 
 export default function Document() {

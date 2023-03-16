@@ -1,5 +1,3 @@
-import axios from 'axios';
-import AuthService from "./AuthService";
 
 import Interceptor from './Interceptor';
 
@@ -11,7 +9,7 @@ async function getDocumentById(id) {
         const response = await Interceptor.get(`${url}/${encodeURIComponent(id)}`);
         return response.data;
     } catch (error) {
-        return error;
+        console.log("Esperando al refresco del token");
     }
 }
 
@@ -20,7 +18,7 @@ async function putDocument(document) {
         const response = await Interceptor.put(url, JSON.stringify(document));
         return response.data;
     } catch (error) {
-        return error;
+        console.log("Esperando al refresco del token");
     }
 }
 
@@ -29,7 +27,7 @@ async function postDocument(document) {
         const response = await Interceptor.post(url, JSON.stringify(document));
         return response.data;
     } catch (error) {
-        return error;
+        console.log("Esperando al refresco del token");
     }
 }
 
@@ -47,6 +45,7 @@ async function getDocumentsByUsername(username) {
         const response = await Interceptor.get(url + "/user/" + username);
         return response.data;
     } catch (error) {
+        console.log("Esperando al refresco del token");
         return [];
     }
 }
@@ -56,9 +55,9 @@ async function deleteDocument(documentId) {
     try {
         const response = await Interceptor.delete(url + "/" + documentId);
         console.log("BORRANDO: " + documentId);
-        return;
+        return response;
     } catch (error) {
-        return;
+        console.log("Esperando al refresco del token");
     }
 }
 

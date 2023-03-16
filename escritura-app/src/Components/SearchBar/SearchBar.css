@@ -1,12 +1,24 @@
-.bar-container{
+.input-wrapper {
     display: flex;
-    background-color: red;
-    height: 5rem;
     align-items: center;
-    
+    justify-content: space-between;
+    background: #f3f3f3;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: #333;
+    border: #333 2px solid;
+    width: 30rem;
 }
-.search-bar{
-    height: 2rem;
-    width: 20rem;
-    right: 5rem;
+
+input {
+    margin: 0 0.5rem 0 0.5rem;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: #f3f3f3;
+    color: #333;
+}
+
+::placeholder {
+    color: #333;
 }

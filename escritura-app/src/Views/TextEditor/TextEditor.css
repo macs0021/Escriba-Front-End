@@ -5,7 +5,7 @@
 }
 
 .container .ql-editor {
-    width: 21cm;
+    width: 90%;
     min-height: 29.7cm;
     padding: 1in;
     margin-top: 1rem;
@@ -82,11 +82,11 @@
 
     .container .ql-editor {
         width: 21cm;
-        height: 29.7cm;
         padding: 0;
         margin: 0;
         box-shadow: none;
         align-self: flex-start;
+        overflow: hidden;
     }
 
     .container .ql-toolbar.ql-snow {
@@ -97,4 +97,15 @@
         overflow: hidden;
     }
 
+}
+@media (min-width: 890px) {
+    .container .ql-editor {
+        width: 21cm;
+        min-height: 29.7cm;
+        padding: 1in;
+        margin-top: 1rem;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+        background-color: white;
+        font-size: 1rem;
+    }
 }

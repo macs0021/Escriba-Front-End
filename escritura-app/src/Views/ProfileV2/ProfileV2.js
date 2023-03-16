@@ -7,6 +7,7 @@ import Cover from '../../files/sizeImage.png'
 import TokenService from '../../Services/TokenService';
 import DocumentService from '../../Services/DocumentService';
 import { useState } from 'react';
+import Card from '../../Components/Card/Card';
 
 const ProfileV2 = () => {
 
@@ -52,46 +53,51 @@ const ProfileV2 = () => {
             <header></header>
             <div className="cols__container">
                 <div className="left__col">
-                    <div className="img__container">
-                        <img src={profileHolder} alt="Anna Smith" />
-                        <span></span>
+                    <div>
+                        <div className="img__container">
+                            <img src={profileHolder} alt="Anna Smith" />
+                            <span></span>
+                        </div>
+                        <h2>{TokenService.getUsername()}</h2>
+                        <p>Aquí van cositas</p>
+                        <p>macs0021@red.ujaen.es</p>
                     </div>
-                    <h2>{TokenService.getUsername()}</h2>
-                    <p>Aquí van cositas</p>
-                    <p>macs0021@red.ujaen.es</p>
-
-                    <ul className="about">
-                        <li><span>4,073</span>Seguidores</li>
-                        <li><span>322</span>Siguiendo</li>
-                        <li><span>200,543</span>Reseñas</li>
-                    </ul>
-
-                    <div className="profile-content">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam
-                            erat volutpat. Morbi imperdiet, mauris ac auctor dictum, nisl
-                            ligula egestas nulla.
-                        </p>
-
-                        <ul>
-
+                    <div>
+                        <ul className="about">
+                            <li><span>4,073</span>Seguidores</li>
+                            <li><span>322</span>Siguiendo</li>
+                            <li><span>200,543</span>Reseñas</li>
                         </ul>
-                        <button className='follow-button'>Follow</button>
+
+                        <div className="profile-content">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam
+                                erat volutpat. Morbi imperdiet, mauris ac auctor dictum, nisl
+                                ligula egestas nulla.
+                            </p>
+
+                            <ul>
+
+                            </ul>
+                            <button className='follow-button'>Follow</button>
+                        </div>
                     </div>
                 </div>
-                {(written.length!==0||read.length!==0) &&
-                <div className="right__col">
-                    <nav>
-                        <ul>
-                            {written.length!==0 && <li><a href="">Escritos</a></li>}
-                            {read.length!==0 && <li><a href="">Leidos</a></li>}
+                {(written.length !== 0 || read.length !== 0) &&
+                    <div className="right__col">
+                        <nav>
+                            <ul>
+                                {written.length !== 0 && <li><a href="">Escritos</a></li>}
+                                {read.length !== 0 && <li><a href="">Leidos</a></li>}
 
-                        </ul>
-                    </nav>
-                    <div className="photos">
-                        <Galery cards={written}></Galery>
-                    </div>
-                </div>}
+                            </ul>
+                        </nav>
+                        <div className="photos">
+                            <Galery>
+                                {written.map((card) => <Card card={card} key={card.id} />)}
+                            </Galery>
+                        </div>
+                    </div>}
             </div>
         </div>
 

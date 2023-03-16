@@ -17,11 +17,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #333;
-    font-size: 100px;
+    font-size: 2rem;
     width: 90%;
 }
 .tittle{
     position: relative;
     top:50%;
+}
+.search-container{
+    display: flex;
+    justify-content: center;
+    padding: 5rem;
 }

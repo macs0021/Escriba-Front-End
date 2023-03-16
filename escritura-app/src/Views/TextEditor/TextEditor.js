@@ -32,16 +32,12 @@ export default function TextEditor() {
     container: [
       [{ 'font': [] }, { 'size': [] }],
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      [{ 'margin': [10, 20, 30, 40] }],
       ['bold', 'italic', 'underline', 'strike'],
       [{ 'color': [] }, { 'background': [] }],
-      [{ 'script': 'super' }, { 'script': 'sub' }],
-      [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block'],
+      [ 'blockquote', 'code-block'],
       [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
       ['direction', { 'align': [] }],
       ['link', 'image', 'video', 'formula'],
-      ['clean'],
-      ['divider'],
     ]
   }
 

@@ -1,16 +1,11 @@
 import './SearchBar.css';
 
 export default function SearchBar() {
-    return (
-        <>
-            <div className='bar-container'>
-                <form>
-                    <label>
-                        <input type="text" className='search-bar' />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
-            </div>
-        </>
-    );
+    return (<>
+        <div class="input-wrapper">
+            <div class="fa fa-search"></div>
+            <input type="text" placeholder="Search" />
+            <div class="fa fa-times"></div>
+        </div>
+    </>);
 }
