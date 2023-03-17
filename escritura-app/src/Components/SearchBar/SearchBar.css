@@ -10,15 +10,11 @@
     width: 30rem;
 }
 
-input {
+.search-bar-input {
     margin: 0 0.5rem 0 0.5rem;
     width: 100%;
     border: none;
     outline: none;
     background: #f3f3f3;
-    color: #333;
-}
-
-::placeholder {
     color: #333;
 }

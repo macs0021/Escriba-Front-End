@@ -1,5 +1,6 @@
 
 import Interceptor from './Interceptor';
+import TokenService from './TokenService';
 
 const url = "documents";
 
@@ -40,9 +41,9 @@ async function getAllDocuments() {
     }
 }
 
-async function getDocumentsByUsername(username) {
+async function getDocumentsByUsername() {
     try {
-        const response = await Interceptor.get(url + "/user/" + username);
+        const response = await Interceptor.get(url + "/user/" + TokenService.getUsername());
         return response.data;
     } catch (error) {
         console.log("Esperando al refresco del token");
@@ -61,6 +62,25 @@ async function deleteDocument(documentId) {
     }
 }
 
+async function userSavesDocument(documentId) {
+    try {
+        const response = await Interceptor.post(url + "/saved/" + TokenService.getUsername() + "?savedDocument=" + documentId);
+        return response;
+    } catch (error) {
+        console.log("Esperando al refresco del token");
+    }
+}
+
+async function getDocumentsSavedByUsername() {
+    try {
+        const response = await Interceptor.get(url + "/saved/" + TokenService.getUsername());
+        return response.data;
+    } catch (error) {
+        console.log("Esperando al refresco del token");
+        return [];
+    }
+}
+
 export default {
     getDocumentById,
     putDocument,
@@ -68,4 +88,6 @@ export default {
     getAllDocuments,
     getDocumentsByUsername,
     deleteDocument,
+    userSavesDocument,
+    getDocumentsSavedByUsername,
 };

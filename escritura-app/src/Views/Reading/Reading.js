@@ -1,18 +1,17 @@
-import Galery from '../../Components/Galery/Galery'
-import './Writting.css';
-import DocumentService from '../../Services/DocumentService';
-import { useState, useEffect } from 'react';
-import TokenService from '../../Services/TokenService';
-import Card from '../../Components/Card/Card';
-import CreateDocumentButton from '../../Components/CreateDocumentButton/CreateDocumentButton';
+import './Reading.css'
 import SearchBar from '../../Components/SearchBar/SearchBar';
+import Galery from '../../Components/Galery/Galery';
+import Card from '../../Components/Card/Card';
+import { useEffect, useState } from 'react';
+import DocumentService from '../../Services/DocumentService';
+import TokenService from '../../Services/TokenService';
 
-export default function Writting() {
+const Reading = () => {
 
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
-        DocumentService.getDocumentsByUsername(TokenService.getUsername()).then(data => {
+        DocumentService.getDocumentsSavedByUsername(TokenService.getUsername()).then(data => {
             console.log(JSON.stringify(books));
             setBooks(data);
         })
@@ -24,19 +23,18 @@ export default function Writting() {
                 <SearchBar></SearchBar>
             </div>
             <div className='tab-container'>
-                <div className='tab'><a href="">Public</a></div>
-                <div className='tab'><a href="">Private</a></div>
+                <div className='tab'><a href="">Reading</a></div>
+                <div className='tab'><a href="">Saved</a></div>
             </div>
             <div>
                 <Galery>
-                    <CreateDocumentButton></CreateDocumentButton>
                     {books.map((card) => <Card card={card} key={card.id} />)}
                 </Galery>
             </div>
         </>
+
+
     );
-
-
-
-
 }
+
+export default Reading;

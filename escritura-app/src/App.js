@@ -1,7 +1,6 @@
 import './App.css';
 import TextEditor from './Views/TextEditor/TextEditor';
 import Explore from './Views/Explore/Explore';
-import Profile from './Views/Profile/Profile';
 import Writting from './Views/Writting/Writting'
 import Authentication from './Views/Authentication/Authentication';
 import Document from './Components/Document/Document'
@@ -11,6 +10,7 @@ import TokenService from './Services/TokenService';
 import Home from './Views/Home/Home';
 import Guard from './Guard/Guard';
 import ProfileV2 from './Views/ProfileV2/ProfileV2';
+import Reading from './Views/Reading/Reading';
 
 
 
@@ -43,7 +43,7 @@ function App() {
             <Route
               path="/reading"
               element={<Guard>
-                <Writting/>
+                <Reading/>
               </Guard>}
             />
             <Route

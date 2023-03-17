@@ -2,6 +2,7 @@ import './CardInfo.css'
 import DocumentService from '../../Services/DocumentService';
 
 import { useNavigate } from 'react-router-dom';
+import TokenService from '../../Services/TokenService';
 
 const CardInfo = (data) => {
 
@@ -12,8 +13,12 @@ const CardInfo = (data) => {
         navigate('/documents/read/' + data.data.id);
     }
 
-    const save = () => {
+    const save = (event) => {
+        event.preventDefault();
+        console.log("guardando " + data.data.id);
+        DocumentService.userSavesDocument(data.data.id).then(data => {
 
+        });
     }
 
     return (<>
@@ -36,9 +41,8 @@ const CardInfo = (data) => {
         </div>
         <div className='content-line border-top'>
             <div className='buttons-line'>
-                <button className='accept-button' >Guardar</button>
+                <button className='accept-button' onClick={save}>Guardar</button>
                 <button className='accept-button' onClick={read}>Leer</button>
-
             </div>
         </div>
 

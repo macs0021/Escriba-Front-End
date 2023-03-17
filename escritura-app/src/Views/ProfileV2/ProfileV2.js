@@ -2,7 +2,6 @@ import './ProfileV2.css'
 import { useEffect } from 'react';
 import profileHolder from '../../files/profile-holder.jpg'
 import Galery from '../../Components/Galery/Galery';
-import Tab from '../../Components/Tab/Tab';
 import Cover from '../../files/sizeImage.png'
 import TokenService from '../../Services/TokenService';
 import DocumentService from '../../Services/DocumentService';
