@@ -4,18 +4,24 @@ import Galery from '../../Components/Galery/Galery';
 import Card from '../../Components/Card/Card';
 import { useEffect, useState } from 'react';
 import DocumentService from '../../Services/DocumentService';
-import TokenService from '../../Services/TokenService';
 
 const Reading = () => {
 
-    const [books, setBooks] = useState([]);
+    const [savedBooks, setSavedBooks] = useState([]);
+    const [unsavedBooks, setUnsavedBooks] = useState([]);
 
     useEffect(() => {
-        DocumentService.getDocumentsSavedByUsername(TokenService.getUsername()).then(data => {
-            console.log(JSON.stringify(books));
-            setBooks(data);
+        DocumentService.getDocumentsSavedByUsername().then(data => {
+            setSavedBooks(data);
         })
     }, []);
+
+    function addUnsavedBooks(book) {
+        setUnsavedBooks([...unsavedBooks, book]);
+        console.log("quitando libro: " + unsavedBooks);
+    }
+
+    const savedBooksToShow = savedBooks.filter(card => !unsavedBooks.find(book => book.id === card.id));
 
     return (
         <>
@@ -28,7 +34,7 @@ const Reading = () => {
             </div>
             <div>
                 <Galery>
-                    {books.map((card) => <Card card={card} key={card.id} />)}
+                    {savedBooksToShow.map((card) => <Card card={card} key={card.id} addUnsavedBooks={addUnsavedBooks} />)}
                 </Galery>
             </div>
         </>

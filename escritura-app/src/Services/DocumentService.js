@@ -70,6 +70,14 @@ async function userSavesDocument(documentId) {
         console.log("Esperando al refresco del token");
     }
 }
+async function userUnsavesDocument(documentId) {
+    try {
+        const response = await Interceptor.delete(url + "/saved/" + TokenService.getUsername() + "?savedDocument=" + documentId);
+        return response;
+    } catch (error) {
+        console.log("Esperando al refresco del token");
+    }
+}
 
 async function getDocumentsSavedByUsername() {
     try {
@@ -90,4 +98,5 @@ export default {
     deleteDocument,
     userSavesDocument,
     getDocumentsSavedByUsername,
+    userUnsavesDocument,
 };

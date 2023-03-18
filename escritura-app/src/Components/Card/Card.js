@@ -10,11 +10,11 @@ import CardInfo from '../Modal/CardInfo'
 import { Edit, PhotoSizeSelectSmallOutlined } from '@mui/icons-material';
 import DocumentService from '../../Services/DocumentService';
 
-export default function Card(props) {
+export default function Card({ card, addUnsavedBooks }) {
 
     const [modalState, setModalState] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [deleted,setDeleted] = useState(false);
+    const [deleted, setDeleted] = useState(false);
 
     const toggleDropdown = (event) => {
         event.stopPropagation();
@@ -26,7 +26,7 @@ export default function Card(props) {
     }
     const OnDeleteClick = (event) => {
         event.stopPropagation();
-        DocumentService.deleteDocument(props.card.id).then(data => {
+        DocumentService.deleteDocument(card.id).then(data => {
             setDeleted(true);
         });
     }
@@ -34,14 +34,13 @@ export default function Card(props) {
     const OnEditClick = (event) => {
         event.stopPropagation();
     }
-    if (deleted) { return (<></>) }
 
     return (
         <>
-            <div className='galery-card' onClick={OnCardClick}>
-                <img className="galery-cover" src={props.card.cover} />
+            {!deleted && <div className='galery-card' onClick={OnCardClick}>
+                <img className="galery-cover" src={card.cover} />
                 <div className="cover-title">
-                    <h2 className='book-title'>{props.card.tittle}</h2>
+                    <h2 className='book-title'>{card.tittle}</h2>
                 </div>
                 <div className="dropdown-container" style={{ display: showDropdown ? "block" : "none" }} >
                     <div className="dropdown">
@@ -56,11 +55,10 @@ export default function Card(props) {
                         <span className="dot"></span>
                     </div>
                 </div>
-
-            </div>
+            </div>}
             <Modal modalState={modalState} setModalState={setModalState}>
                 <div className='modal-content'>
-                    <CardInfo data={props.card} />
+                    <CardInfo data={card} addUnsavedBooks={addUnsavedBooks} />
                 </div>
             </Modal>
         </>
