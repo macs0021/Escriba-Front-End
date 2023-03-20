@@ -52,12 +52,12 @@
     width: 10%;
 }
 
-.tab a {
+.tab {
     text-transform: uppercase;
     color: #818181;
 }
 
-.tab:nth-child(1) a {
+.tab:nth-child(1) {
     color: #1d1d1d;
     font-weight: 600;
 }

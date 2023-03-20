@@ -43,7 +43,7 @@ const CreationFormulary = () => {
 
         console.log(selectedGenres);
 
-        const document = { "privateText": "", "cover": cover, "tittle": title, "synopsis": synopsis, "creatorUsername": TokenService.getUsername(), "genres": selectedGenres };
+        const document = { "privateText": "", "cover": cover, "tittle": title, "synopsis": synopsis, "creatorUsername": TokenService.getUsername(), "genres": selectedGenres, "readings": []};
         console.log("User: " + TokenService.getUsername());
 
         DocumentService.postDocument(document).then(data => {

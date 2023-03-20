@@ -1,5 +1,6 @@
 import './CardInfo.css'
 import DocumentService from '../../Services/DocumentService';
+import ReadingService from '../../Services/ReadingService';
 
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -14,7 +15,9 @@ const CardInfo = ({ data, addUnsavedBooks }) => {
     console.log("data: " + JSON.stringify(data));
 
     const read = () => {
-        navigate('/documents/read/' + data.id);
+        ReadingService.postReading(data.id).then(result => {
+            navigate('/documents/read/' + data.id);
+        });
     }
 
     const save = (event) => {

@@ -1,4 +1,3 @@
-
 import Interceptor from './Interceptor';
 import TokenService from './TokenService';
 

@@ -24,8 +24,8 @@ export default function Writting() {
                 <SearchBar></SearchBar>
             </div>
             <div className='tab-container'>
-                <div className='tab'><a href="">Public</a></div>
-                <div className='tab'><a href="">Private</a></div>
+                <div className='tab'>Public</div>
+                <div className='tab'>Private</div>
             </div>
             <div>
                 <Galery>

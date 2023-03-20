@@ -9,6 +9,7 @@ const Reading = () => {
 
     const [savedBooks, setSavedBooks] = useState([]);
     const [unsavedBooks, setUnsavedBooks] = useState([]);
+    const [onReading, setOnReading] = useState(true);
 
     useEffect(() => {
         DocumentService.getDocumentsSavedByUsername().then(data => {
@@ -29,8 +30,8 @@ const Reading = () => {
                 <SearchBar></SearchBar>
             </div>
             <div className='tab-container'>
-                <div className='tab'><a href="">Reading</a></div>
-                <div className='tab'><a href="">Saved</a></div>
+                <div className='tab'>Reading</div>
+                <div className='tab'>Saved</div>
             </div>
             <div>
                 <Galery>
