@@ -15,9 +15,7 @@ const CardInfo = ({ data, addUnsavedBooks }) => {
     console.log("data: " + JSON.stringify(data));
 
     const read = () => {
-        ReadingService.postReading(data.id).then(result => {
-            navigate('/documents/read/' + data.id);
-        });
+        navigate('/documents/read/' + data.id);
     }
 
     const save = (event) => {

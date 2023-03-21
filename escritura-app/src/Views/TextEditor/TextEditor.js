@@ -94,7 +94,9 @@ export default function TextEditor() {
         "tittle": docuData.tittle,
         "synopsis": docuData.synopsis,
         "creatorUsername": TokenService.getUsername(),
-        "genres": docuData.genres
+        "genres": docuData.genres,
+        "savedBy": docuData.savedBy,
+        "readings": docuData.readings
       };
 
       console.log("enviando datos: " + quill.root.innerHTML);

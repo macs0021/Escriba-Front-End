@@ -5,18 +5,19 @@ import TokenService from './TokenService';
 const url = "readings";
 
 async function getReading(id) {
-
     try {
-        const response = await Interceptor.get(`${url}/${encodeURIComponent(id)}/${encodeURIComponent(TokenService.getUsername())}`);
+        const response = await Interceptor.get(`${url}/get/${id}/${TokenService.getUsername()}`);
         return response.data;
     } catch (error) {
-        console.log("Esperando al refresco del token");
+        console.log(error);
+        return null;
     }
 }
 
-async function putReading(id) {
+async function putReading(id, spot) {
     try {
-        const response = await Interceptor.put(url, JSON.stringify(document));
+        const reading = {'username': TokenService.getUsername(), 'document': id,'readingSpot': spot}
+        const response = await Interceptor.put(url, JSON.stringify(reading));
         return response.data;
     } catch (error) {
         console.log("Esperando al refresco del token");
