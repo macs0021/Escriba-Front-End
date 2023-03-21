@@ -88,6 +88,16 @@ async function getDocumentsSavedByUsername() {
     }
 }
 
+async function getDocumentsReadByUsername() {
+    try {
+        const response = await Interceptor.get(url + "/read/" + TokenService.getUsername());
+        return response.data;
+    } catch (error) {
+        console.log("Esperando al refresco del token");
+        return [];
+    }
+}
+
 export default {
     getDocumentById,
     putDocument,
@@ -98,4 +108,5 @@ export default {
     userSavesDocument,
     getDocumentsSavedByUsername,
     userUnsavesDocument,
+    getDocumentsReadByUsername,
 };

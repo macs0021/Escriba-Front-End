@@ -8,12 +8,16 @@ import DocumentService from '../../Services/DocumentService';
 const Reading = () => {
 
     const [savedBooks, setSavedBooks] = useState([]);
+    const [readingBooks, setReadingBooks] = useState([]);
     const [unsavedBooks, setUnsavedBooks] = useState([]);
     const [onReading, setOnReading] = useState(true);
 
     useEffect(() => {
         DocumentService.getDocumentsSavedByUsername().then(data => {
             setSavedBooks(data);
+        })
+        DocumentService.getDocumentsReadByUsername().then(data => {
+            setReadingBooks(data);
         })
     }, []);
 
@@ -30,13 +34,19 @@ const Reading = () => {
                 <SearchBar></SearchBar>
             </div>
             <div className='tab-container'>
-                <div className='tab'>Reading</div>
-                <div className='tab'>Saved</div>
+                <div className='tab' onClick={() => setOnReading(true)}>Reading</div>
+                <div className='tab' onClick={() => setOnReading(false)}>Saved</div>
             </div>
             <div>
-                <Galery>
-                    {savedBooksToShow.map((card) => <Card card={card} key={card.id} addUnsavedBooks={addUnsavedBooks} />)}
-                </Galery>
+                {!onReading ? (
+                    <Galery>
+                        {savedBooksToShow.map((card) => <Card card={card} key={card.id} addUnsavedBooks={addUnsavedBooks} />)}
+                    </Galery>
+                ) : (
+                    <Galery>
+                        {readingBooks.map((card) => <Card card={card} key={card.id} />)}
+                    </Galery>
+                )}
             </div>
         </>
 

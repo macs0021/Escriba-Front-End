@@ -6,7 +6,7 @@ const url = "readings";
 
 async function getReading(id) {
     try {
-        const response = await Interceptor.get(`${url}/get/${id}/${TokenService.getUsername()}`);
+        const response = await Interceptor.get(`${url}/get/${TokenService.getUsername()}/${id}`);
         return response.data;
     } catch (error) {
         console.log(error);
