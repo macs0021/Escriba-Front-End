@@ -10,7 +10,6 @@ const Login = () => {
 
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
-    const [redirect, setRedirect] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();

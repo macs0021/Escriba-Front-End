@@ -11,10 +11,10 @@ import { Edit, PhotoSizeSelectSmallOutlined } from '@mui/icons-material';
 import DocumentService from '../../Services/DocumentService';
 
 export default function Card({ card, addUnsavedBooks }) {
-
     const [modalState, setModalState] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [deleted, setDeleted] = useState(false);
+    const [isFlipped, setIsFlipped] = useState(false);
 
     const toggleDropdown = (event) => {
         event.stopPropagation();
@@ -22,8 +22,10 @@ export default function Card({ card, addUnsavedBooks }) {
     };
 
     const OnCardClick = (event) => {
-        setModalState(true);
+        event.stopPropagation();
+        setIsFlipped(!isFlipped);
     }
+
     const OnDeleteClick = (event) => {
         event.stopPropagation();
         DocumentService.deleteDocument(card.id).then(data => {
@@ -37,27 +39,33 @@ export default function Card({ card, addUnsavedBooks }) {
 
     return (
         <>
-            {!deleted && <div className='galery-card' onClick={OnCardClick}>
-                <img className="galery-cover" src={card.cover} />
-                <div className="cover-title">
-                    <h2 className='book-title'>{card.tittle}</h2>
-                </div>
-                <div className="dropdown-container" style={{ display: showDropdown ? "block" : "none" }} >
-                    <div className="dropdown">
-                        <DeleteIcon className='dropdown-icon' onClick={OnDeleteClick} />
-                        <Edit className='dropdown-icon' onClick={OnEditClick} />
+            {!deleted && (
+                <article
+                    className={`card${isFlipped ? " is-flipped" : ""}`}
+                    onClick={OnCardClick}
+                >
+                    <div className="card__inner">
+                        <div className="card__body card__body--front">
+                            <div className="galery-card">
+                                <img className="galery-cover" src={card.cover} />
+                            </div>
+                        </div>
+                        <div className="card__body card__body--back">
+                            <div className="galery-card">
+                                <div className='card-data-container'>
+                                    <div className="cover-title">
+  
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className="dots-container" onClick={toggleDropdown}>
-                    <div className="dots" >
-                        <span className="dot"></span>
-                        <span className="dot"></span>
-                        <span className="dot"></span>
-                    </div>
-                </div>
-            </div>}
+                </article>
+            )}
+
             <Modal modalState={modalState} setModalState={setModalState}>
-                <div className='modal-content'>
+                <div className="modal-content">
                     <CardInfo data={card} addUnsavedBooks={addUnsavedBooks} />
                 </div>
             </Modal>

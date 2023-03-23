@@ -54,7 +54,7 @@ const ProfileV2 = () => {
                 <div className="left__col">
                     <div>
                         <div className="img__container">
-                            <img src={profileHolder} alt="Anna Smith" />
+                            <img src={profileHolder} alt="user" />
                             <span></span>
                         </div>
                         <h2>{TokenService.getUsername()}</h2>

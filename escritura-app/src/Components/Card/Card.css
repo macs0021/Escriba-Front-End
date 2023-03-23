@@ -3,20 +3,17 @@
     background-color: #f3f3f3;
     position: relative;
     cursor: pointer;
+    height: 23.5rem;
     width: 17rem;
     display: flex;
     justify-content: center;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
     background: rgba(1, 1, 1, 0.28);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
 }
 
-
 .galery-cover {
-    width: auto;
     width: 16.5rem;
+    height: 23rem !important;
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
 }
@@ -34,6 +31,14 @@
     -webkit-backdrop-filter: blur(20px);
 
     max-width: 85%;
+}
+
+.card-data-container{
+    background-color: #f3f3f3;
+    width: 16.5rem;
+    height: 23rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .book-title {
@@ -134,4 +139,24 @@
     background-color: #333;
     color: #f3f3f3;
     border-radius: 5px;
+}
+
+.card__inner {
+	position: relative;
+	height: 100%;
+	transform-style: preserve-3d;
+	transition: transform 0.5s;
+}
+.card.is-flipped .card__inner {
+    transform: rotateY(180deg);
+  }
+.card__body {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	backface-visibility: hidden;
+}
+.card__body--back {
+	transform: rotateY(180deg);
 }

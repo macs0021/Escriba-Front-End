@@ -12,20 +12,12 @@ import Guard from './Guard/Guard';
 import ProfileV2 from './Views/ProfileV2/ProfileV2';
 import Reading from './Views/Reading/Reading';
 
-
-
 function App() {
 
-  const pathname = window.location.pathname;
   console.log("LOGUEADO: " + TokenService.Logged());
   console.log("TOKEN: " + TokenService.getToken());
   console.log("USER: " + TokenService.getUsername());
   TokenService.dropToken();
-
-  useEffect(() => {
-    console.log("Scroll Reset");
-    window.scrollTo(0, 0);
-  }, [window.location.pathname]);
 
   return (
     <>
