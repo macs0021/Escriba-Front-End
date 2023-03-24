@@ -14,11 +14,6 @@ import Reading from './Views/Reading/Reading';
 
 function App() {
 
-  console.log("LOGUEADO: " + TokenService.Logged());
-  console.log("TOKEN: " + TokenService.getToken());
-  console.log("USER: " + TokenService.getUsername());
-  TokenService.dropToken();
-
   return (
     <>
       <Router>

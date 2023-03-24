@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "http://ff0a-35-230-16-252.ngrok.io";
+const url = "http://cf03-34-132-95-45.ngrok.io";
 
 async function postImg(postData) {
     const options = {
