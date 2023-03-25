@@ -233,3 +233,11 @@
     display: block;
     box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.18);
 }
+
+.card-link{
+    color: #333;
+}
+.card-link:hover{
+    color: #333;
+    font-weight: bold;
+}

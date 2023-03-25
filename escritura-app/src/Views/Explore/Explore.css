@@ -1,0 +1,27 @@
+.explore-chips-container{
+    display: flex;
+    width: 50%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.explore-center:after{
+    margin-top: 1rem;
+    content: "";
+    display: flex;
+    background: #cccccc;
+    height: 1px;
+    width: 60%;
+}
+.explore-search-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+.explore-center{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}

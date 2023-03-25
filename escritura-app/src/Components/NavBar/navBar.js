@@ -54,7 +54,7 @@ function NavBar() {
           <CustomLink to="/write" className='item' onClick={linkClick}><HistoryEduIcon className='button-icon' /> Writting</CustomLink>
         </div>
         <div>
-          <CustomLink to="/profile" className='item' onClick={linkClick}><Person2Icon className='button-icon' />Profile</CustomLink>
+          <CustomLink to={`/profile/${TokenService.getUsername()}`} className='item' onClick={linkClick}><Person2Icon className='button-icon' />Profile</CustomLink>
         </div>
         <div>
           <CustomLink to="/explore" className='item' onClick={linkClick}><SearchIcon className='button-icon'></SearchIcon>Explore</CustomLink>

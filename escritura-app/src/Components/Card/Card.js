@@ -12,6 +12,7 @@ import DocumentService from '../../Services/DocumentService';
 import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
 import profileHolder from '../../files/profile-holder.jpg'
+import { Link } from 'react-router-dom';
 
 export default function Card({ card, addUnsavedBooks }) {
     const [modalState, setModalState] = useState(false);
@@ -27,6 +28,11 @@ export default function Card({ card, addUnsavedBooks }) {
     const OnCardClick = (event) => {
         event.stopPropagation();
         setIsFlipped(!isFlipped);
+    }
+
+    const openInfo = (event) => {
+        event.stopPropagation();
+        setModalState(true);
     }
 
     const OnDeleteClick = (event) => {
@@ -59,7 +65,9 @@ export default function Card({ card, addUnsavedBooks }) {
                                         <div className='card-profile-data'>
                                             <img className="card-profile-img" src={profileHolder}></img>
                                             <div>
-                                                {card.creatorUsername}
+                                                <Link to={`/profile/${card.creatorUsername}`} className = "card-link">
+                                                    {card.creatorUsername}
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -68,7 +76,7 @@ export default function Card({ card, addUnsavedBooks }) {
                                     </div>
 
                                     <div className='card-genre-data'>
-                                    <div>{card.genres.join(' - ')}</div>
+                                        <div>{card.genres.join(' - ')}</div>
                                     </div>
                                     <div className='card-stars-data'>
                                         <div className='card-stars-background'>
@@ -80,7 +88,7 @@ export default function Card({ card, addUnsavedBooks }) {
                                         </div>
                                     </div>
                                     <div className='card-button-data'>
-                                        <div className='more-info-button'> More info</div>
+                                        <div className='more-info-button' onClick={openInfo}> More info</div>
                                     </div>
                                 </div>
 

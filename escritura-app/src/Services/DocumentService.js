@@ -40,9 +40,9 @@ async function getAllDocuments() {
     }
 }
 
-async function getDocumentsByUsername() {
+async function getDocumentsByUsername(username) {
     try {
-        const response = await Interceptor.get(url + "/user/" + TokenService.getUsername());
+        const response = await Interceptor.get(url + "/user/" + username);
         return response.data;
     } catch (error) {
         console.log("Esperando al refresco del token");

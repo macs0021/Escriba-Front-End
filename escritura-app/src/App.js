@@ -21,7 +21,7 @@ function App() {
           <Routes>
             <Route path="/authentication" element={<Authentication />} />
             <Route
-              path="/profile"
+              path="/profile/:username"
               element={<Guard>
                 <ProfileV2 />
               </Guard>}
