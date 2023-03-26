@@ -30,10 +30,29 @@ async function followUser(following) {
         console.log("Esperando al refresco del token");
     }
 }
-
+async function getFollowers(username) {
+    try {
+        const response = await Interceptor.get(`${url}/${username}/followers`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+async function getFollowing(username) {
+    try {
+        const response = await Interceptor.get(`${url}/${username}/following`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
 
 export default {
     getUser,
     putUser,
     followUser,
+    getFollowers,
+    getFollowing
 };

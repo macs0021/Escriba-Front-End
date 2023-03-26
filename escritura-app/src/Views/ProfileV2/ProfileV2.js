@@ -10,7 +10,8 @@ import { useParams } from 'react-router-dom';
 import Card from '../../Components/Card/Card';
 import UserService from '../../Services/UserService';
 import { Token } from '@mui/icons-material';
-import { Modal } from 'bootstrap';
+import Modal from '../../Components/Modal/Modal';
+import { Link } from 'react-router-dom';
 
 const ProfileV2 = () => {
 
@@ -22,6 +23,7 @@ const ProfileV2 = () => {
     const [isFollowing, setIsFollowing] = useState(false);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
+    const [modalList, setModalList] = useState([]);
 
     useEffect(() => {
         UserService.getUser(user).then(data => {
@@ -38,13 +40,30 @@ const ProfileV2 = () => {
     }, [user]);
 
 
-    const handleFollow = () => {
+    const handleFollow = (user) => {
         setIsFollowing(!isFollowing);
         UserService.followUser(user).then(data => {
             if (isFollowing)
                 setFollowers(prevFollowers => prevFollowers.filter(follower => follower !== user));
             else
                 setFollowers(prevFollowers => prevFollowers.concat(user));
+        })
+    }
+
+    const followersClick = () => {
+        if (followers.length == 0) return;
+        UserService.getFollowers(user).then(data => {
+            setModalList(data);
+            setModalState(true);
+            console.log("seguidor: " + JSON.stringify(data));
+        })
+    }
+
+    const followingClick = () => {
+        if (following.length == 0) return;
+        UserService.getFollowing(user).then(data => {
+            setModalList(data);
+            setModalState(true);
         })
     }
 
@@ -67,8 +86,8 @@ const ProfileV2 = () => {
                     </div>
                     <div>
                         <ul className="about">
-                            <li onClick={handleModal}><span>{followers.length}</span>Followers</li>
-                            <li onClick={handleModal}><span>{following.length}</span>Following</li>
+                            <li onClick={followersClick}><span>{followers.length}</span>Followers</li>
+                            <li onClick={followingClick}><span>{following.length}</span>Following</li>
                             <li onClick={handleModal}><span>200,543</span>Score</li>
                         </ul>
 
@@ -79,7 +98,7 @@ const ProfileV2 = () => {
                             <ul>
 
                             </ul>
-                            {<button className='follow-button' onClick={handleFollow}>
+                            {<button className='follow-button' onClick={() => handleFollow(user)}>
                                 {user != TokenService.getUsername() ? isFollowing ? 'Unfollow' : isFollowing ? 'Followed' : 'Follow' : 'Edit profile'}
                             </button>}
                         </div>
@@ -101,10 +120,21 @@ const ProfileV2 = () => {
                         </div>
                     </div>}
             </div>
+
+            <Modal modalState={modalState} setModalState={setModalState}>
+                {modalList.map((user) => <div className="profile-small-profile">
+                    <div className='profile-picture-name'>
+                        <img className='small-profile-picture' src={profileHolder} alt="user" key={user.name} />
+                        <Link to={`/profile/${user.name}`} onClick={() => setModalState(false)} className="card-link">
+                            {user.name}
+                        </Link>
+                    </div>
+                    {<button className='follow-button' onClick={() => handleFollow(user)}>
+                        {user != TokenService.getUsername() ? isFollowing ? 'Unfollow' : isFollowing ? 'Followed' : 'Follow' : ''}
+                    </button>}
+                </div>)}
+            </Modal>
         </div>
-
-
-
     </>);
 }
 
