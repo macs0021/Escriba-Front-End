@@ -1,0 +1,24 @@
+.profile-small-profile{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 30rem;
+    flex-direction: row;
+    margin-top: 1rem;
+}
+
+.profile-picture-name{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.small-profile-picture{
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.18);
+}
