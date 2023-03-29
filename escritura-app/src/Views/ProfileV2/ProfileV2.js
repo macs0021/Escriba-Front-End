@@ -16,7 +16,7 @@ import MiniProfile from '../../Components/MiniProfile/MiniProfile';
 
 const ProfileV2 = () => {
 
-    const [modalState, setModalState] = useState(false);
+    const [usersModalState, setUsersModalState] = useState(false);
     const [written, setWritten] = useState([]);
     const [userData, setUserData] = useState("");
     const [read, setRead] = useState([]);
@@ -25,14 +25,20 @@ const ProfileV2 = () => {
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
     const [modalList, setModalList] = useState([]);
+    const [profileImage, setProfileImage] = useState([]);
+    const [profileEditModalState, setProfileEditModalState] = useState(false);
 
     //Inicializo la vista, recogiendo datos del usuario del perfil y de sus libros
     useEffect(() => {
+        if (user === null) return;
+
         resetStates();
         UserService.getUser(user).then(data => {
             setUserData(data);
             setFollowers(data.followers);
             setFollowing(data.following);
+            setProfileImage(data.image);
+            console.log("image: " + data.image);
             if (data.followers.includes(TokenService.getUsername())) setIsFollowing(true);
 
             console.log("userData: " + JSON.stringify(data));
@@ -66,7 +72,7 @@ const ProfileV2 = () => {
         if (followers.length === 0) return;
         UserService.getFollowers(user).then(data => {
             setModalList(data);
-            setModalState(true);
+            setUsersModalState(true);
             console.log("seguidor: " + JSON.stringify(data));
         })
     }
@@ -75,20 +81,20 @@ const ProfileV2 = () => {
         if (following.length === 0) return;
         UserService.getFollowing(user).then(data => {
             setModalList(data);
-            setModalState(true);
+            setUsersModalState(true);
         })
     }
 
-    const handleModal = () => {
-        setModalState(true);
-    }
-
     const resetStates = () => {
-        setModalState(false);
+        setUsersModalState(false);
         setIsFollowing(false);
+        setProfileEditModalState(false);
         setFollowers([]);
         setFollowing([]);
         setModalList([]);
+    }
+    const editProfile = () => {
+        setProfileEditModalState(true);
     }
 
     return (<>
@@ -98,7 +104,7 @@ const ProfileV2 = () => {
                 <div className="left__col">
                     <div>
                         <div className="img__container">
-                            <img src={profileHolder} alt="user" />
+                            <img src={`data:image/png;base64,${profileImage}`} alt="user" />
                             <span></span>
                         </div>
                         <h2>{user}</h2>
@@ -108,18 +114,22 @@ const ProfileV2 = () => {
                         <ul className="about">
                             <li onClick={followersClick}><span>{followers.length}</span>Followers</li>
                             <li onClick={followingClick}><span>{following.length}</span>Following</li>
-                            <li onClick={handleModal}><span>200,543</span>Score</li>
+                            <li><span>200,543</span>Score</li>
                         </ul>
 
                         <div className="profile-content">
                             <p>
                                 {userData.description}
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
                             </p>
                             <ul>
 
                             </ul>
-                            {<button className='follow-button' onClick={() => handleFollow(user)}>
-                                {user !== TokenService.getUsername() ? isFollowing ? 'Unfollow' : isFollowing ? 'Followed' : 'Follow' : 'Edit profile'}
+                            {user !== TokenService.getUsername() && <button id="main-follow-button" className='follow-button' onClick={() => handleFollow(user)}>
+                                {isFollowing ? 'Unfollow' : isFollowing ? 'Followed' : 'Follow'}
+                            </button>}
+                            {user === TokenService.getUsername() && <button id="main-follow-button" className='follow-button' onClick={() => editProfile()}>
+                                Edit profile
                             </button>}
                         </div>
                     </div>
@@ -141,11 +151,16 @@ const ProfileV2 = () => {
                     </div>}
             </div>
 
-            <Modal modalState={modalState} setModalState={setModalState}>
-                {modalList.map((user) => 
+            <Modal modalState={usersModalState} setModalState={setUsersModalState}>
+                {modalList.map((user) =>
                     <MiniProfile user={user} handleFollow={handleFollow}></MiniProfile>
                 )}
             </Modal>
+
+            <Modal modalState={profileEditModalState} setModalState={setProfileEditModalState}>
+
+            </Modal>
+
         </div>
     </>);
 }
