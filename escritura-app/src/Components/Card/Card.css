@@ -187,7 +187,7 @@
     align-items: center;
     width: 100%;
     gap: 1rem;
-
+    justify-content: space-between;
 }
 
 .more-info-button {
@@ -241,4 +241,9 @@
 .card-link:hover{
     color: #333;
     font-weight: bold;
+}
+.icon-gap{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }

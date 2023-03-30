@@ -14,6 +14,8 @@ import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
 import profileHolder from '../../files/profile-holder.jpg'
 import { Link } from 'react-router-dom';
 import UserService from '../../Services/UserService';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import TokenService from '../../Services/TokenService';
 
 export default function Card({ card, addUnsavedBooks }) {
     const [modalState, setModalState] = useState(false);
@@ -71,12 +73,18 @@ export default function Card({ card, addUnsavedBooks }) {
                                 <div className='card-data-container'>
                                     <div className='card-creator-data'>
                                         <div className='card-profile-data'>
-                                            <img className="card-profile-img" src={`data:image/png;base64,${creatorPicture}`}></img>
-                                            <div>
-                                                <Link to={`/profile/${card.creatorUsername}`} className="card-link">
-                                                    {card.creatorUsername}
-                                                </Link>
+                                            <div className='row'>
+                                                <img className="card-profile-img" src={`data:image/png;base64,${creatorPicture}`}></img>
+                                                <div >
+                                                    <Link to={`/profile/${card.creatorUsername}`} className="card-link">
+                                                        {card.creatorUsername}
+                                                    </Link>
+                                                </div>
                                             </div>
+                                            {card.creatorUsername === TokenService.getUsername() && <div className='icon-gap'>
+                                                <DeleteIcon className='dropdown-icon'></DeleteIcon>
+                                                <EditIcon className='dropdown-icon'></EditIcon>
+                                            </div>}
                                         </div>
                                     </div>
                                     <div className="cover-title">

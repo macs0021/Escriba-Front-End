@@ -92,7 +92,6 @@ const ProfileV2 = () => {
 
     return (<>
         <div className="header__wrapper">
-            <header></header>
             <div className="cols__container">
                 <div className="left__col">
                     <div>
@@ -100,28 +99,30 @@ const ProfileV2 = () => {
                             <img src={`data:image/png;base64,${userData.image}`} alt="user" />
                         </div>
                         <h2>{userData.name}</h2>
-
                     </div>
-                    <div>
-                        <ul className="about">
-                            <li onClick={followersClick}><span>{followers.length}</span>Followers</li>
-                            <li onClick={followingClick}><span>{following.length}</span>Following</li>
-                            <li><span>200,543</span>Score</li>
-                        </ul>
 
-                        <div className="profile-content">
-                            <p>
-                                {userData.description}
-                            </p>
-                            <ul>
-
+                    <div className='center'>
+                        <div className='center column'>
+                            <ul className="about">
+                                <li onClick={followersClick}><span>{followers.length}</span>Followers</li>
+                                <li onClick={followingClick}><span>{following.length}</span>Following</li>
+                                <li><span>200,543</span>Score</li>
                             </ul>
-                            {user !== TokenService.getUsername() && <button id="main-follow-button" className='follow-button' onClick={() => handleFollow(user)}>
-                                {isFollowing ? 'Unfollow' : isFollowing ? 'Followed' : 'Follow'}
-                            </button>}
-                            {user === TokenService.getUsername() && <button id="main-follow-button" className='follow-button' onClick={() => editProfile()}>
-                                Edit profile
-                            </button>}
+
+                            <div className="profile-content">
+                                <p>
+                                    {userData.description}
+                                </p>
+                                <ul>
+
+                                </ul>
+                                {user !== TokenService.getUsername() && <button id="main-follow-button" className='follow-button' onClick={() => handleFollow(user)}>
+                                    {isFollowing ? 'Unfollow' : isFollowing ? 'Followed' : 'Follow'}
+                                </button>}
+                                {user === TokenService.getUsername() && <button id="main-follow-button" className='follow-button' onClick={() => editProfile()}>
+                                    Edit profile
+                                </button>}
+                            </div>
                         </div>
                     </div>
                 </div>
