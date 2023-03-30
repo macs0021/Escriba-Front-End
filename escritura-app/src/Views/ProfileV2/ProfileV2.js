@@ -1,18 +1,15 @@
 import './ProfileV2.css'
 import { useEffect } from 'react';
-import profileHolder from '../../files/profile-holder.jpg'
 import Galery from '../../Components/Galery/Galery';
-import Cover from '../../files/sizeImage.png'
 import TokenService from '../../Services/TokenService';
 import DocumentService from '../../Services/DocumentService';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Card from '../../Components/Card/Card';
 import UserService from '../../Services/UserService';
-import { Token } from '@mui/icons-material';
 import Modal from '../../Components/Modal/Modal';
-import { Link } from 'react-router-dom';
 import MiniProfile from '../../Components/MiniProfile/MiniProfile';
+import ProfileEditFormulary from '../../Components/Modal/ProfileEditFormulary';
 
 const ProfileV2 = () => {
 
@@ -31,23 +28,19 @@ const ProfileV2 = () => {
     //Inicializo la vista, recogiendo datos del usuario del perfil y de sus libros
     useEffect(() => {
         if (user === null) return;
-
         resetStates();
         UserService.getUser(user).then(data => {
+
             setUserData(data);
             setFollowers(data.followers);
             setFollowing(data.following);
             setProfileImage(data.image);
-            console.log("image: " + data.image);
             if (data.followers.includes(TokenService.getUsername())) setIsFollowing(true);
+        });
 
-            console.log("userData: " + JSON.stringify(data));
-
-        })
-        console.log("llamando libros de " + user);
         DocumentService.getDocumentsByUsername(user).then(data => {
             setWritten(data);
-        })
+        });
     }, [user]);
 
 
@@ -104,10 +97,9 @@ const ProfileV2 = () => {
                 <div className="left__col">
                     <div>
                         <div className="img__container">
-                            <img src={`data:image/png;base64,${profileImage}`} alt="user" />
-                            <span></span>
+                            <img src={`data:image/png;base64,${userData.image}`} alt="user" />
                         </div>
-                        <h2>{user}</h2>
+                        <h2>{userData.name}</h2>
 
                     </div>
                     <div>
@@ -120,7 +112,6 @@ const ProfileV2 = () => {
                         <div className="profile-content">
                             <p>
                                 {userData.description}
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
                             </p>
                             <ul>
 
@@ -138,8 +129,8 @@ const ProfileV2 = () => {
                     <div className="right__col">
                         <nav>
                             <ul>
-                                {written.length !== 0 && <li><a href="">Escritos</a></li>}
-                                {read.length !== 0 && <li><a href="">Leidos</a></li>}
+                                {written.length !== 0 && <li><a href="">Written</a></li>}
+                                {read.length !== 0 && <li><a href="">Readed</a></li>}
 
                             </ul>
                         </nav>
@@ -158,7 +149,7 @@ const ProfileV2 = () => {
             </Modal>
 
             <Modal modalState={profileEditModalState} setModalState={setProfileEditModalState}>
-
+                <ProfileEditFormulary userData={userData} setUserData={setUserData} setModalState={setProfileEditModalState}></ProfileEditFormulary>
             </Modal>
 
         </div>

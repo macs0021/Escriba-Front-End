@@ -14,9 +14,9 @@ async function getUser(username) {
     }
 }
 
-async function putUser(username, user) {
+async function putUser(id, user) {
     try {
-        const response = await Interceptor.put(`${url}/${username}`, JSON.stringify(user));
+        const response = await Interceptor.put(`${url}/${id}`, JSON.stringify(user));
         return response.data;
     } catch (error) {
         console.log("Esperando al refresco del token");

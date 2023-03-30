@@ -23,12 +23,12 @@ const MiniProfile = ({ user, handleFollow }) => {
     return (<>
         <div className="profile-small-profile">
             <div className='profile-picture-name'>
-                <img className='small-profile-picture' src={profileHolder} alt="user" key={user.name} />
+                <img className="small-profile-picture" src={`data:image/png;base64,${user.image}`} alt="user" key={user.name} />
                 <Link to={`/profile/${user.name}`} replace={false} className="card-link">
                     {user.name}
                 </Link>
             </div>
-            {<button className='follow-button' onClick={() => handleClick()}>
+            {user.name!==TokenService.getUsername() && <button className='follow-button' onClick={() => handleClick()}>
                 {clicked ? 'Unfollow' : 'Follow'}
             </button>}
         </div>

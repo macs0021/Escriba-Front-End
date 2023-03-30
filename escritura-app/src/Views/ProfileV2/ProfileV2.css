@@ -15,13 +15,13 @@ a {
 .header__wrapper header {
     width: 100%;
     background-color: #c4b7a6;
-    min-height: calc(10vw);
+    min-height: 10rem;
 }
 
 .header__wrapper .cols__container .left__col {
     padding: 25px 20px;
     text-align: center;
-    max-width: 350px;
+    max-width: 500px;
     position: relative;
     margin: 0 auto;
 }
@@ -29,14 +29,14 @@ a {
 
 .header__wrapper .cols__container .left__col .img__container {
     position: absolute;
-    top: -60px;
+    top: -100px;
     left: 50%;
     transform: translatex(-50%);
 }
 
 .header__wrapper .cols__container .left__col .img__container img {
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     border-radius: 50%;
     display: block;
@@ -55,10 +55,9 @@ a {
 }
 
 .header__wrapper .cols__container .left__col h2 {
-    margin-top: 60px;
+    margin-top: 105px;
     font-weight: 600;
     font-size: 22px;
-    margin-bottom: 5px;
 }
 
 .header__wrapper .cols__container .left__col p {
@@ -71,6 +70,7 @@ a {
     justify-content: space-around;
     position: relative;
     margin: 35px 0;
+    margin-top: 30px;
 }
 
 .header__wrapper .cols__container .left__col .about li {
@@ -141,15 +141,6 @@ a {
     font-weight: 600;
 }
 
-.follow-button {
-    background: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
 .header__wrapper .cols__container .right__col nav button:hover {
     opacity: 0.8;
 }
@@ -190,7 +181,7 @@ a {
 
     .header__wrapper header {
         width: 100%;
-        min-height: calc(7vw);
+        min-height: 10rem
     }
 
 }
@@ -208,8 +199,7 @@ a {
 
     .header__wrapper header {
         width: 100%;
-        min-height: calc(7vw);
-        box-shadow: inset 0px 0px 50px 5px rgba(0, 0, 0, 0.5);
+        min-height: 10rem;
     }
 
     .header__wrapper .cols__container .left__col {
@@ -227,5 +217,6 @@ a {
         margin: auto;
         margin-top: 0;
     }
+
 
 }

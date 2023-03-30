@@ -1,0 +1,54 @@
+.formulary-img {
+    width: 5rem;
+}
+
+.image-uploader {
+    display: flex;
+    justify-content: center;
+}
+
+.profileImg {
+    border-radius: 50%;
+    border: 1px solid #dadce0;
+    box-sizing: border-box;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.profileImg:hover>.imgOverlay {
+    opacity: 1;
+}
+
+.profileImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profileImg .imgOverlay {
+    transition: opacity .2s ease-in-out;
+    background-color: rgba(32, 33, 36, 0.6);
+    bottom: 0;
+    height: 33%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    opacity: 0;
+}
+
+.imgOverlay .oBody {
+    background-image: url(//www.gstatic.com/images/icons/material/system/2x/photo_camera_white_24dp.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    height: 100%;
+    opacity: .8;
+}
+.profile-edit-form textarea {
+    font-family: inherit;
+    font-size: inherit;
+    height: 200px;
+  }

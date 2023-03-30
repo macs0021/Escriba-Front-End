@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import './Card.css'
 import Modal from '../Modal/Modal'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CardInfo from '../Modal/CardInfo'
 import { Edit, PhotoSizeSelectSmallOutlined } from '@mui/icons-material';
 import DocumentService from '../../Services/DocumentService';
@@ -13,12 +13,20 @@ import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
 import profileHolder from '../../files/profile-holder.jpg'
 import { Link } from 'react-router-dom';
+import UserService from '../../Services/UserService';
 
 export default function Card({ card, addUnsavedBooks }) {
     const [modalState, setModalState] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [deleted, setDeleted] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
+    const [creatorPicture, setCreatorPicture] = useState("");
+
+    useEffect(() => {
+        UserService.getUser(card.creatorUsername).then(data => {
+            setCreatorPicture(data.image);
+        });
+    }, []);
 
     const toggleDropdown = (event) => {
         event.stopPropagation();
@@ -63,9 +71,9 @@ export default function Card({ card, addUnsavedBooks }) {
                                 <div className='card-data-container'>
                                     <div className='card-creator-data'>
                                         <div className='card-profile-data'>
-                                            <img className="card-profile-img" src={profileHolder}></img>
+                                            <img className="card-profile-img" src={`data:image/png;base64,${creatorPicture}`}></img>
                                             <div>
-                                                <Link to={`/profile/${card.creatorUsername}`} className = "card-link">
+                                                <Link to={`/profile/${card.creatorUsername}`} className="card-link">
                                                     {card.creatorUsername}
                                                 </Link>
                                             </div>
