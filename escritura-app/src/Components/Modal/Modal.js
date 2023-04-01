@@ -1,21 +1,23 @@
 import React from 'react'
 import './Modal.css'
+import CloseIcon from '@mui/icons-material/Close';
 
-const Modal = ({children, modalState, setModalState}) =>{
-    return(
+const Modal = ({ children, modalState, setModalState, tittle }) => {
+    return (
         <>
-        {modalState &&
-            <div className='overlay'>
-                <div className='modal-container'>
-                    <div className='header'>
-                        <h3> title</h3>
+            {modalState &&
+                <div className='overlay'>
+                    <div className='modal-container'>
+                        <div className='header'>
+                            <h3> {tittle}</h3>
+                            <CloseIcon className='close-button' onClick={() => setModalState(false)}></CloseIcon>
+                        </div>
+
+                        {children}
                     </div>
-                    <button className='close-button' onClick={()=>setModalState(false)}>X</button>
-                    {children}
+
                 </div>
-                
-            </div>
-        }
+            }
         </>
     );
 

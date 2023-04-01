@@ -19,6 +19,7 @@ import TokenService from '../../Services/TokenService';
 
 export default function Card({ card, addUnsavedBooks }) {
     const [modalState, setModalState] = useState(false);
+    const [deleteWarningModalState, setDeleteWarningModalState] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [deleted, setDeleted] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
@@ -33,6 +34,11 @@ export default function Card({ card, addUnsavedBooks }) {
     const toggleDropdown = (event) => {
         event.stopPropagation();
         setShowDropdown(!showDropdown);
+    };
+
+    const enableDeleteModal = (event) => {
+        event.stopPropagation();
+        setDeleteWarningModalState(true);
     };
 
     const OnCardClick = (event) => {
@@ -82,7 +88,7 @@ export default function Card({ card, addUnsavedBooks }) {
                                                 </div>
                                             </div>
                                             {card.creatorUsername === TokenService.getUsername() && <div className='icon-gap'>
-                                                <DeleteIcon className='dropdown-icon'></DeleteIcon>
+                                                <DeleteIcon className='dropdown-icon' onClick={enableDeleteModal}></DeleteIcon>
                                                 <EditIcon className='dropdown-icon'></EditIcon>
                                             </div>}
                                         </div>
@@ -118,6 +124,15 @@ export default function Card({ card, addUnsavedBooks }) {
                 <div className="modal-content">
                     <CardInfo data={card} addUnsavedBooks={addUnsavedBooks} />
                 </div>
+            </Modal>
+            <Modal modalState={deleteWarningModalState} setModalState={setDeleteWarningModalState} tittle={"Delete document"}>
+                <p>Are you sure you want to delete this document?</p>
+                <p>You can't undo this action</p>
+                <div className='space-evenly'>
+                    <button className='delete-button' onClick={OnDeleteClick}>Delete</button>
+                    <button onClick={() => setDeleteWarningModalState(false)}>Cancel</button>
+                </div>
+
             </Modal>
         </>
     );

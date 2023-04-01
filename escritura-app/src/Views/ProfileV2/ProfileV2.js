@@ -99,6 +99,7 @@ const ProfileV2 = () => {
                             <img src={`data:image/png;base64,${userData.image}`} alt="user" />
                         </div>
                         <h2>{userData.name}</h2>
+                        <p>dudu@gmail.com</p>
                     </div>
 
                     <div className='center'>

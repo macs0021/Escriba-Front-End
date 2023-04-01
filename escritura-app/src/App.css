@@ -22,6 +22,10 @@ button {
   display: flex;
   justify-content: center;
 }
+.space-evenly{
+  display: flex;
+  justify-content: space-evenly;
+}
 .top-bot-margin{
   margin-top: 1rem;
   margin-bottom: 1rem;

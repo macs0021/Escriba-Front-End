@@ -247,3 +247,6 @@
     gap: 1rem;
     align-items: center;
 }
+.delete-button{
+    background-color: #c94c4c;
+}
