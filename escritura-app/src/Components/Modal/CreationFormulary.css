@@ -32,7 +32,7 @@
 }
 
 .cover {
-    width: 60%;
+    width: 20rem;
     aspect-ratio: 77/109;
     object-fit: contain;
     border: 1px solid #333;

@@ -16,14 +16,25 @@ import { Link } from 'react-router-dom';
 import UserService from '../../Services/UserService';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import TokenService from '../../Services/TokenService';
+import CreationFormulary from '../Modal/CreationFormulary';
+import CardBack from './CardBack.js/CardBack';
+import DeleteDocumentModal from '../Modal/DeleteDocumentModal/DeleteDocumentModal';
+import EditDocumentModal from '../Modal/EditDocumentModal/EditDocumentModal';
 
 export default function Card({ card, addUnsavedBooks }) {
+    //Estados de las modales
     const [modalState, setModalState] = useState(false);
     const [deleteWarningModalState, setDeleteWarningModalState] = useState(false);
+    const [editModalState, setEditModalState] = useState(false);
+
     const [showDropdown, setShowDropdown] = useState(false);
     const [deleted, setDeleted] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
     const [creatorPicture, setCreatorPicture] = useState("");
+
+    const [tittle, setTittle] = useState(card.tittle);
+    const [cover, setCover] = useState(card.cover);
+    const [synopsis, setSynopsis] = useState(card.synopsis)
 
     useEffect(() => {
         UserService.getUser(card.creatorUsername).then(data => {
@@ -31,14 +42,14 @@ export default function Card({ card, addUnsavedBooks }) {
         });
     }, []);
 
-    const toggleDropdown = (event) => {
-        event.stopPropagation();
-        setShowDropdown(!showDropdown);
-    };
-
     const enableDeleteModal = (event) => {
         event.stopPropagation();
         setDeleteWarningModalState(true);
+    };
+
+    const enableEditModal = (event) => {
+        event.stopPropagation();
+        setEditModalState(true);
     };
 
     const OnCardClick = (event) => {
@@ -51,17 +62,6 @@ export default function Card({ card, addUnsavedBooks }) {
         setModalState(true);
     }
 
-    const OnDeleteClick = (event) => {
-        event.stopPropagation();
-        DocumentService.deleteDocument(card.id).then(data => {
-            setDeleted(true);
-        });
-    }
-
-    const OnEditClick = (event) => {
-        event.stopPropagation();
-    }
-
     return (
         <>
             {!deleted && (
@@ -71,68 +71,31 @@ export default function Card({ card, addUnsavedBooks }) {
                     <div className="card__inner">
                         <div className="card__body card__body--front">
                             <div className="galery-card">
-                                <img className="galery-cover" src={card.cover} />
+                                <img className="galery-cover" src={cover} />
                             </div>
                         </div>
                         <div className="card__body card__body--back">
-                            <div className="galery-card">
-                                <div className='card-data-container'>
-                                    <div className='card-creator-data'>
-                                        <div className='card-profile-data'>
-                                            <div className='row'>
-                                                <img className="card-profile-img" src={`data:image/png;base64,${creatorPicture}`}></img>
-                                                <div >
-                                                    <Link to={`/profile/${card.creatorUsername}`} className="card-link">
-                                                        {card.creatorUsername}
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                            {card.creatorUsername === TokenService.getUsername() && <div className='icon-gap'>
-                                                <DeleteIcon className='dropdown-icon' onClick={enableDeleteModal}></DeleteIcon>
-                                                <EditIcon className='dropdown-icon'></EditIcon>
-                                            </div>}
-                                        </div>
-                                    </div>
-                                    <div className="cover-title">
-                                        {card.tittle}
-                                    </div>
-
-                                    <div className='card-genre-data'>
-                                        <div>{card.genres.join(' - ')}</div>
-                                    </div>
-                                    <div className='card-stars-data'>
-                                        <div className='card-stars-background'>
-                                            <StarOutlinedIcon></StarOutlinedIcon>
-                                            <StarOutlinedIcon></StarOutlinedIcon>
-                                            <StarOutlinedIcon></StarOutlinedIcon>
-                                            <StarOutlineOutlinedIcon></StarOutlineOutlinedIcon>
-                                            <StarOutlineOutlinedIcon></StarOutlineOutlinedIcon>
-                                        </div>
-                                    </div>
-                                    <div className='card-button-data'>
-                                        <div className='more-info-button' onClick={openInfo}> More info</div>
-                                    </div>
-                                </div>
-
-                            </div>
+                            <CardBack card={card}
+                                tittle={tittle}
+                                genres={card.genres}
+                                synopsis={synopsis}
+                                creatorPicture={creatorPicture}
+                                addUnsavedBooks={addUnsavedBooks}
+                                enableDeleteModal={enableDeleteModal}
+                                openInfo={openInfo}
+                                enableEditModal={enableEditModal}></CardBack>
                         </div>
                     </div>
                 </article>
             )}
 
+            <DeleteDocumentModal card={card} deleteWarningModalState={deleteWarningModalState} setDeleteWarningModalState={setDeleteWarningModalState} setDeleted={setDeleted} />
+            <EditDocumentModal tittle={tittle} card={card} synopsis={synopsis} cover={cover} setCover={setCover} setSynopsis={setSynopsis} setTittle={setTittle} editModalState={editModalState} setEditModalState={setEditModalState} />
+
             <Modal modalState={modalState} setModalState={setModalState}>
                 <div className="modal-content">
-                    <CardInfo data={card} addUnsavedBooks={addUnsavedBooks} />
+                    <CardInfo data={card} tittle={tittle} synopsis={synopsis} addUnsavedBooks={addUnsavedBooks} />
                 </div>
-            </Modal>
-            <Modal modalState={deleteWarningModalState} setModalState={setDeleteWarningModalState} tittle={"Delete document"}>
-                <p>Are you sure you want to delete this document?</p>
-                <p>You can't undo this action</p>
-                <div className='space-evenly'>
-                    <button className='delete-button' onClick={OnDeleteClick}>Delete</button>
-                    <button onClick={() => setDeleteWarningModalState(false)}>Cancel</button>
-                </div>
-
             </Modal>
         </>
     );

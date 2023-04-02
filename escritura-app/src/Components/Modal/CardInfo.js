@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import TokenService from '../../Services/TokenService';
 
-const CardInfo = ({ data, addUnsavedBooks }) => {
+const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks }) => {
 
     const [saved, setSaved] = useState(false);
 
@@ -43,7 +43,7 @@ const CardInfo = ({ data, addUnsavedBooks }) => {
 
     return (<>
         <div className='content-line'>
-            <h1>{data.tittle}</h1>
+            <h1>{tittle}</h1>
         </div>
         <div className='listed-content'>
             <div className='listed-element'>Genero:
@@ -55,7 +55,7 @@ const CardInfo = ({ data, addUnsavedBooks }) => {
         </div>
         <div className='text-line'>
             <p>
-                {data.synopsis}
+                {synopsis}
             </p>
 
         </div>

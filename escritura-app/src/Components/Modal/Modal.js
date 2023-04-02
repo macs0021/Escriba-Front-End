@@ -12,7 +12,6 @@ const Modal = ({ children, modalState, setModalState, tittle }) => {
                             <h3> {tittle}</h3>
                             <CloseIcon className='close-button' onClick={() => setModalState(false)}></CloseIcon>
                         </div>
-
                         {children}
                     </div>
 

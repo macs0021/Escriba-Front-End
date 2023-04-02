@@ -36,7 +36,7 @@ a {
 
 .header__wrapper .cols__container .left__col .img__container {
     top: 30px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.1rem;
 }
 
 .header__wrapper .cols__container .left__col .img__container img {
@@ -60,7 +60,9 @@ a {
 }
 
 .header__wrapper .cols__container .left__col h2 {
-    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
     font-size: 22px;
 }
 
@@ -68,6 +70,11 @@ a {
     font-size: 0.9rem;
     color: #818181;
     margin: 0;
+}
+
+.profile-data-container{
+    display: flex;
+    flex-direction: column;
 }
 
 .header__wrapper .cols__container .left__col .about {
