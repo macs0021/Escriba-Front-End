@@ -12,7 +12,6 @@ const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks }) => {
 
 
     const navigate = useNavigate();
-    console.log("data: " + JSON.stringify(data));
 
     const read = () => {
         navigate('/documents/read/' + data.id);

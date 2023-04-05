@@ -3,6 +3,7 @@ import './ProfileEditFormulary.css'
 import DefaultProfilePicture from '../../files/DefaultProfilePicture.jpg'
 import imageToBase64 from 'image-to-base64/browser'
 import UserService from '../../Services/UserService';
+import { putUser } from '../../Services/UserService';
 
 
 const ProfileEditFormulary = ({ userData, setUserData, setModalState }) => {
@@ -10,6 +11,7 @@ const ProfileEditFormulary = ({ userData, setUserData, setModalState }) => {
     const [email, setEmail] = useState("");
     const [description, setDescription] = useState(userData.description);
     const [image, setImage] = useState(userData.image);
+    
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -39,7 +41,7 @@ const ProfileEditFormulary = ({ userData, setUserData, setModalState }) => {
         const saveUser = { "id": userData.id, "name": userData.name, "email": email, "description": description, "image": image }
         setUserData(saveUser);
         setModalState(false);
-        UserService.putUser(userData.id, saveUser);
+        putUser(userData.id, saveUser);
     }
 
     return (<>

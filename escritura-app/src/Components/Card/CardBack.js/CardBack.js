@@ -13,7 +13,7 @@ import TokenService from '../../../Services/TokenService';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-const CardBack = ({ card, tittle, genres, creatorPicture, enableEditModal, enableDeleteModal, openInfo }) => {
+const CardBack = ({ card, tittle, genres, creatorPicture, enableEditModal, enableDeleteModal, openInfo, enableCommentModal }) => {
 
     return (<>
         <div className="galery-card">
@@ -42,7 +42,7 @@ const CardBack = ({ card, tittle, genres, creatorPicture, enableEditModal, enabl
                     <div>{genres.join(' - ')}</div>
                 </div>
                 <div className='card-stars-data'>
-                    <div className='card-stars-background'>
+                    <div className='card-stars-background' onClick={enableCommentModal}>
                         <StarOutlinedIcon></StarOutlinedIcon>
                         <StarOutlinedIcon></StarOutlinedIcon>
                         <StarOutlinedIcon></StarOutlinedIcon>

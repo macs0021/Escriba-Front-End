@@ -47,9 +47,9 @@ const CreateDocumentButton = () => {
 
         <Modal modalState={modalState} setModalState={setModalState} tittle={"Create document"}>
             <div className='modal-content'>
-                <CreationFormulary title={title} setTitle={setTitle} 
-                image={image} cover={cover} selectedGenres={selectedGenres}
-                 setCover={setCover} setSynopsis={setSynopsis} setImage={setImage} setSelectedGenres={setSelectedGenres} synopsis={synopsis}/>
+                <CreationFormulary title={title} setTitle={setTitle}
+                    image={image} cover={cover} selectedGenres={selectedGenres}
+                    setCover={setCover} setSynopsis={setSynopsis} setImage={setImage} setSelectedGenres={setSelectedGenres} synopsis={synopsis} />
             </div>
             <div className='center-element'>
                 <button onClick={createDocument} className='create-document-button'>Enviar</button>

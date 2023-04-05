@@ -40,8 +40,7 @@ export default function TextEditor() {
       ['link', 'image', 'video', 'formula'],
     ]
   }
-
-
+  
   const reference = useCallback((refe) => {
     if (refe == null) return;
     refe.innerHTML = "";

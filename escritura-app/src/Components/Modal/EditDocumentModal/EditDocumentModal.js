@@ -7,9 +7,13 @@ import DocumentService from "../../../Services/DocumentService";
 import { useNavigate } from "react-router";
 
 
-const EditDocumentModal = ({ tittle, setTittle, cover, setCover, synopsis, setSynopsis, editModalState, setEditModalState, card }) => {
+const EditDocumentModal = ({ editModalState, setEditModalState, card, setCard }) => {
 
     const navigate = useNavigate();
+
+    const [tittle, setTittle] = useState(card.tittle);
+    const [cover, setCover] = useState(card.cover);
+    const [synopsis, setSynopsis] = useState(card.synopsis)
 
     const document = {
         "id": card.id,
@@ -24,7 +28,9 @@ const EditDocumentModal = ({ tittle, setTittle, cover, setCover, synopsis, setSy
     };
 
     const updateDocument = () => {
-        DocumentService.putDocument(document);
+        DocumentService.putDocument(document).then((result) => {
+            setCard(result);
+        });
         setEditModalState(false);
     }
 

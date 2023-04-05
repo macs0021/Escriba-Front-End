@@ -10,6 +10,7 @@ import UserService from '../../Services/UserService';
 import Modal from '../../Components/Modal/Modal';
 import MiniProfile from '../../Components/MiniProfile/MiniProfile';
 import ProfileEditFormulary from '../../Components/Modal/ProfileEditFormulary';
+import { getUser, followUser, getFollowers, getFollowing } from '../../Services/UserService';
 
 const ProfileV2 = () => {
 
@@ -29,7 +30,7 @@ const ProfileV2 = () => {
     useEffect(() => {
         if (user === null) return;
         resetStates();
-        UserService.getUser(user).then(data => {
+        getUser(user).then(data => {
 
             setUserData(data);
             setFollowers(data.followers);
@@ -45,7 +46,7 @@ const ProfileV2 = () => {
 
 
     const handleFollow = (username) => {
-        UserService.followUser(username).then(data => {
+        followUser(username).then(data => {
             if (user === TokenService.getUsername()) {
                 if (following.includes(username))
                     setFollowing(prevFollowing => prevFollowing.filter(followedUser => followedUser !== username));
@@ -63,7 +64,7 @@ const ProfileV2 = () => {
 
     const followersClick = () => {
         if (followers.length === 0) return;
-        UserService.getFollowers(user).then(data => {
+        getFollowers(user).then(data => {
             setModalList(data);
             setUsersModalState(true);
             console.log("seguidor: " + JSON.stringify(data));
@@ -72,7 +73,7 @@ const ProfileV2 = () => {
 
     const followingClick = () => {
         if (following.length === 0) return;
-        UserService.getFollowing(user).then(data => {
+        getFollowing(user).then(data => {
             setModalList(data);
             setUsersModalState(true);
         })

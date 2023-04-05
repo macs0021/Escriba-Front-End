@@ -14,7 +14,6 @@ const Modal = ({ children, modalState, setModalState, tittle }) => {
                         </div>
                         {children}
                     </div>
-
                 </div>
             }
         </>
