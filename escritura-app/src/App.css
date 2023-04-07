@@ -21,10 +21,15 @@ button {
 .center{
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .space-evenly{
   display: flex;
   justify-content: space-evenly;
+}
+.space-between{
+  display: flex;
+  justify-content: space-between;
 }
 .top-bot-margin{
   margin-top: 1rem;
@@ -42,4 +47,6 @@ button {
   align-items: center;
   gap: 1rem;
 }
-
+.gap{
+  gap: 1rem;
+}

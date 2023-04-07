@@ -6,15 +6,10 @@
     resize: none;
 }
 
-.post-comment-button::after {
-    content: "";
-    position: absolute;
-    top: 11rem;
-    display: flex;
-    background: #cccccc;
-    height: 1px;
-    width: 90%;
-}
+
 .post-comment-button{
     margin-bottom: 2rem;
+}
+.posting-stars{
+    margin: 1rem;
 }

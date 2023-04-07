@@ -4,7 +4,7 @@ const url = 'comments';
 
 export async function getReviewsOfDocument(documentID) {
     try {
-        const response = await Interceptor.get(`${url}/${documentID}`);
+        const response = await Interceptor.get(`${url}/${documentID}/review`);
         return response.data;
     } catch (error) {
         console.error(error);

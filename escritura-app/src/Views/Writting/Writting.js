@@ -13,7 +13,6 @@ export default function Writting() {
 
     useEffect(() => {
         DocumentService.getDocumentsByUsername(TokenService.getUsername()).then(data => {
-            console.log(JSON.stringify(books));
             setBooks(data);
         })
     }, []);
