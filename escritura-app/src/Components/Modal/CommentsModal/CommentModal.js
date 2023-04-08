@@ -9,6 +9,7 @@ import TokenService from "../../../Services/TokenService";
 const CommentModal = ({ documentId, modalState, setModalState }) => {
 
     const [comments, setComments] = useState([]);
+    const [editing, setEditing] = useState(false);
     const [userComment, setUserComment] = useState(null);
 
     useEffect(() => {
@@ -34,12 +35,26 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
         })
     }
 
+    const closeModalAndEditMode = () =>{
+        setModalState(false);
+        setEditing(false);
+    }
+
+    const editMode = () => {
+        setEditing(true);
+        console.log(editing);
+    }
+
     return (<>
-        <Modal modalState={modalState} setModalState={setModalState} tittle={"Comments"}>
-            {userComment ? (
-                <Comment comment={userComment} />
+        <Modal modalState={modalState} setModalState={closeModalAndEditMode} tittle={"Comments"}>
+            {userComment && !editing ? (
+                <Comment comment={userComment} reloadContent={reloadContent} setEditing={editMode} />
             ) : (
-                <CommentPosting documentId={documentId} reloadContent={reloadContent} />
+                <CommentPosting documentId={documentId}
+                    reloadContent={reloadContent}
+                    editing={editing}
+                    setEditing={setEditing}
+                    comment={userComment} />
             )}
             <div className="comments">
                 {comments.map(comment => (

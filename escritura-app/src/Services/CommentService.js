@@ -30,3 +30,12 @@ export async function putComment(commentId, updatedComment) {
         console.error(error);
     }
 }
+
+export async function deleteComment(commentId) {
+    try {
+        const response = await Interceptor.delete(`${url}/${commentId}`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}

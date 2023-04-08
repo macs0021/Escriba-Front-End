@@ -59,3 +59,7 @@
 .comment-container .space-between{
     width: 100%;
 }
+.comment-responses-button{
+    margin-bottom: 1rem;
+    font-weight: bold;
+}

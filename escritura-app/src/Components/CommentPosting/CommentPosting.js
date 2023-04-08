@@ -1,34 +1,41 @@
 import './CommentPosting.css'
-import { postComment } from '../../Services/CommentService'
+import { postComment, putComment } from '../../Services/CommentService'
 import { useState } from 'react'
 import TokenService from '../../Services/TokenService';
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
-const CommentPosting = ({ documentId, reloadContent }) => {
+const CommentPosting = ({ documentId, reloadContent, setEditing, editing, comment }) => {
 
-    const [text, setText] = useState("");
+    const [text, setText] = useState(comment?.text || '');
 
-    const [rating, setRating] = useState(0);
+    const [review, setReview] = useState(comment?.rating || 0);
 
     const handleRatingClick = (clickedRating) => {
-        setRating(clickedRating);
+        setReview(clickedRating);
     };
 
     const postingComment = () => {
 
-        const comment = { "text": text, "postedBy": TokenService.getUsername(), "postedIn": documentId, "rating": rating, "commentType": "REVIEW" }
+        const post = { "text": text, "postedBy": TokenService.getUsername(), "postedIn": documentId, "rating": review, "commentType": "REVIEW" }
 
-        postComment(comment).then((result) => {
-            reloadContent();
-        })
+        if (editing) {
+            putComment(comment.id, post).then(() => {
+                setEditing(false);
+                reloadContent();
+            })
+        } else {
+            postComment(post).then(() => {
+                reloadContent();
+            })
+        }
     }
 
 
     return (<>
         <div className='comment-posting'>
             <div className="center red">
-                <input onChange={(event) => setText(event.target.value)} className='comment-text-area' />
+                <input onChange={(event) => setText(event.target.value)} defaultValue={text} className='comment-text-area' />
             </div>
             <div className='row center posting-stars'>
                 {[...Array(5)].map((_, i) => (
@@ -36,7 +43,7 @@ const CommentPosting = ({ documentId, reloadContent }) => {
                         key={i}
                         onClick={() => handleRatingClick(i + 1)}
                     >
-                        {i + 1 <= rating ? <StarIcon /> : <StarOutlineIcon />}
+                        {i + 1 <= review ? <StarIcon /> : <StarOutlineIcon />}
                     </div>
                 ))}
             </div>
