@@ -9,6 +9,7 @@ import DeleteDocumentModal from '../Modal/DeleteDocumentModal/DeleteDocumentModa
 import EditDocumentModal from '../Modal/EditDocumentModal/EditDocumentModal';
 import CommentModal from '../Modal/CommentsModal/CommentModal';
 import { getUser } from '../../Services/UserService';
+import PublishModal from '../Modal/PublishModal/PublishModal';
 
 export default function Card({ card, addUnsavedBooks }) {
     //Estados de las modales
@@ -16,6 +17,7 @@ export default function Card({ card, addUnsavedBooks }) {
     const [deleteWarningModalState, setDeleteWarningModalState] = useState(false);
     const [editModalState, setEditModalState] = useState(false);
     const [commentModalState, setCommentModalState] = useState(false);
+    const [publishModalState, setPublishModalState] = useState(false);
 
     const [deleted, setDeleted] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
@@ -53,6 +55,10 @@ export default function Card({ card, addUnsavedBooks }) {
         event.stopPropagation();
         setCommentModalState(true);
     }
+    const enablePublishModal = (event) => {
+        event.stopPropagation();
+        setPublishModalState(true);
+    }
 
     return (
         <>
@@ -69,14 +75,15 @@ export default function Card({ card, addUnsavedBooks }) {
                         <div className="card__body card__body--back">
                             <CardBack card={card}
                                 tittle={document.tittle}
-                                genres={card.genres}
+                                genres={document.genres}
                                 synopsis={document.synopsis}
                                 creatorPicture={creatorPicture}
                                 addUnsavedBooks={addUnsavedBooks}
                                 enableDeleteModal={enableDeleteModal}
                                 openInfo={openInfo}
                                 enableEditModal={enableEditModal}
-                                enableCommentModal={enableCommentModal}>
+                                enableCommentModal={enableCommentModal}
+                                enablePublishModal={enablePublishModal}>
                             </CardBack>
                         </div>
                     </div>
@@ -86,10 +93,11 @@ export default function Card({ card, addUnsavedBooks }) {
             <DeleteDocumentModal card={card} deleteWarningModalState={deleteWarningModalState} setDeleteWarningModalState={setDeleteWarningModalState} setDeleted={setDeleted} />
             <EditDocumentModal card={document} setCard={setDocument} editModalState={editModalState} setEditModalState={setEditModalState} />
             <CommentModal documentId={card.id} modalState={commentModalState} setModalState={setCommentModalState} ></CommentModal>
+            <PublishModal card={document} publishModalState={publishModalState} setPublishModalState={setPublishModalState}></PublishModal>
 
             <Modal modalState={modalState} setModalState={setModalState}>
                 <div className="modal-content">
-                    <CardInfo data={card} tittle={document.tittle} synopsis={document.synopsis} addUnsavedBooks={addUnsavedBooks} />
+                    <CardInfo data={card} genres={document.genres} tittle={document.tittle} synopsis={document.synopsis} addUnsavedBooks={addUnsavedBooks} />
                 </div>
             </Modal>
         </>

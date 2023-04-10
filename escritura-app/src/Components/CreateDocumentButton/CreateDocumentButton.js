@@ -14,8 +14,8 @@ const CreateDocumentButton = () => {
 
     const navigate = useNavigate();
 
-    const [title, setTitle] = useState('');
-    const [image, setImage] = useState('');
+    const [title, setTitle] = useState("");
+    const [image, setImage] = useState("");
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [synopsis, setSynopsis] = useState("");
 
@@ -47,7 +47,7 @@ const CreateDocumentButton = () => {
 
         <Modal modalState={modalState} setModalState={setModalState} tittle={"Create document"}>
             <div className='modal-content'>
-                <CreationFormulary title={title} setTitle={setTitle}
+                <CreationFormulary tittle={title} setTitle={setTitle}
                     image={image} cover={cover} selectedGenres={selectedGenres}
                     setCover={setCover} setSynopsis={setSynopsis} setImage={setImage} setSelectedGenres={setSelectedGenres} synopsis={synopsis} />
             </div>

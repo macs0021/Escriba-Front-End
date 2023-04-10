@@ -6,7 +6,42 @@ import loadingImg from '../../files/cargaV3.gif';
 
 import React, { useState } from 'react';
 
-const genres = ['Ficción', 'No ficción', 'Drama', 'Romance', 'Ciencia ficción', 'Terror', 'Misterio'];
+const genres = [
+    "Novel",
+    "Short Story",
+    "Poetry",
+    "Drama",
+    "Science Fiction",
+    "Fantasy",
+    "Horror",
+    "Mystery",
+    "Romance",
+    "Adventure",
+    "Humor",
+    "Historical",
+    "Detective",
+    "Western",
+    "Dystopian",
+    "Realistic",
+    "Juvenile",
+    "Children's",
+    "History",
+    "Biography and Memoir",
+    "Self-Help and Personal Development",
+    "Business and Finance",
+    "Politics and Current Affairs",
+    "Travel",
+    "Food and Gastronomy",
+    "Art and Photography",
+    "Sports and Outdoor Activities",
+    "Education and Reference",
+    "Science and Technology",
+    "Religion and Spirituality",
+    "Environment and Ecology",
+    "Philosophy and Thought",
+    "Sociology and Anthropology",
+    "Journalism and Essays"
+];
 
 const CreationFormulary = ({ tittle, setTitle, selectedGenres, setSelectedGenres, synopsis, setSynopsis, cover, setCover }) => {
 
@@ -50,9 +85,12 @@ const CreationFormulary = ({ tittle, setTitle, selectedGenres, setSelectedGenres
     return (<>
         <form>
             <div className=' formulary-line'>
-                <label className='create-form-label'>
-                    Tittle:
-                </label>
+                <div className='create-form-two-grid row'>
+                    <label className='create-form-label create-form-two-grid row'>
+                        Tittle:
+                    </label>
+                    <p className={tittle.trim().length !== 0 ? 'create-form-two-grid info-accepted' : 'create-form-two-grid info'}> You need to fill this field in order to publish your document</p>
+                </div>
                 <input className='create-form-input create-form-two-grid' type="text" defaultValue={tittle} onChange={(event) => setTitle(event.target.value)} />
             </div>
             <div className='formulary-line'>
@@ -69,21 +107,27 @@ const CreationFormulary = ({ tittle, setTitle, selectedGenres, setSelectedGenres
                 <img className='cover' src={tempCover}></img>
             </div>
 
-            <label className='create-form-label'>
-                Sinopsis:
-            </label>
+            <div className='create-form-two-grid row'>
+                <label className='create-form-label create-form-two-grid row'>
+                    Synopsis:
+                </label>
+                <p className={synopsis.trim().split(" ").length>=10 ? 'create-form-two-grid info-accepted' : 'create-form-two-grid info'}>You need to write a synopsis of at least 10 words in order to publish your document</p>
+            </div>
             <div className='center-element vertical'>
                 <textarea onChange={(event) => setSynopsis(event.target.value)} defaultValue={synopsis} className='sinopsis-input'></textarea>
             </div>
 
-            <label className='create-form-label'>
-                Genres:
-            </label>
+            <div className='create-form-two-grid row'>
+                <label className='create-form-label create-form-two-grid row'>
+                    Genres:
+                </label>
+                <p className={selectedGenres.length!==0 ? 'create-form-two-grid info-accepted' : 'create-form-two-grid info'}>You need to select at least one of this in order to publish your document</p>
+            </div>
 
             <div className='center-element'>
                 <div className='chip-container'>
                     {genres.map((genre) => (
-                        <Chip key={genre} data={genre} onClick={handleGenreClick} />
+                        <Chip key={genre} data={genre} onClick={handleGenreClick} active={!selectedGenres.includes(genre)} />
                     ))}
                 </div>
             </div>

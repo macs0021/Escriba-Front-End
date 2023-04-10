@@ -75,6 +75,9 @@ export default function Explore() {
                         <Chip key={genre} data={genre} onClick={handleGenreClick} />
                     ))}
                 </div>
+                <div className='center'>
+                    <button>Search</button>
+                </div>
             </div>
             <Galery>
                 {cards.map((card) => <Card card={card} key={card.id} />)}

@@ -47,9 +47,17 @@ const CommentPosting = ({ documentId, reloadContent, setEditing, editing, commen
                     </div>
                 ))}
             </div>
-            <div className="center post-comment-button">
-                <button onClick={postingComment}>Post comment</button>
-            </div>
+            {!editing ? (
+                <div className="center">
+                    <button onClick={postingComment}>Post comment</button>
+                </div>) : (
+                <div className='center'>
+                    <div className="center gap">
+                        <button onClick={postingComment}>Save changes</button>
+                        <button onClick={()=>setEditing(false)}>Cancel</button>
+                    </div>
+                </div>
+            )}
         </div>
     </>)
 

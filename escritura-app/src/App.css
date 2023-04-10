@@ -18,35 +18,62 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
-.center{
+
+.center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.space-evenly{
+
+.space-evenly {
   display: flex;
   justify-content: space-evenly;
 }
-.space-between{
+
+.space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.space-between {
   display: flex;
   justify-content: space-between;
 }
-.top-bot-margin{
+
+.top-bot-margin {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-.row{
+
+.row {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
 }
-.column{
+
+.column {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
-.gap{
+
+.gap {
   gap: 1rem;
+}
+
+.info {
+  font-style: oblique;
+  color: #818181;
+}
+
+.info-accepted {
+  font-style: oblique;
+  color: #97cf8a;
+}
+
+.info-warning {
+  font-style: oblique;
+  color: #c94c4c;
 }

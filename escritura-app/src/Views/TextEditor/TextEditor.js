@@ -72,7 +72,7 @@ export default function TextEditor() {
   useEffect(() => {
     if (quill != null) {
       documentService.getDocumentById(documentId).then(data => {
-        quill.root.innerHTML = data.privateText;
+        quill.root.innerHTML = data.text;
         setDocuData(data);
       });
     }
@@ -88,7 +88,7 @@ export default function TextEditor() {
 
       const document = {
         "id": documentId,
-        "privateText": quill.root.innerHTML,
+        "text": quill.root.innerHTML,
         "cover": docuData.cover,
         "tittle": docuData.tittle,
         "synopsis": docuData.synopsis,

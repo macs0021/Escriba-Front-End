@@ -57,7 +57,7 @@ export default function Document() {
     if (quill != null) {
       console.log("GETTING DATA");
       documentService.getDocumentById(documentId).then(data => {
-        quill.root.innerHTML = data.privateText;
+        quill.root.innerHTML = data.text;
         ReadingService.getReading(data.id).then(result => {
           if (result == null) {
             ReadingService.postReading(data.id);

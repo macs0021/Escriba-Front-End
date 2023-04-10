@@ -13,16 +13,17 @@ const EditDocumentModal = ({ editModalState, setEditModalState, card, setCard })
 
     const [tittle, setTittle] = useState(card.tittle);
     const [cover, setCover] = useState(card.cover);
-    const [synopsis, setSynopsis] = useState(card.synopsis)
+    const [synopsis, setSynopsis] = useState(card.synopsis);
+    const [genres, SetGenres] = useState(card.genres);
 
     const document = {
         "id": card.id,
-        "privateText": card.privateText,
+        "privateText": card.text,
         "cover": cover,
         "tittle": tittle,
         "synopsis": synopsis,
         "creatorUsername": TokenService.getUsername(),
-        "genres": card.genres,
+        "genres": genres,
         "savedBy": card.savedBy,
         "readings": card.readings
     };
@@ -44,7 +45,7 @@ const EditDocumentModal = ({ editModalState, setEditModalState, card, setCard })
     return (<>
         <Modal modalState={editModalState} setModalState={setEditModalState} tittle={"Edit document"}>
             <div className='modal-content'>
-                <CreationFormulary card={card} tittle={tittle} cover={cover} synopsis={synopsis} setCover={setCover} setTitle={setTittle} setSynopsis={setSynopsis}></CreationFormulary>
+                <CreationFormulary card={card} tittle={tittle} cover={cover} synopsis={synopsis} setCover={setCover} setTitle={setTittle} setSynopsis={setSynopsis} selectedGenres={genres} setSelectedGenres={SetGenres}></CreationFormulary>
             </div>
             <div className='center'>
                 <div className='buttons-line'>

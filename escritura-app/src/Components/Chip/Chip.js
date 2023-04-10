@@ -1,11 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Chip.css'
 
-const Chips = ({ data, onClick }) => {
+const Chips = ({ data, onClick, active }) => {
 
-    const [selected, setSelected] = useState(false);
+    const [selected, setSelected] = useState(active);
+
+    useEffect(() => {
+        if (!active) {
+            document.getElementById(data).setAttribute('class', 'selected-chip selectable');
+        }
+        else {
+            document.getElementById(data).setAttribute('class', 'unselected-chip selectable');
+        }
+    }, []);
+
     const changeState = () => {
-        if (!selected) {
+        if (selected) {
             document.getElementById(data).setAttribute('class', 'selected-chip selectable');
         }
         else {

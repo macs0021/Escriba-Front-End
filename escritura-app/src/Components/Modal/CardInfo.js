@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import TokenService from '../../Services/TokenService';
 
-const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks }) => {
+const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks,genres }) => {
 
     const [saved, setSaved] = useState(false);
 
@@ -46,7 +46,7 @@ const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks }) => {
         </div>
         <div className='listed-content'>
             <div className='listed-element'>Genero:
-                {data.genres.map(genre => (
+                {genres.map(genre => (
                     <span key={genre} style={{ marginLeft: 10 }}>{genre}</span>
                 ))}
 
