@@ -127,7 +127,7 @@ const CreationFormulary = ({ tittle, setTitle, selectedGenres, setSelectedGenres
             <div className='center-element'>
                 <div className='chip-container'>
                     {genres.map((genre) => (
-                        <Chip key={genre} data={genre} onClick={handleGenreClick} active={!selectedGenres.includes(genre)} />
+                        <Chip key={genre + " - form"} id={genre + " - form"} data={genre} onClick={handleGenreClick} active={!selectedGenres.includes(genre)} />
                     ))}
                 </div>
             </div>

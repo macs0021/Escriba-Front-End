@@ -77,3 +77,11 @@ button {
   font-style: oblique;
   color: #c94c4c;
 }
+
+.green {
+  background-color: #97cf8a;
+}
+
+.red {
+  background-color: #c94c4c;
+}

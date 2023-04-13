@@ -54,7 +54,16 @@ export default function Explore() {
         })
     }, []);
 
+
     const [selectedGenres, setSelectedGenres] = useState([]);
+    console.log("Generos de explore: " + selectedGenres);
+
+    const search = () => {
+        DocumentService.getDocumentsByGenreAndPage(selectedGenres, 0, 10).then((data) => {
+            console.log(JSON.stringify(data))
+            setCards(data);
+        });
+    }
 
     const handleGenreClick = (genre) => {
         if (selectedGenres.includes(genre)) {
@@ -72,11 +81,11 @@ export default function Explore() {
                 </div>
                 <div className='explore-chips-container'>
                     {genres.map((genre) => (
-                        <Chip key={genre} data={genre} onClick={handleGenreClick} />
+                        <Chip key={genre + " - explore"} id={genre + " - explore"} data={genre} onClick={handleGenreClick} active={!selectedGenres.includes(genre)} />
                     ))}
                 </div>
                 <div className='center'>
-                    <button>Search</button>
+                    <button onClick={search}>Search</button>
                 </div>
             </div>
             <Galery>

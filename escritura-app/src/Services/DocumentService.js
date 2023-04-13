@@ -13,9 +13,9 @@ async function getDocumentById(id) {
     }
 }
 
-async function putDocument(document) {
+async function putDocument(documentId,document) {
     try {
-        const response = await Interceptor.put(url, JSON.stringify(document));
+        const response = await Interceptor.put(`${url}/${documentId}`, JSON.stringify(document));
         return response.data;
     } catch (error) {
         console.log("Esperando al refresco del token");
@@ -98,6 +98,25 @@ async function getDocumentsReadByUsername() {
     }
 }
 
+async function getDocumentsByGenreAndPage(genres, page, pageSize) {
+    try {
+        const response = await Interceptor.get(`${url}/genres?genres=${genres.join(',')}&page=${page}&pageSize=${pageSize}`);
+        return response.data;
+    } catch (error) {
+        console.log("Esperando al refresco del token");
+        return [];
+    }
+}
+async function changeVisibility(documentId) {
+    try {
+        const response = await Interceptor.patch(`${url}/${documentId}/visibility`);
+        return response.data;
+    } catch (error) {
+        console.log("Esperando al refresco del token");
+        return [];
+    }
+}
+
 export default {
     getDocumentById,
     putDocument,
@@ -109,4 +128,6 @@ export default {
     getDocumentsSavedByUsername,
     userUnsavesDocument,
     getDocumentsReadByUsername,
+    getDocumentsByGenreAndPage,
+    changeVisibility,
 };

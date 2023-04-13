@@ -22,6 +22,7 @@ export default function Card({ card, addUnsavedBooks }) {
     const [deleted, setDeleted] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
     const [creatorPicture, setCreatorPicture] = useState("");
+    const [isPublished, setIsPublished] = useState(card.public);
 
     const [document, setDocument] = useState(card);
 
@@ -83,7 +84,8 @@ export default function Card({ card, addUnsavedBooks }) {
                                 openInfo={openInfo}
                                 enableEditModal={enableEditModal}
                                 enableCommentModal={enableCommentModal}
-                                enablePublishModal={enablePublishModal}>
+                                enablePublishModal={enablePublishModal}
+                                isPublic = {isPublished}>
                             </CardBack>
                         </div>
                     </div>
@@ -93,7 +95,7 @@ export default function Card({ card, addUnsavedBooks }) {
             <DeleteDocumentModal card={card} deleteWarningModalState={deleteWarningModalState} setDeleteWarningModalState={setDeleteWarningModalState} setDeleted={setDeleted} />
             <EditDocumentModal card={document} setCard={setDocument} editModalState={editModalState} setEditModalState={setEditModalState} />
             <CommentModal documentId={card.id} modalState={commentModalState} setModalState={setCommentModalState} ></CommentModal>
-            <PublishModal card={document} publishModalState={publishModalState} setPublishModalState={setPublishModalState}></PublishModal>
+            <PublishModal card={document} publishModalState={publishModalState} setPublishModalState={setPublishModalState} setEditModalState={setEditModalState} isPublic={isPublished} setIsPublic={setIsPublished}></PublishModal>
 
             <Modal modalState={modalState} setModalState={setModalState}>
                 <div className="modal-content">

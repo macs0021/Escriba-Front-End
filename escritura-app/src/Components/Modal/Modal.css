@@ -67,3 +67,6 @@
     word-wrap: break-word;
     overflow: auto;
 }
+.info-modal-text-width{
+    width: 22rem;
+}

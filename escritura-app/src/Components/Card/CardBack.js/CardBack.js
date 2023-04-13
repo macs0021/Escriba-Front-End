@@ -15,7 +15,7 @@ import TokenService from '../../../Services/TokenService';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-const CardBack = ({ card, tittle, genres, creatorPicture, enableEditModal, enableDeleteModal, openInfo, enableCommentModal, enablePublishModal }) => {
+const CardBack = ({ card, tittle, genres, creatorPicture, enableEditModal, enableDeleteModal, openInfo, enableCommentModal, enablePublishModal, isPublic }) => {
 
     return (<>
         <div className="galery-card">

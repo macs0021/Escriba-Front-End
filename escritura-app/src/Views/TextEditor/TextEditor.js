@@ -34,13 +34,13 @@ export default function TextEditor() {
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       ['bold', 'italic', 'underline', 'strike'],
       [{ 'color': [] }, { 'background': [] }],
-      [ 'blockquote', 'code-block'],
+      ['blockquote', 'code-block'],
       [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
       ['direction', { 'align': [] }],
       ['link', 'image', 'video', 'formula'],
     ]
   }
-  
+
   const reference = useCallback((refe) => {
     if (refe == null) return;
     refe.innerHTML = "";
@@ -95,12 +95,12 @@ export default function TextEditor() {
         "creatorUsername": TokenService.getUsername(),
         "genres": docuData.genres,
         "savedBy": docuData.savedBy,
-        "readings": docuData.readings
+        "readings": docuData.readings,
       };
 
       console.log("enviando datos: " + quill.root.innerHTML);
 
-      documentService.putDocument(document).then(data => {
+      documentService.putDocument(documentId, document).then(data => {
         setIsLoading(false);
       })
 

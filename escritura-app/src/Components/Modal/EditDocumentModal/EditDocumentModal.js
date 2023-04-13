@@ -25,18 +25,22 @@ const EditDocumentModal = ({ editModalState, setEditModalState, card, setCard })
         "creatorUsername": TokenService.getUsername(),
         "genres": genres,
         "savedBy": card.savedBy,
-        "readings": card.readings
+        "readings": card.readings,
+        "public": card.public,
     };
 
+    console.log("DOCUMENT: " + JSON.stringify(card))
+    console.log("VISIBILITY: " + card.public);
+
     const updateDocument = () => {
-        DocumentService.putDocument(document).then((result) => {
+        DocumentService.putDocument(card.id, document).then((result) => {
             setCard(result);
         });
         setEditModalState(false);
     }
 
     const moveToEdit = () => {
-        DocumentService.putDocument(document).then(() => {
+        DocumentService.putDocument(card.id, document).then(() => {
             navigate('/documents/' + card.id);
         })
     }
