@@ -86,7 +86,6 @@
         margin: 0;
         box-shadow: none;
         align-self: flex-start;
-        overflow: hidden;
     }
 
     .container .ql-toolbar.ql-snow {

@@ -13,7 +13,7 @@ async function getDocumentById(id) {
     }
 }
 
-async function putDocument(documentId,document) {
+async function putDocument(documentId, document) {
     try {
         const response = await Interceptor.put(`${url}/${documentId}`, JSON.stringify(document));
         return response.data;
@@ -31,9 +31,12 @@ async function postDocument(document) {
     }
 }
 
-async function getAllDocuments() {
+async function getAllDocuments(page, pageSize) {
     try {
-        const response = await Interceptor.get(url);
+
+        console.log(`${url}/all?page=${page}&pageSize=${pageSize}`);
+        const response = await Interceptor.get(`${url}/all?page=${page}&pageSize=${pageSize}`);
+        
         return response.data;
     } catch (error) {
         return [];

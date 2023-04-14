@@ -5,10 +5,14 @@ import Chip from '../../Components/Chip/Chip';
 import { useState, useEffect } from 'react';
 import Card from '../../Components/Card/Card';
 import DocumentService from '../../Services/DocumentService';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default function Explore() {
 
     const [cards, setCards] = useState([]);
+    const [page, setPage] = useState(0);
+    const [selectedGenres, setSelectedGenres] = useState([]);
+    const [end, setEnd] = useState(false);
 
     const genres = [
         "Novel",
@@ -47,20 +51,31 @@ export default function Explore() {
         "Journalism and Essays"
     ];
 
-
     useEffect(() => {
-        DocumentService.getAllDocuments().then(data => {
-            setCards(data);
-        })
-    }, []);
+        if (selectedGenres.length === 0) {
+            DocumentService.getAllDocuments(page, 10).then(data => {
+                setCards(prevCards => prevCards.concat(data));
+                if (data.length < 10) {
+                    setEnd(true);
+                }
+                console.log("datos: " + JSON.stringify(data));
+            })
+        } else {
+            DocumentService.getDocumentsByGenreAndPage(selectedGenres, page, 10).then(data => {
+                setCards(prevCards => prevCards.concat(data));
+                if (data.length > 10) {
+                    setEnd(true);
+                }
+            })
+        }
+    }, [page, selectedGenres]);
 
-
-    const [selectedGenres, setSelectedGenres] = useState([]);
     console.log("Generos de explore: " + selectedGenres);
 
     const search = () => {
         DocumentService.getDocumentsByGenreAndPage(selectedGenres, 0, 10).then((data) => {
             console.log(JSON.stringify(data))
+            setPage(0);
             setCards(data);
         });
     }
@@ -88,9 +103,13 @@ export default function Explore() {
                     <button onClick={search}>Search</button>
                 </div>
             </div>
-            <Galery>
-                {cards.map((card) => <Card card={card} key={card.id} />)}
-            </Galery>
+
+            <InfiniteScroll dataLength={cards.length} hasMore={!end} next={() => setPage((prevPage) => prevPage + 1)} loader={"Loading..."} endMessage={"no more"}>
+                <Galery>
+                    {cards.map((card) => <Card card={card} key={card.id} />)}
+                </Galery>
+            </InfiniteScroll>
+
         </>
     );
 }
