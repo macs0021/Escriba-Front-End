@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import TokenService from '../../../Services/TokenService';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { PublicOff } from '@mui/icons-material';
 
 const CardBack = ({ card, tittle, genres, creatorPicture, enableEditModal, enableDeleteModal, openInfo, enableCommentModal, enablePublishModal, isPublic }) => {
 
@@ -33,7 +34,9 @@ const CardBack = ({ card, tittle, genres, creatorPicture, enableEditModal, enabl
                         {card.creatorUsername === TokenService.getUsername() && <div className='icon-gap'>
                             <DeleteIcon className='dropdown-icon' onClick={enableDeleteModal}></DeleteIcon>
                             <EditIcon className='dropdown-icon' onClick={enableEditModal}></EditIcon>
-                            <PublicIcon className='dropdown-icon' onClick={enablePublishModal}></PublicIcon>
+                            {isPublic ? <PublicIcon className='dropdown-icon' onClick={enablePublishModal}></PublicIcon>:
+                            <PublicOff className='dropdown-icon' onClick={enablePublishModal}></PublicOff> }
+                            
                         </div>}
                     </div>
                 </div>

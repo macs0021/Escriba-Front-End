@@ -68,16 +68,26 @@ export default function Explore() {
                 }
             })
         }
-    }, [page, selectedGenres]);
+    }, [page]);
 
-    console.log("Generos de explore: " + selectedGenres);
 
     const search = () => {
-        DocumentService.getDocumentsByGenreAndPage(selectedGenres, 0, 10).then((data) => {
-            console.log(JSON.stringify(data))
-            setPage(0);
-            setCards(data);
-        });
+        if (selectedGenres.length === 0) {
+            DocumentService.getAllDocuments(page, 10).then(data => {
+                setCards(data);
+                if (data.length < 10) {
+                    setEnd(true);
+                }
+                console.log("datos: " + JSON.stringify(data));
+            })
+        } else {
+            DocumentService.getDocumentsByGenreAndPage(selectedGenres, page, 10).then(data => {
+                setCards(data);
+                if (data.length > 10) {
+                    setEnd(true);
+                }
+            })
+        }
     }
 
     const handleGenreClick = (genre) => {

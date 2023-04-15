@@ -23,6 +23,7 @@ const ProfileV2 = () => {
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
     const [modalList, setModalList] = useState([]);
+    const [followModalTittle, setFollowModalTittle] = useState("");
     const [profileImage, setProfileImage] = useState([]);
     const [profileEditModalState, setProfileEditModalState] = useState(false);
 
@@ -66,8 +67,8 @@ const ProfileV2 = () => {
         if (followers.length === 0) return;
         getFollowers(user).then(data => {
             setModalList(data);
+            setFollowModalTittle(user + " followers")
             setUsersModalState(true);
-            console.log("seguidor: " + JSON.stringify(data));
         })
     }
 
@@ -75,6 +76,7 @@ const ProfileV2 = () => {
         if (following.length === 0) return;
         getFollowing(user).then(data => {
             setModalList(data);
+            setFollowModalTittle(user + " followings")
             setUsersModalState(true);
         })
     }
@@ -144,7 +146,7 @@ const ProfileV2 = () => {
                     </div>}
             </div>
 
-            <Modal modalState={usersModalState} setModalState={setUsersModalState}>
+            <Modal modalState={usersModalState} setModalState={setUsersModalState} tittle={followModalTittle}>
                 {modalList.map((user) =>
                     <MiniProfile user={user} handleFollow={handleFollow}></MiniProfile>
                 )}
