@@ -11,7 +11,6 @@
 }
 
 .comment-header {
-    display: flex;
     align-items: center;
     width: 100%;
 }
@@ -54,7 +53,6 @@
 
 .comment-stars {
     display: flex;
-    margin-left: 2rem;
     align-items: center;
     justify-content: center;
 }
@@ -66,4 +64,29 @@
 .comment-responses-button {
     margin-bottom: 1rem;
     font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .comment-container {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .comment-info {
+        margin: 0;
+        display: flex;
+        width: 30% !important;
+    }
+
+    .star-icon{
+        font-size: 1.2rem !important;
+    }
+    .comment-date-name{
+        width: 4rem;
+    }
+
+    .comment-header {
+        align-items: center;
+        width: 100%;
+    }
 }

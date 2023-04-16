@@ -5,6 +5,7 @@ import Comment from "../../Comment/Comment";
 import { useState } from "react";
 import { getReviewsOfDocument } from "../../../Services/CommentService";
 import TokenService from "../../../Services/TokenService";
+import './CommentModal.css'
 
 const CommentModal = ({ documentId, modalState, setModalState }) => {
 
@@ -35,7 +36,7 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
         })
     }
 
-    const closeModalAndEditMode = () =>{
+    const closeModalAndEditMode = () => {
         setModalState(false);
         setEditing(false);
     }
@@ -46,19 +47,21 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
     }
 
     return (<>
-        <Modal modalState={modalState} setModalState={closeModalAndEditMode} tittle={"Comments"}>
-            {userComment && !editing ? (
-                <Comment comment={userComment} reloadContent={reloadContent} setEditing={editMode} />
-            ) : (
-                <CommentPosting documentId={documentId}
-                    reloadContent={reloadContent}
-                    editing={editing}
-                    setEditing={setEditing}
-                    comment={userComment} />
-            )}
-            <div className="comments">
-                {comments.map(comment => (
-                    <Comment key={comment.id} comment={comment} />))}
+        <Modal modalState={modalState} setModalState={closeModalAndEditMode} tittle={"Comments"} fullscreen={true}>
+            <div className = "comments-container">
+                {userComment && !editing ? (
+                    <Comment comment={userComment} reloadContent={reloadContent} setEditing={editMode} />
+                ) : (
+                    <CommentPosting documentId={documentId}
+                        reloadContent={reloadContent}
+                        editing={editing}
+                        setEditing={setEditing}
+                        comment={userComment} />
+                )}
+                <div className="comments">
+                    {comments.map(comment => (
+                        <Comment key={comment.id} comment={comment} />))}
+                </div>
             </div>
         </Modal >
 

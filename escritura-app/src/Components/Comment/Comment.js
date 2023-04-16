@@ -41,10 +41,10 @@ const Comment = ({ comment, reloadContent, setEditing }) => {
                                 alt={`${comment.postedBy}'s avatar`}
                                 className="comment-avatar"
                             />
-                            <div>
+                            <div className='comment-date-name'>
                                 <h4 className="comment-info">{comment.postedBy}</h4>
                                 <p className="comment-info" style={{ fontSize: '12px' }}>
-                                    {new Date(comment.postedAt).toLocaleString()}
+                                    {new Date(comment.postedAt).toLocaleDateString()}
                                 </p>
                             </div>
 
@@ -54,9 +54,9 @@ const Comment = ({ comment, reloadContent, setEditing }) => {
                                 const stars = [];
                                 for (let i = 1; i <= 5; i++) {
                                     if (i <= comment.rating) {
-                                        stars.push(<StarIcon key={i} />);
+                                        stars.push(<StarIcon className='star-icon' key={i} />);
                                     } else {
-                                        stars.push(<StarOutlineIcon key={i} />);
+                                        stars.push(<StarOutlineIcon className='star-icon' key={i} />);
                                     }
                                 }
                                 return stars;

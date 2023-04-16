@@ -34,7 +34,7 @@ const CommentPosting = ({ documentId, reloadContent, setEditing, editing, commen
 
     return (<>
         <div className='comment-posting'>
-            <div className="center red">
+            <div className="center">
                 <input onChange={(event) => setText(event.target.value)} defaultValue={text} className='comment-text-area' />
             </div>
             <div className='row center posting-stars'>

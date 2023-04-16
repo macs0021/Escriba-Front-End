@@ -102,7 +102,7 @@ export default function Explore() {
         <>
             <div className='explore-center'>
                 <div className='explore-search-container'>
-                    <SearchBar></SearchBar>
+
                 </div>
                 <div className='explore-chips-container'>
                     {genres.map((genre) => (
