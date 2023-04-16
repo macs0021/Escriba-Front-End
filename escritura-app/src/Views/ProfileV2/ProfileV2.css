@@ -40,8 +40,8 @@ a {
 }
 
 .header__wrapper .cols__container .left__col .img__container img {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border-radius: 50%;
     display: block;

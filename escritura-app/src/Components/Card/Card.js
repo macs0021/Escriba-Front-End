@@ -97,7 +97,7 @@ export default function Card({ card, addUnsavedBooks }) {
             <CommentModal documentId={card.id} modalState={commentModalState} setModalState={setCommentModalState} ></CommentModal>
             <PublishModal card={document} publishModalState={publishModalState} setPublishModalState={setPublishModalState} setEditModalState={setEditModalState} isPublic={isPublished} setIsPublic={setIsPublished}></PublishModal>
 
-            <Modal modalState={modalState} setModalState={setModalState}>
+            <Modal modalState={modalState} setModalState={setModalState} fullscreen={true}>
                 <div className="modal-content">
                     <CardInfo data={card} genres={document.genres} tittle={document.tittle} synopsis={document.synopsis} addUnsavedBooks={addUnsavedBooks} />
                 </div>

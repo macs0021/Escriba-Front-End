@@ -45,14 +45,14 @@ const CreateDocumentButton = () => {
             </div>
         </div>
 
-        <Modal modalState={modalState} setModalState={setModalState} tittle={"Create document"}>
+        <Modal modalState={modalState} setModalState={setModalState} tittle={"Create document"} fullscreen={true}>
             <div className='modal-content'>
                 <CreationFormulary tittle={title} setTitle={setTitle}
                     image={image} cover={cover} selectedGenres={selectedGenres}
                     setCover={setCover} setSynopsis={setSynopsis} setImage={setImage} setSelectedGenres={setSelectedGenres} synopsis={synopsis} />
             </div>
-            <div className='center-element'>
-                <button onClick={createDocument} className='create-document-button'>Enviar</button>
+            <div className='center'>
+                <button onClick={createDocument} className='create-document-button'>Save</button>
             </div>
         </Modal>
     </>);

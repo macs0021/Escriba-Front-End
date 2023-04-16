@@ -22,3 +22,7 @@
     color: #333;
     font-size: 5rem !important;
 }
+.CDB-button-container{
+    display: flex;
+    height: 100%;
+}
