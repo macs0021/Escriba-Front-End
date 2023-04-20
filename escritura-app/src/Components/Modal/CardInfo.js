@@ -62,8 +62,8 @@ const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks, genres }) => {
         </div>
         <div className='content-line border-top'>
             <div className='buttons-line'>
-                <button className='accept-button' onClick={save}>{saved ? 'Unsave' : 'Save'}</button>
-                <button className='accept-button' onClick={read}>Read</button>
+                <button className='accept-button button' onClick={save}>{saved ? 'Unsave' : 'Save'}</button>
+                <button className='accept-button button' onClick={read}>Read</button>
             </div>
         </div>
 

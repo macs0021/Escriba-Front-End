@@ -18,7 +18,7 @@ const EditDocumentModal = ({ editModalState, setEditModalState, card, setCard })
 
     const document = {
         "id": card.id,
-        "privateText": card.text,
+        "text": card.text,
         "cover": cover,
         "tittle": tittle,
         "synopsis": synopsis,

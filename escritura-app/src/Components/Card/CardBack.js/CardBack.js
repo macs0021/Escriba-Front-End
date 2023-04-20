@@ -49,11 +49,11 @@ const CardBack = ({ card, tittle, genres, creatorPicture, enableEditModal, enabl
                 </div>
                 <div className='card-stars-data'>
                     <div className='card-stars-background' onClick={enableCommentModal}>
-                        <StarOutlinedIcon></StarOutlinedIcon>
-                        <StarOutlinedIcon></StarOutlinedIcon>
-                        <StarOutlinedIcon></StarOutlinedIcon>
-                        <StarOutlineOutlinedIcon></StarOutlineOutlinedIcon>
-                        <StarOutlineOutlinedIcon></StarOutlineOutlinedIcon>
+                        <StarOutlinedIcon className='star-icon'></StarOutlinedIcon>
+                        <StarOutlinedIcon className='star-icon'></StarOutlinedIcon>
+                        <StarOutlinedIcon className='star-icon'></StarOutlinedIcon>
+                        <StarOutlineOutlinedIcon className='star-icon'></StarOutlineOutlinedIcon>
+                        <StarOutlineOutlinedIcon className='star-icon'></StarOutlineOutlinedIcon>
                     </div>
                 </div>
                 <div className='card-button-data'>

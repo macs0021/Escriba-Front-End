@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 import Card from '../../Components/Card/Card';
 import DocumentService from '../../Services/DocumentService';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 export default function Explore() {
 
@@ -13,6 +15,7 @@ export default function Explore() {
     const [page, setPage] = useState(0);
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [end, setEnd] = useState(false);
+    const [showGenres, setShowGenres] = useState(false);
 
     const genres = [
         "Novel",
@@ -88,6 +91,7 @@ export default function Explore() {
                 }
             })
         }
+        setShowGenres(false);
     }
 
     const handleGenreClick = (genre) => {
@@ -100,19 +104,24 @@ export default function Explore() {
 
     return (
         <>
-            <div className='explore-center'>
-                <div className='explore-search-container'>
 
-                </div>
-                <div className='explore-chips-container'>
+            <div className='explore-search-container'>
+                <SearchBar></SearchBar>
+            </div>
+            <div className='center top-bot-margin clickable bold' onClick={()=>setShowGenres(!showGenres)}>
+                <button className='explore-genres-button bold'>GENRE SELECTOR </button> {showGenres? <KeyboardArrowUpIcon/>:<KeyboardArrowDownIcon/>}
+            </div>
+            {showGenres &&<div className='explore-center'>
+                 <div className='explore-chips-container'>
                     {genres.map((genre) => (
                         <Chip key={genre + " - explore"} id={genre + " - explore"} data={genre} onClick={handleGenreClick} active={!selectedGenres.includes(genre)} />
                     ))}
                 </div>
-                <div className='center'>
-                    <button onClick={search}>Search</button>
-                </div>
+            </div>}
+            <div className='center'>
+                <button className='button' onClick={search}>Search</button>
             </div>
+
 
             <InfiniteScroll dataLength={cards.length} hasMore={!end} next={() => setPage((prevPage) => prevPage + 1)} loader={"Loading..."} endMessage={"no more"}>
                 <Galery>

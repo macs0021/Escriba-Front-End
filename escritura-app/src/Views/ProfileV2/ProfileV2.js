@@ -11,6 +11,7 @@ import Modal from '../../Components/Modal/Modal';
 import MiniProfile from '../../Components/MiniProfile/MiniProfile';
 import ProfileEditFormulary from '../../Components/Modal/ProfileEditFormulary';
 import { getUser, followUser, getFollowers, getFollowing } from '../../Services/UserService';
+import NoBooksImage from '../../files/cute.png'
 
 const ProfileV2 = () => {
 
@@ -94,62 +95,64 @@ const ProfileV2 = () => {
     }
 
     return (<>
-        <div className="header__wrapper">
-            <div className="cols__container">
-                <div className="left__col">
-                    <div className='profile-data-container'>
-                        <div className="img__container">
-                            <img src={`data:image/png;base64,${userData.image}`} alt="user" />
-                        </div>
-                        <h2>{userData.name}</h2>
+        <div class="header__wrapper">
+            <div class="cols__container">
+                <div class="left__col">
+                    <div class="img__container">
+                        <img src={`data:image/png;base64,${userData.image}`} alt="user" />
+                        <span></span>
                     </div>
+                    <h2>{user}</h2>
+                    <p>UX/UI Designer</p>
+                    <p>test@example.com</p>
 
-                    <div className='center'>
-                        <div className='center column'>
-                            <ul className="about">
-                                <li onClick={followersClick}><span>{followers.length}</span>Followers</li>
-                                <li onClick={followingClick}><span>{following.length}</span>Following</li>
-                                <li><span>200,543</span>Score</li>
-                            </ul>
+                    <ul className="about">
+                        <li onClick={followersClick}><span>{followers.length}</span>Followers</li>
+                        <li onClick={followingClick}><span>{following.length}</span>Following</li>
+                        <li><span>200,543</span>Score</li>
+                    </ul>
 
-                            <div className="profile-content">
-                                <p>
-                                    {userData.description}
-                                </p>
-                                <ul>
+                    <div class="content">
+                        <p>
+                            {userData.description}
+                        </p>
 
-                                </ul>
-                                {user !== TokenService.getUsername() && <button id="main-follow-button" className='follow-button' onClick={() => handleFollow(user)}>
-                                    {isFollowing ? 'Unfollow' : isFollowing ? 'Followed' : 'Follow'}
-                                </button>}
-                                {user === TokenService.getUsername() && <button id="main-follow-button" className='follow-button' onClick={() => editProfile()}>
-                                    Edit profile
-                                </button>}
-                            </div>
-                        </div>
+                        <ul>
+                            <li><i class="fab fa-twitter"></i></li>
+                            <i class="fab fa-pinterest"></i>
+                            <i class="fab fa-facebook"></i>
+                            <i class="fab fa-dribbble"></i>
+                        </ul>
+                        {user !== TokenService.getUsername() && <button id="main-follow-button" className='follow-button button' onClick={() => handleFollow(user)}>
+                            {isFollowing ? 'Unfollow' : isFollowing ? 'Followed' : 'Follow'}
+                        </button>}
+                        {user === TokenService.getUsername() && <button id="main-follow-button" className='follow-button button' onClick={() => editProfile()}>
+                            Edit profile
+                        </button>}
                     </div>
                 </div>
-                {(written.length !== 0 || read.length !== 0) &&
-                    <div className="right__col">
-                        <nav>
-                            <ul>
-                                {written.length !== 0 && <li><a href="">Written</a></li>}
-                                {read.length !== 0 && <li><a href="">Readed</a></li>}
 
-                            </ul>
-                        </nav>
-                        <div className="photos">
-                            <Galery>
-                                {written.map((card) => <Card card={card} key={card.id} />)}
-                            </Galery>
-                        </div>
-                    </div>}
+                <div className="right__col">
+                    <nav>
+                        <ul>
+                            <li><a href="">Written</a></li>
+                            <li><a href="">Readed</a></li>
+                        </ul>
+                    </nav>
+                    {(written.length !== 0 || read.length !== 0) ? <div>
+                        <Galery>
+                            {written.map((card) => <Card card={card} key={card.id} />)}
+                        </Galery>
+                    </div> : <div className='center top-bot-margin'> <img className='no-books-image' src={NoBooksImage}></img></div>}
+                </div>
             </div>
 
-            <Modal modalState={usersModalState} setModalState={setUsersModalState} tittle={followModalTittle}>
-                {modalList.map((user) =>
-                    <MiniProfile user={user} handleFollow={handleFollow}></MiniProfile>
-                )}
+            <Modal modalState={usersModalState} setModalState={setUsersModalState} tittle={followModalTittle} fullscreen={true}>
+                <div className='mini-profile-container'>
+                    {modalList.map((user) =>
+                        <MiniProfile user={user} handleFollow={handleFollow}></MiniProfile>
+                    )}
+                </div>
             </Modal>
 
             <Modal modalState={profileEditModalState} setModalState={setProfileEditModalState}>

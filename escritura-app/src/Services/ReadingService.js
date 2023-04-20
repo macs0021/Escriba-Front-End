@@ -31,6 +31,7 @@ async function postReading(id) {
         const response = await Interceptor.post(url, JSON.stringify(reading));
         return response.data;
     } catch (error) {
+        return null;
         console.log("Esperando al refresco del token");
     }
 }

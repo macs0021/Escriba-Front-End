@@ -28,7 +28,7 @@ const MiniProfile = ({ user, handleFollow }) => {
                     {user.name}
                 </Link>
             </div>
-            {user.name!==TokenService.getUsername() && <button className='follow-button' onClick={() => handleClick()}>
+            {user.name!==TokenService.getUsername() && <button className='follow-button button' onClick={() => handleClick()}>
                 {clicked ? 'Unfollow' : 'Follow'}
             </button>}
         </div>

@@ -17,6 +17,30 @@ import loadingImg from '../../files/cargaV3.gif'
 
 Quill.register('modules/imageResize', ImageResize);
 
+const toolbarDesktop = {
+  container: [
+    [{ 'font': [] }, { 'size': [] }],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ 'color': [] }, { 'background': [] }],
+    ['blockquote', 'code-block'],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+    ['direction', { 'align': [] }],
+    ['link', 'image', 'video'],
+  ]
+}
+
+const toolbarMobile = [
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  ['bold', 'italic', 'underline'],
+  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+];
+
+function getToolbarConfig() {
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  return isMobile ? toolbarMobile : toolbarDesktop;
+}
+
 export default function TextEditor() {
 
   const [quill, setQuill] = useState();
@@ -27,19 +51,20 @@ export default function TextEditor() {
   const [lastSelection, setLastSelection] = useState(0);
   const [actualImage, setActualImage] = useState(null);
 
+  const [toolbarConfig, setToolbarConfig] = useState(getToolbarConfig());
 
-  const toolBar = {
-    container: [
-      [{ 'font': [] }, { 'size': [] }],
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ 'color': [] }, { 'background': [] }],
-      ['blockquote', 'code-block'],
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-      ['direction', { 'align': [] }],
-      ['link', 'image', 'video', 'formula'],
-    ]
-  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setToolbarConfig(getToolbarConfig());
+      console.log(getToolbarConfig());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const reference = useCallback((refe) => {
     if (refe == null) return;
@@ -52,7 +77,7 @@ export default function TextEditor() {
     const quill = new Quill(editor, {
       theme: 'snow',
       modules: {
-        'toolbar': toolBar,
+        'toolbar': toolbarConfig,
         imageResize: {
           modules: ['Resize']
         }
@@ -66,7 +91,7 @@ export default function TextEditor() {
     });
 
     setQuill(quill);
-  }, []);
+  }, [toolbarConfig]);
 
   //Recojo datos del servidor
   useEffect(() => {
@@ -84,7 +109,6 @@ export default function TextEditor() {
       setIsLoading(true);
 
       if (quill == null) return;
-
 
       const document = {
         "id": documentId,
@@ -106,7 +130,7 @@ export default function TextEditor() {
 
     }, 5000);
     return () => clearInterval(interval);
-  }, [quill, docuData]);
+  }, [quill, docuData, toolbarConfig]);
 
   const handleButtonClick = ({ imagePrompt, width, height }) => {
 
@@ -184,6 +208,5 @@ export default function TextEditor() {
 
   return (<>
     <div className="container" ref={reference}></div>
-    <ImageGeneratorForm execute={handleButtonClick} reload={reloadOnButtonClick}></ImageGeneratorForm>
   </>);
 };

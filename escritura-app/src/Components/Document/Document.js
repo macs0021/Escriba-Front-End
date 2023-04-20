@@ -53,14 +53,14 @@ export default function Document() {
 
   //Recibo datos al iniciar Quill.
   useEffect(() => {
-    console.log("inicio");
     if (quill != null) {
-      console.log("GETTING DATA");
       documentService.getDocumentById(documentId).then(data => {
         quill.root.innerHTML = data.text;
+        console.log(JSON.stringify(data));
         ReadingService.getReading(data.id).then(result => {
           if (result == null) {
             ReadingService.postReading(data.id);
+            window.scrollTo(0, 0);
           } else {
             window.scrollTo(0, result.readingSpot);
           }

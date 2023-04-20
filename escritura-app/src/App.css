@@ -10,7 +10,16 @@ body {
   background-color: #f3f3f3;
 }
 
-button {
+.clickable {
+  cursor: pointer;
+}
+
+.bold{
+  text-transform: uppercase;
+  color: #818181;
+}
+
+.button {
   background: #333;
   color: #fff;
   border: none;

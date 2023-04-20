@@ -3,11 +3,17 @@
     margin-bottom: 3rem;
     margin-top: 0.5rem;
     grid-auto-rows: 25rem;
-    grid-template-columns: repeat(auto-fit, minmax(0rem,18rem));
+    grid-template-columns: repeat(auto-fit, minmax(0rem, 18rem));
     width: 100%;
     justify-content: center;
 }
-.galery-center{
+
+.galery-center {
     display: flex;
     justify-content: center;
+}
+
+@media only screen and (max-width: 780px) {
+
+
 }

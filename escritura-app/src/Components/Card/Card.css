@@ -252,3 +252,6 @@
 .delete-button{
     background-color: #c94c4c;
 }
+@media only screen and (max-width: 768px) {
+    
+  }

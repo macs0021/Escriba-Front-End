@@ -6,23 +6,21 @@
     align-items: center;
     margin-bottom: 2rem;
 }
-.explore-center:after{
-    margin-top: 1rem;
-    content: "";
-    display: flex;
-    background: #cccccc;
-    height: 1px;
-    width: 60%;
-}
+
 .explore-search-container{
     display: flex;
     justify-content: center;
     margin-top: 4rem;
-    margin-bottom: 4rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
 }
 .explore-center{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+}
+.explore-genres-button{
+    border: none;
 }
