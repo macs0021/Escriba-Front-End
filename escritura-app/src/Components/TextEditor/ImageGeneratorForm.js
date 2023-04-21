@@ -1,6 +1,7 @@
 import '../TextEditor/ImageGeneratorForm.css'
 import { useState } from 'react';
 import '../../Services/DocumentService';
+import { Slider } from '@mui/material';
 
 
 export default function ImageGeneratorForm(props) {
@@ -15,7 +16,7 @@ export default function ImageGeneratorForm(props) {
         props.execute({ imagePrompt: imagePrompt, width: width, height: height });
     };
 
-    const reloadParameters = () =>{
+    const reloadParameters = () => {
         props.reload({ imagePrompt: imagePrompt, width: width, height: height });
     }
 
@@ -24,11 +25,11 @@ export default function ImageGeneratorForm(props) {
         setImagePrompt(event.target.value);
     };
 
-    const handleChangeWidth = (event) => {
+    const handleChangeWidth = (event, newValue) => {
         setWidth(event.target.value);
     };
 
-    const handleChangeHeight = (event) => {
+    const handleChangeHeight = (event, newValue) => {
         setHeight(event.target.value);
     };
 
@@ -36,7 +37,7 @@ export default function ImageGeneratorForm(props) {
 
     return (<>
         <div className="image-generator">
-
+            <div className='center'><p>Image Generator</p></div>
             <div className="top-image-container">
                 <input className="image-prompt-input"
                     type="text"
@@ -45,20 +46,33 @@ export default function ImageGeneratorForm(props) {
                 />
             </div>
             <div className="size-input-container">
-                <input className="size-input"
-                    type="number"
-                    placeholder="width"
+                <div className='center'><p style={{ fontSize: '0.9rem', marginBottom: '0' }}>Width</p></div>
+                <Slider
+                    aria-label="width"
+                    defaultValue={512}
+                    step={8}
+                    marks
+                    min={512}
+                    max={1024}
+                    valueLabelDisplay="auto"
+                    style={{ color: '#333' }}
                     onChange={handleChangeWidth}
                 />
-                <input className="size-input"
-                    type="number"
-                    placeholder="height"
+                <div className='center'><p style={{ fontSize: '0.9rem', marginBottom: '0' }}>Height</p></div>
+                <Slider
+                    aria-label="height"
+                    defaultValue={512}
+                    step={8}
+                    marks
+                    min={512}
+                    max={1024}
+                    valueLabelDisplay="auto"
+                    style={{ color: '#333' }}
                     onChange={handleChangeHeight}
                 />
             </div>
-            <div className="input-button-container">
-                <button className="input-button" onClick={setParameters} type="button">New Image</button>
-                <button className="input-button" onClick={reloadParameters} type="button">Reload</button>
+            <div className="input-button-container center">
+                <button className="button" onClick={setParameters} type="button">Generate</button>
             </div>
         </div>
 

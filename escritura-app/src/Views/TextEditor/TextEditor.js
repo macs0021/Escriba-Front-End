@@ -208,5 +208,6 @@ export default function TextEditor() {
 
   return (<>
     <div className="container" ref={reference}></div>
+    <ImageGeneratorForm execute={handleButtonClick} reload={reloadOnButtonClick}></ImageGeneratorForm>
   </>);
 };

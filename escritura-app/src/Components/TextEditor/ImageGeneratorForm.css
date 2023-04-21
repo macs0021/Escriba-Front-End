@@ -4,7 +4,6 @@
     top: 10rem;
     right: 6rem;
     width: 20rem;
-    height: 10rem;
     background-color: #F3F3F3;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 }
@@ -33,12 +32,23 @@
     width: 5rem;
     border: 1px solid #333;
 }
-.size-input-container{
+
+.size-input-container {
     display: flex;
     margin: auto;
+    flex-direction: column;
     justify-content: center;
     width: 80%;
+    margin-top: 1rem;
 }
-.input-button-container{
+
+.input-button-container {
     display: flex;
+}
+
+.size-input {
+    height: 1.5rem;
+    width: 5rem;
+    margin: auto;
+    margin-top: 1rem;
 }
