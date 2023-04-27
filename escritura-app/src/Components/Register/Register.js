@@ -55,7 +55,7 @@ const Register = (props) => {
         <p className="register-form-error"></p>
         <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
 
-        <button type="submit" className="register-button">Registrarse</button>
+        <button type="submit" className="button">Register</button>
 
       </form>
     </>

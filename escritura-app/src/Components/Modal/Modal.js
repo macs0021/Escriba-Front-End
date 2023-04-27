@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Modal.css'
 import CloseIcon from '@mui/icons-material/Close';
 
 const Modal = ({ children, modalState, setModalState, tittle, fullscreen }) => {
+
+    useEffect(() => {
+        if (modalState) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [modalState]);
     return (
         <>
             {modalState &&

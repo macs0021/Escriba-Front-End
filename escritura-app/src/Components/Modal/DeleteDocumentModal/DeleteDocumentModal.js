@@ -18,8 +18,8 @@ const DeleteDocumentModal = ({ deleteWarningModalState, setDeleteWarningModalSta
             <p>Are you sure you want to delete this document?</p>
             <p>You can't undo this action</p>
             <div className='space-evenly'>
-                <button className='delete-button' onClick={OnDeleteClick}>Delete</button>
-                <button onClick={() => setDeleteWarningModalState(false)}>Cancel</button>
+                <button className='delete-button button' onClick={OnDeleteClick}>Delete</button>
+                <button className='button' onClick={() => setDeleteWarningModalState(false)}>Cancel</button>
             </div>
         </Modal>
 

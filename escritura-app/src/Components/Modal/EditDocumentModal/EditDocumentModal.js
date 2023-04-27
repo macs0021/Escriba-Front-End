@@ -29,9 +29,6 @@ const EditDocumentModal = ({ editModalState, setEditModalState, card, setCard })
         "public": card.public,
     };
 
-    console.log("DOCUMENT: " + JSON.stringify(card))
-    console.log("VISIBILITY: " + card.public);
-
     const updateDocument = () => {
         DocumentService.putDocument(card.id, document).then((result) => {
             setCard(result);
@@ -53,9 +50,9 @@ const EditDocumentModal = ({ editModalState, setEditModalState, card, setCard })
             </div>
             <div className='center'>
                 <div className='buttons-line'>
-                    <button onClick={() => setEditModalState(false)}>Cancel</button>
-                    <button onClick={updateDocument}>Save</button>
-                    <button onClick={moveToEdit}>Edit content</button>
+                    <button className='button' onClick={() => setEditModalState(false)}>Cancel</button>
+                    <button className='button' onClick={updateDocument}>Save</button>
+                    <button className='button' onClick={moveToEdit}>Content</button>
                 </div>
             </div>
         </Modal>

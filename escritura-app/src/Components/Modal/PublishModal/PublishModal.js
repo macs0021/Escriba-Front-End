@@ -29,17 +29,17 @@ const PublishModal = ({ publishModalState, setPublishModalState, card, setEditMo
     }, [card]);
 
     return (<>
-        <Modal modalState={publishModalState} setModalState={setPublishModalState} tittle={ card.tittle + " document visibility"}>
+        <Modal modalState={publishModalState} setModalState={setPublishModalState} tittle={card.tittle + " document visibility"}>
             <div className="info-modal-text-width colunm">
-                <p>{isPublic ? "By pressing this button you will make this document private, only you will be able to see it. You can make it public again at any momment.": "Are you sure you want to publish this document?  Any user will be able to read, review and share this document" }</p>
+                <p>{isPublic ? "By pressing this button you will make this document private, only you will be able to see it. You can make it public again at any momment." : "Are you sure you want to publish this document?  Any user will be able to read, review and share this document"}</p>
                 {!canBePublished && <p className="info-warning">You need to complete all the fields of the document in order to publish it. Edit this document and complete the fields.</p>}
             </div>
             <div className='center'>
                 <div className="row">
-                    <button onClick={onActionClick} className={canBePublished ? "green" : "red"}>
+                    <button onClick={onActionClick} className={`button ${canBePublished ? "green" : "red"}`}>
                         {isPublic ? "Make Private" : (canBePublished ? "Publish" : "Edit")}
                     </button>
-                    <button onClick={() => setPublishModalState(false)}>Cancel</button>
+                    <button className='button' onClick={() => setPublishModalState(false)}>Cancel</button>
                 </div>
             </div>
         </Modal>

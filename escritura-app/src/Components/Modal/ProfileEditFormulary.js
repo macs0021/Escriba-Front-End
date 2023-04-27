@@ -78,7 +78,7 @@ const ProfileEditFormulary = ({ userData, setUserData, setModalState }) => {
                 <input className='create-form-input create-form-two-grid' type="text" defaultValue={userData.email} onChange={(event) => setEmail(event.target.value)} />
             </div>
             <div className='center'>
-                <button onClick={saveChanges}>Save </button>
+                <button className='button' onClick={saveChanges}>Save </button>
             </div>
         </form>
 

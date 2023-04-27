@@ -14,7 +14,7 @@ body {
   cursor: pointer;
 }
 
-.bold{
+.bold {
   text-transform: uppercase;
   color: #818181;
 }
@@ -94,4 +94,7 @@ body {
 
 .red {
   background-color: #c94c4c;
+}
+label{
+  color: #333;
 }

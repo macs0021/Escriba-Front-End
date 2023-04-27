@@ -32,7 +32,7 @@ const Login = () => {
             <input type="text" placeholder="User" value={user} onChange={(event) => setUser(event.target.value)} />
             <p className="login-form-error"></p>
             <input type="password" placeholder="Contraseña" value={password} onChange={(event) => setPassword(event.target.value)} />
-            <button type="submit" className="login-button">Iniciar sesión</button>
+            <button type="submit" className="button">Login</button>
         </form>
     );
 

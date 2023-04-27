@@ -10,6 +10,11 @@
 
 }
 
+.comment-container.reply {
+    min-width: 10rem;
+    width: 30rem !important;
+}
+
 .comment-header {
     align-items: center;
     width: 100%;
@@ -46,8 +51,6 @@
     display: flex;
     flex-direction: column;
     max-height: 30rem;
-    overflow-y: auto;
-    overflow-x: hidden;
     margin-top: 1rem;
 }
 
@@ -78,15 +81,20 @@
         width: 30% !important;
     }
 
-    .star-icon{
+    .star-icon {
         font-size: 1.2rem !important;
     }
-    .comment-date-name{
+
+    .comment-date-name {
         width: 4rem;
     }
 
     .comment-header {
         align-items: center;
         width: 100%;
+    }
+
+    .comment-container.reply {
+        width: 10rem;
     }
 }

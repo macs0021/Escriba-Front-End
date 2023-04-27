@@ -39,3 +39,13 @@ export async function deleteComment(commentId) {
         console.error(error);
     }
 }
+
+export async function getRepliesOfReview(reviewID) {
+    try {
+        const response = await Interceptor.get(`${url}/${reviewID}/replies`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}

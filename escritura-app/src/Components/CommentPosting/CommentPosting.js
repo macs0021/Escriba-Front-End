@@ -5,7 +5,7 @@ import TokenService from '../../Services/TokenService';
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
-const CommentPosting = ({ documentId, reloadContent, setEditing, editing, comment }) => {
+const CommentPosting = ({ documentId, reloadContent, setEditing, editing, comment, isReply, respondingTo }) => {
 
     const [text, setText] = useState(comment?.text || '');
 
@@ -17,7 +17,13 @@ const CommentPosting = ({ documentId, reloadContent, setEditing, editing, commen
 
     const postingComment = () => {
 
-        const post = { "text": text, "postedBy": TokenService.getUsername(), "postedIn": documentId, "rating": review, "commentType": "REVIEW" }
+        const post = { "text": text, "postedBy": TokenService.getUsername(), "postedIn": documentId, "rating": review, "commentType": "", "responding": respondingTo }
+
+        if (!isReply) {
+            post.commentType = "REVIEW";
+        }else{
+            post.commentType = "RESPONSE";
+        }
 
         if (editing) {
             putComment(comment.id, post).then(() => {
@@ -25,10 +31,12 @@ const CommentPosting = ({ documentId, reloadContent, setEditing, editing, commen
                 reloadContent();
             })
         } else {
+            console.log("Posting a comment...");
             postComment(post).then(() => {
                 reloadContent();
             })
         }
+
     }
 
 
@@ -37,7 +45,7 @@ const CommentPosting = ({ documentId, reloadContent, setEditing, editing, commen
             <div className="center">
                 <input onChange={(event) => setText(event.target.value)} defaultValue={text} className='comment-text-area' />
             </div>
-            <div className='row center posting-stars'>
+            {!isReply && <div className='row center posting-stars'>
                 {[...Array(5)].map((_, i) => (
                     <div
                         key={i}
@@ -46,15 +54,15 @@ const CommentPosting = ({ documentId, reloadContent, setEditing, editing, commen
                         {i + 1 <= review ? <StarIcon /> : <StarOutlineIcon />}
                     </div>
                 ))}
-            </div>
+            </div>}
             {!editing ? (
                 <div className="center">
-                    <button onClick={postingComment}>Post comment</button>
+                    <button className="button" onClick={postingComment}>Post comment</button>
                 </div>) : (
                 <div className='center'>
                     <div className="center gap">
-                        <button onClick={postingComment}>Save changes</button>
-                        <button onClick={()=>setEditing(false)}>Cancel</button>
+                        <button className="button" onClick={postingComment}>Save changes</button>
+                        <button className="button" onClick={() => setEditing(false)}>Cancel</button>
                     </div>
                 </div>
             )}

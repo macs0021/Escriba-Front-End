@@ -102,14 +102,14 @@ const ProfileV2 = () => {
                         <img src={`data:image/png;base64,${userData.image}`} alt="user" />
                         <span></span>
                     </div>
-                    <h2>{user}</h2>
+                    <h2 className='light'>{user}</h2>
                     <p>UX/UI Designer</p>
-                    <p>test@example.com</p>
+                    <p>{userData.email}</p>
 
                     <ul className="about">
-                        <li onClick={followersClick}><span>{followers.length}</span>Followers</li>
-                        <li onClick={followingClick}><span>{following.length}</span>Following</li>
-                        <li><span>200,543</span>Score</li>
+                        <li className='light' onClick={followersClick}><span className='light'>{followers.length}</span>Followers</li>
+                        <li onClick={followingClick}><span className='light'>{following.length}</span>Following</li>
+                        <li><span className='light'>200,543</span>Score</li>
                     </ul>
 
                     <div class="content">
@@ -135,8 +135,8 @@ const ProfileV2 = () => {
                 <div className="right__col">
                     <nav>
                         <ul>
-                            <li><a href="">Written</a></li>
-                            <li><a href="">Readed</a></li>
+                            <li><a className='light' href="">Written</a></li>
+                            <li><a className='light' href="">Readed</a></li>
                         </ul>
                     </nav>
                     {(written.length !== 0 || read.length !== 0) ? <div>
