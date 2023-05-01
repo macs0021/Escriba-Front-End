@@ -2,6 +2,26 @@ import Interceptor from './Interceptor';
 
 const url = 'comments';
 
+
+export async function getReviewByID(reviewID) {
+    try {
+        const response = await Interceptor.get(`${url}/reviews/${reviewID}`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+export async function getReplyByID(replyID) {
+    try {
+        const response = await Interceptor.get(`${url}/responses/${replyID}`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
 export async function getReviewsOfDocument(documentID) {
     try {
         const response = await Interceptor.get(`${url}/${documentID}/review`);

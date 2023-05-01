@@ -6,7 +6,6 @@ import DocumentService from '../../Services/DocumentService';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Card from '../../Components/Card/Card';
-import UserService from '../../Services/UserService';
 import Modal from '../../Components/Modal/Modal';
 import MiniProfile from '../../Components/MiniProfile/MiniProfile';
 import ProfileEditFormulary from '../../Components/Modal/ProfileEditFormulary';
