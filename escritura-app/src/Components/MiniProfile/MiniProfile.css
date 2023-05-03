@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    margin-top: 1rem;
+    min-width: none;
 }
 
 .profile-picture-name {
@@ -24,7 +24,13 @@
 }
 
 @media (min-width: 868px) {
-
+    .profile-small-profile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        width: 20rem;
+    }
     
 
 }

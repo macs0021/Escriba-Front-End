@@ -8,6 +8,8 @@ import MiniProfile from '../MiniProfile/MiniProfile'
 import { followUser, getFollowers, getFollowing } from '../../Services/UserService';
 import Card from '../Card/Card'
 import Comment from '../Comment/Comment';
+import Galery from '../Galery/Galery'
+import { Link } from 'react-router-dom';
 
 
 const HomeNotification = ({ notification }) => {
@@ -57,9 +59,9 @@ const HomeNotification = ({ notification }) => {
         if (notificationData === null) return (<></>);
         switch (notification.entityType) {
             case "USER":
-                return (<MiniProfile user={user} handleFollow={() => handleFollow(notification.entityId)}></MiniProfile>)
+                return (<MiniProfile user={notificationData} handleFollow={() => handleFollow(notification.entityId)}></MiniProfile>)
             case "DOCUMENT":
-                return (<Card card={notificationData}></Card>)
+                return (<Galery><Card card={notificationData}></Card></Galery>)
             case "REVIEW":
                 return (<Comment comment={notificationData}></Comment>)
             case "REPLY":
@@ -70,9 +72,29 @@ const HomeNotification = ({ notification }) => {
     return (<>
         <div className='notification' style={{ margin: '3rem' }}>
             <div className='notification-header'>
-                <p>El usuario {notification.username} ha hecho una interacción: </p>
+                <div className='profile-picture-name row'>
+                    <img className="small-profile-picture" src={`data:image/png;base64,${user?.image}`} alt="user" key={user?.name} />
+                    <Link to={`/profile/${notification.username}`} replace={false} className="card-link">
+                        {notification.username}
+                    </Link>
+                    {(() => {
+                        switch (notification.action) {
+                            case 'PUBLISHED':
+                                return 'published a document';
+                            case 'FOLLOWS':
+                                return 'started following';
+                            case 'READING':
+                                return 'started reading.';
+                            case 'REVIEWED':
+                                return 'posted a review.';
+                            case 'REPLIED':
+                                return 'posted a reply';
+                        }
+                    })()}
+                </div>
+
             </div>
-            <div className='center'>
+            <div className='notification-content center'>
                 {notificationDisplay()}
             </div>
         </div>
