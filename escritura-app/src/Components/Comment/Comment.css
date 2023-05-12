@@ -4,7 +4,6 @@
     border-radius: 5px;
     background-color: white;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    margin-right: 1rem;
     min-width: 40rem;
     position: relative;
 
@@ -12,7 +11,7 @@
 
 .comment-container.reply {
     min-width: 10rem;
-    width: 30rem !important;
+    width: 30rem;
 }
 
 .comment-header {
@@ -72,7 +71,7 @@
 @media (max-width: 768px) {
     .comment-container {
         min-width: 0;
-        width: 100%;
+        width: 21rem;
     }
 
     .comment-info {
@@ -95,6 +94,6 @@
     }
 
     .comment-container.reply {
-        width: 10rem;
+        width: 20rem;
     }
 }

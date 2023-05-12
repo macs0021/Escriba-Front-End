@@ -61,7 +61,7 @@ const Comment = ({ comment, reloadContent, setEditing, isReply }) => {
                                 return stars;
                             })()}
                         </div>}
-                        {comment.postedBy === TokenService.getUsername() && <div className='center gap'>
+                        {comment.postedBy === TokenService.getUsername() && <div className='center'>
                             <DeleteIcon onClick={() => setDeleteModal(true)}></DeleteIcon>
                             <EditIcon onClick={() => setEditing(true)}></EditIcon>
                         </div>}

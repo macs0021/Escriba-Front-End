@@ -75,7 +75,7 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
 
     return (<>
         <Modal modalState={modalState} setModalState={closeModalAndEditMode} tittle={"Comments"} fullscreen={true}>
-            <div className='modal-content'>
+            <div  className = 'modal-space'style={{overflowY: 'auto'}}>
                 <div className="comments-container">
                     {userComment && !editing ? (<>
                         <Comment comment={userComment} reloadContent={reloadContent} setEditing={editMode} />

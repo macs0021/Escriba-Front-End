@@ -6,7 +6,14 @@
     resize: none;
 }
 
-.posting-stars{
+.posting-stars {
     margin: 1rem;
     margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .comment-text-area {
+        width: 20rem;
+        height: 2rem;
+    }
 }

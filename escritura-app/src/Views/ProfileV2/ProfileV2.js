@@ -147,7 +147,7 @@ const ProfileV2 = () => {
             </div>
 
             <Modal modalState={usersModalState} setModalState={setUsersModalState} tittle={followModalTittle} fullscreen={true}>
-                <div className='mini-profile-container'>
+                <div className='mini-profile-container modal-space' style={{overflow:'auto'}}>
                     {modalList.map((user) =>
                         <MiniProfile user={user} handleFollow={handleFollow}></MiniProfile>
                     )}

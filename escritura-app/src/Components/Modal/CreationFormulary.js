@@ -75,6 +75,9 @@ const CreationFormulary = ({ tittle, setTitle, selectedGenres, setSelectedGenres
             "steps": 50,
             "seed": seed,
         }
+
+        console.log("PIDIENDO PORTADA");
+
         ImageGeneratorService.postImg(imgData).then(data => {
             console.log("imagen generada: " + data.images[0])
             setTemCover(`data:image/png;base64,${data.images[0]}`);

@@ -7,7 +7,9 @@ import { getActivityOfUsers } from '../../Services/ActivityService';
 import { getFollowing, getUser, followUser } from '../../Services/UserService';
 import TokenService from '../../Services/TokenService';
 import MiniProfile from '../../Components/MiniProfile/MiniProfile';
-
+import Galery from '../../Components/Galery/Galery';
+import Card from '../../Components/Card/Card';
+import DocumentService from '../../Services/DocumentService';
 const Home = () => {
 
     const [users, setUsers] = useState([]);
@@ -17,6 +19,7 @@ const Home = () => {
     const [recommendedUsers, setRecommendedUsers] = useState([]);
     const [testUser, setTestUser] = useState(null);
     const [isFollowing, setIsFollowing] = useState(false);
+    const [testDocument, setTestDocument] = useState(null);
 
     const handleFollow = (username) => {
         followUser(username);
@@ -31,34 +34,50 @@ const Home = () => {
                 setUsers(result.map(user => user.name));
             }
         })
+
+        /*DocumentService.getDocumentById(1).then((result) => {
+            setTestDocument(result);
+        })*/
+
     }, [])
 
 
 
     useEffect(() => {
-        if (users.length > 0) { // Verificar si la lista de usuarios tiene elementos
-            getActivityOfUsers(10, page, users).then((result) => {
-                if (result.length < 10) {
+        if (users.length > 0) {
+            getActivityOfUsers(5, page, users).then((result) => {
+                console.log("PROBANDO: " + result)
+                if (!result || result.length < 5) {
                     setEnd(true);
                 } else {
                     setEnd(false);
                 }
                 setActivities(prevActivities => prevActivities.concat(result));
             });
+        }else{
+            setEnd(true);
         }
 
     }, [page, users]);
 
     return (<div className='home-div'>
         <div className='user-recomendations'>
-            <div className='user-recomendations-header'>
-                Users we recommend you to follow:
+            <div className='user-recomendations-header home-text'>
+                Users we recommend you to follow
             </div>
-            {recommendedUsers.map((recommendedUser) => <MiniProfile user={recommendedUser} handleFollow={handleFollow}></MiniProfile>)}
+            {recommendedUsers && recommendedUsers.map((recommendedUser) => <MiniProfile user={recommendedUser} handleFollow={handleFollow}></MiniProfile>)}
+        </div>
+        <div className='book-recomendations'>
+            <div className='book-recomendations-header home-text'>
+                Best reviewed document today
+            </div>
+            <Galery>
+                {testDocument && <Card card={testDocument}></Card>}
+            </Galery>
         </div>
         <div className='center column' style={{ margin: '0rem', minWidth: '45rem' }} >
             <InfiniteScroll dataLength={activities.length} hasMore={!end} next={() => setPage((prevPage) => prevPage + 1)} loader={"Loading..."} endMessage={"no more"} style={{ padding: '15px', overflow: 'visible' }}>
-                {activities.map((activity) => <HomeNotification key={activity.id} notification={activity}></HomeNotification>)}
+                {activities.map((activity) => activity && <HomeNotification key={activity.id} notification={activity}></HomeNotification>)}
             </InfiniteScroll>
         </div>
     </div>);

@@ -22,12 +22,12 @@ export default function Card({ card, addUnsavedBooks }) {
     const [deleted, setDeleted] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
     const [creatorPicture, setCreatorPicture] = useState("");
-    const [isPublished, setIsPublished] = useState(card.public);
+    const [isPublished, setIsPublished] = useState(card?.public);
 
     const [document, setDocument] = useState(card);
 
     useEffect(() => {
-        getUser(card.creatorUsername).then(data => {
+        getUser(card?.creatorUsername).then(data => {
             setCreatorPicture(data.image);
         });
     }, []);
@@ -70,14 +70,14 @@ export default function Card({ card, addUnsavedBooks }) {
                     <div className="card__inner">
                         <div className="card__body card__body--front">
                             <div className="galery-card">
-                                <img className="galery-cover" src={document.cover} />
+                                <img className="galery-cover" src={document?.cover} />
                             </div>
                         </div>
                         <div className="card__body card__body--back">
                             <CardBack card={card}
-                                tittle={document.tittle}
-                                genres={document.genres}
-                                synopsis={document.synopsis}
+                                tittle={document?.tittle}
+                                genres={document?.genres}
+                                synopsis={document?.synopsis}
                                 creatorPicture={creatorPicture}
                                 addUnsavedBooks={addUnsavedBooks}
                                 enableDeleteModal={enableDeleteModal}
@@ -94,12 +94,12 @@ export default function Card({ card, addUnsavedBooks }) {
 
             <DeleteDocumentModal card={card} deleteWarningModalState={deleteWarningModalState} setDeleteWarningModalState={setDeleteWarningModalState} setDeleted={setDeleted} />
             <EditDocumentModal card={document} setCard={setDocument} editModalState={editModalState} setEditModalState={setEditModalState} />
-            <CommentModal documentId={card.id} modalState={commentModalState} setModalState={setCommentModalState} ></CommentModal>
+            <CommentModal documentId={card?.id} modalState={commentModalState} setModalState={setCommentModalState} ></CommentModal>
             <PublishModal card={document} publishModalState={publishModalState} setPublishModalState={setPublishModalState} setEditModalState={setEditModalState} isPublic={isPublished} setIsPublic={setIsPublished}></PublishModal>
 
             <Modal modalState={modalState} setModalState={setModalState} fullscreen={true}>
                 <div className="modal-content">
-                    <CardInfo data={card} genres={document.genres} tittle={document.tittle} synopsis={document.synopsis} addUnsavedBooks={addUnsavedBooks} />
+                    <CardInfo data={card} genres={document?.genres} tittle={document?.tittle} synopsis={document?.synopsis} addUnsavedBooks={addUnsavedBooks} />
                 </div>
             </Modal>
         </>

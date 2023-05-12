@@ -26,12 +26,12 @@ const CardBack = ({ card, tittle, genres, creatorPicture, enableEditModal, enabl
                         <div className='row'>
                             <img className="card-profile-img" src={`data:image/png;base64,${creatorPicture}`}></img>
                             <div >
-                                <Link to={`/profile/${card.creatorUsername}`} className="card-link">
-                                    {card.creatorUsername}
+                                <Link to={`/profile/${card?.creatorUsername}`} className="card-link">
+                                    {card?.creatorUsername}
                                 </Link>
                             </div>
                         </div>
-                        {card.creatorUsername === TokenService.getUsername() && <div className='icon-gap'>
+                        {card?.creatorUsername === TokenService.getUsername() && <div className='icon-gap'>
                             <DeleteIcon className='dropdown-icon' onClick={enableDeleteModal}></DeleteIcon>
                             <EditIcon className='dropdown-icon' onClick={enableEditModal}></EditIcon>
                             {isPublic ? <PublicIcon className='dropdown-icon' onClick={enablePublishModal}></PublicIcon>:

@@ -11,34 +11,34 @@ const EditDocumentModal = ({ editModalState, setEditModalState, card, setCard })
 
     const navigate = useNavigate();
 
-    const [tittle, setTittle] = useState(card.tittle);
-    const [cover, setCover] = useState(card.cover);
-    const [synopsis, setSynopsis] = useState(card.synopsis);
-    const [genres, SetGenres] = useState(card.genres);
+    const [tittle, setTittle] = useState(card?.tittle);
+    const [cover, setCover] = useState(card?.cover);
+    const [synopsis, setSynopsis] = useState(card?.synopsis);
+    const [genres, SetGenres] = useState(card?.genres);
 
     const document = {
-        "id": card.id,
-        "text": card.text,
+        "id": card?.id,
+        "text": card?.text,
         "cover": cover,
         "tittle": tittle,
         "synopsis": synopsis,
         "creatorUsername": TokenService.getUsername(),
         "genres": genres,
-        "savedBy": card.savedBy,
-        "readings": card.readings,
-        "public": card.public,
+        "savedBy": card?.savedBy,
+        "readings": card?.readings,
+        "public": card?.public,
     };
 
     const updateDocument = () => {
-        DocumentService.putDocument(card.id, document).then((result) => {
+        DocumentService.putDocument(card?.id, document).then((result) => {
             setCard(result);
         });
         setEditModalState(false);
     }
 
     const moveToEdit = () => {
-        DocumentService.putDocument(card.id, document).then(() => {
-            navigate('/documents/' + card.id);
+        DocumentService.putDocument(card?.id, document).then(() => {
+            navigate('/documents/' + card?.id);
         })
     }
 

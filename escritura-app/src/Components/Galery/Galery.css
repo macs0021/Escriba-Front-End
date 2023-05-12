@@ -1,6 +1,5 @@
 .galery-container {
     display: grid;
-    margin-bottom: 3rem;
     margin-top: 0.5rem;
     grid-auto-rows: 25rem;
     grid-template-columns: repeat(auto-fit, minmax(0rem, 18rem));

@@ -9,6 +9,8 @@
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
     width: fit-content;
     height:fit-content;
+    max-height: 52rem;
+    overflow: hidden;
     right: 5%;
     z-index: 1;
 }
@@ -24,4 +26,33 @@
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #E8E8E8;
+}
+.book-recomendations {
+    background-color: #f3f3f3;
+    top: 7.25rem;
+    display: flex;
+    position: fixed;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    width: fit-content;
+    height:fit-content;
+    left: 5%;
+    z-index: 1;
+}
+.book-recomendations-header{
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.home-text {
+    text-transform: uppercase;
+    color: #333;
+    font-weight: 600;
 }

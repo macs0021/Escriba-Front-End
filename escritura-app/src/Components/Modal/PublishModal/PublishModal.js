@@ -12,7 +12,7 @@ const PublishModal = ({ publishModalState, setPublishModalState, card, setEditMo
         console.log("entro");
         if (canBePublished) {
             console.log("publishing...");
-            DocumentService.changeVisibility(card.id).then(() => {
+            DocumentService.changeVisibility(card?.id).then(() => {
                 setIsPublic(!isPublic);
                 setPublishModalState(false);
             });
@@ -25,11 +25,11 @@ const PublishModal = ({ publishModalState, setPublishModalState, card, setEditMo
     }
 
     useEffect(() => {
-        setCanBePublished(card.tittle.trim() !== '' && card.synopsis.trim() !== '' && card.synopsis.trim().split(" ").length >= 10 && card.genres.length > 0);
+        setCanBePublished(card?.tittle.trim() !== '' && card?.synopsis.trim() !== '' && card?.synopsis.trim().split(" ").length >= 10 && card?.genres.length > 0);
     }, [card]);
 
     return (<>
-        <Modal modalState={publishModalState} setModalState={setPublishModalState} tittle={card.tittle + " document visibility"}>
+        <Modal modalState={publishModalState} setModalState={setPublishModalState} tittle={card?.tittle + " document visibility"}>
             <div className="info-modal-text-width colunm">
                 <p>{isPublic ? "By pressing this button you will make this document private, only you will be able to see it. You can make it public again at any momment." : "Are you sure you want to publish this document?  Any user will be able to read, review and share this document"}</p>
                 {!canBePublished && <p className="info-warning">You need to complete all the fields of the document in order to publish it. Edit this document and complete the fields.</p>}

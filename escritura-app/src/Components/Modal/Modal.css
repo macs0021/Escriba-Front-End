@@ -28,12 +28,12 @@
 @media (max-width: 768px) {
 
 
-    .modal-container{
+    .modal-container {
         width: 350px;
-        
+
     }
 
-    .modal-container  p {
+    .modal-container p {
         width: 300px;
         word-wrap: break-word;
         overflow-wrap: break-word;
@@ -51,17 +51,22 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-      }
+    }
 
     .overlay {
         padding: 0;
     }
+
     .modal-content {
         flex-grow: 1;
     }
-    
-    
-    
+
+    .modal-space {
+        max-height: 100% !important;
+        height: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 .header {
@@ -110,4 +115,10 @@
 
 .info-modal-text-width {
     width: 22rem;
+}
+
+.modal-space {
+    max-height: 40rem;
+    padding-left: 10px;
+    padding-right: 10px;
 }
