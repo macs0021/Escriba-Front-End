@@ -101,9 +101,9 @@ async function getDocumentsReadByUsername() {
     }
 }
 
-async function getDocumentsByGenreAndPage(genres, page, pageSize) {
+async function getDocumentsByGenreAndPage(genres,tittleFragment, page, pageSize) {
     try {
-        const response = await Interceptor.get(`${url}/genres?genres=${genres.join(',')}&page=${page}&pageSize=${pageSize}`);
+        const response = await Interceptor.get(`${url}/genres?genres=${genres.join(',')}&tittleFragment=${tittleFragment}&page=${page}&pageSize=${pageSize}`);
         return response.data;
     } catch (error) {
         console.log("Esperando al refresco del token");

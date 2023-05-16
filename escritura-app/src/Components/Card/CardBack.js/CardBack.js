@@ -1,13 +1,8 @@
 
 import '../Card.css'
-import Modal from '../../Modal/Modal'
-import { useEffect, useState } from 'react';
-import CardInfo from '../../Modal/CardInfo'
-import DocumentService from '../../../Services/DocumentService';
 import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
 import PublicIcon from '@mui/icons-material/Public';
-import PublicOffIcon from '@mui/icons-material/PublicOff';
 
 import { Link } from 'react-router-dom';
 
@@ -24,7 +19,7 @@ const CardBack = ({ card, tittle, genres, creatorPicture, enableEditModal, enabl
                 <div className='card-creator-data'>
                     <div className='card-profile-data'>
                         <div className='row'>
-                            <img className="card-profile-img" src={`data:image/png;base64,${creatorPicture}`}></img>
+                            <img className="card-profile-img" src={`data:image/png;base64,${creatorPicture}`} alt='profile'></img>
                             <div >
                                 <Link to={`/profile/${card?.creatorUsername}`} className="card-link">
                                     {card?.creatorUsername}
@@ -34,18 +29,14 @@ const CardBack = ({ card, tittle, genres, creatorPicture, enableEditModal, enabl
                         {card?.creatorUsername === TokenService.getUsername() && <div className='icon-gap'>
                             <DeleteIcon className='dropdown-icon' onClick={enableDeleteModal}></DeleteIcon>
                             <EditIcon className='dropdown-icon' onClick={enableEditModal}></EditIcon>
-                            {isPublic ? <PublicIcon className='dropdown-icon' onClick={enablePublishModal}></PublicIcon>:
-                            <PublicOff className='dropdown-icon' onClick={enablePublishModal}></PublicOff> }
-                            
+                            {isPublic ? <PublicIcon className='dropdown-icon' onClick={enablePublishModal}></PublicIcon> :
+                                <PublicOff className='dropdown-icon' onClick={enablePublishModal}></PublicOff>}
+
                         </div>}
                     </div>
                 </div>
                 <div className="cover-title">
                     {tittle}
-                </div>
-
-                <div className='card-genre-data'>
-                    <div>{genres}</div>
                 </div>
                 <div className='card-stars-data'>
                     <div className='card-stars-background' onClick={enableCommentModal}>

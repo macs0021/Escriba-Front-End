@@ -3,7 +3,6 @@ import './Card.css'
 import Modal from '../Modal/Modal'
 import { useEffect, useState } from 'react';
 import CardInfo from '../Modal/CardInfo'
-import UserService from '../../Services/UserService';
 import CardBack from './CardBack.js/CardBack';
 import DeleteDocumentModal from '../Modal/DeleteDocumentModal/DeleteDocumentModal';
 import EditDocumentModal from '../Modal/EditDocumentModal/EditDocumentModal';
@@ -27,10 +26,12 @@ export default function Card({ card, addUnsavedBooks }) {
     const [document, setDocument] = useState(card);
 
     useEffect(() => {
-        getUser(card?.creatorUsername).then(data => {
-            setCreatorPicture(data.image);
-        });
-    }, []);
+        if (card?.creatorUsername) {
+            getUser(card?.creatorUsername).then(data => {
+                setCreatorPicture(data.image);
+            });
+        }
+    }, [card?.creatorUsername]);
 
     const enableDeleteModal = (event) => {
         event.stopPropagation();
@@ -70,7 +71,7 @@ export default function Card({ card, addUnsavedBooks }) {
                     <div className="card__inner">
                         <div className="card__body card__body--front">
                             <div className="galery-card">
-                                <img className="galery-cover" src={document?.cover} />
+                                <img className="galery-cover" src={document?.cover} alt='cover' />
                             </div>
                         </div>
                         <div className="card__body card__body--back">
@@ -85,7 +86,7 @@ export default function Card({ card, addUnsavedBooks }) {
                                 enableEditModal={enableEditModal}
                                 enableCommentModal={enableCommentModal}
                                 enablePublishModal={enablePublishModal}
-                                isPublic = {isPublished}>
+                                isPublic={isPublished}>
                             </CardBack>
                         </div>
                     </div>

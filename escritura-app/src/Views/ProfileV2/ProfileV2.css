@@ -188,6 +188,10 @@ a {
     height: 100%;
 }
 
+.header__wrapper .cols__container .right__col nav:after {
+    display: none;
+}
+
 /* Responsiveness */
 
 @media (min-width: 868px) {

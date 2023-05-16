@@ -50,3 +50,23 @@ export async function getFollowing(username) {
         return null;
     }
 }
+
+export async function getRecommendations(username) {
+    try {
+        const response = await Interceptor.get(`${url}/recommendations/${username}`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+export async function getSearch(username) {
+    try {
+        const response = await Interceptor.get(`${url}/contains/${username}`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}

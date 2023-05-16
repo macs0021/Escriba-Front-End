@@ -1,4 +1,4 @@
-.explore-chips-container{
+.explore-chips-container {
     display: flex;
     width: 50%;
     flex-wrap: wrap;
@@ -7,7 +7,7 @@
     margin-bottom: 2rem;
 }
 
-.explore-search-container{
+.explore-search-container {
     display: flex;
     justify-content: center;
     margin-top: 4rem;
@@ -15,12 +15,33 @@
     padding-left: 2rem;
     margin-bottom: 1rem;
 }
-.explore-center{
+
+.explore-center {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
-.explore-genres-button{
+
+.explore-genres-button {
     border: none;
+}
+
+.header__wrapper .cols__container .right__col nav:after {
+    position: absolute;
+    top: 159px;
+    content: "";
+    display: block;
+    background: #cccccc;
+    height: 1px;
+    width: 90%;
+}
+
+.explore-users-result {
+    flex-wrap: wrap;
+}
+
+.explore-search {
+    margin-bottom: 3rem;
+    
 }

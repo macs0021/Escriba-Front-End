@@ -4,12 +4,13 @@ import './Home.css'
 import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { getActivityOfUsers } from '../../Services/ActivityService';
-import { getFollowing, getUser, followUser } from '../../Services/UserService';
+import { getFollowing, getUser, followUser, getRecommendations } from '../../Services/UserService';
 import TokenService from '../../Services/TokenService';
 import MiniProfile from '../../Components/MiniProfile/MiniProfile';
 import Galery from '../../Components/Galery/Galery';
 import Card from '../../Components/Card/Card';
 import DocumentService from '../../Services/DocumentService';
+import Loader from '../../Components/Loader/Loader';
 const Home = () => {
 
     const [users, setUsers] = useState([]);
@@ -29,15 +30,12 @@ const Home = () => {
         getFollowing(TokenService.getUsername()).then((result) => {
             console.log("PIDO USERS")
             if (result !== []) {
-                setRecommendedUsers(result);
-                console.log(JSON.stringify("MUESTRO USERS: " + result));
                 setUsers(result.map(user => user.name));
             }
         })
-
-        /*DocumentService.getDocumentById(1).then((result) => {
-            setTestDocument(result);
-        })*/
+        getRecommendations(TokenService.getUsername()).then((result) => {
+            setRecommendedUsers(result);
+        })
 
     }, [])
 
@@ -54,7 +52,7 @@ const Home = () => {
                 }
                 setActivities(prevActivities => prevActivities.concat(result));
             });
-        }else{
+        } else {
             setEnd(true);
         }
 
@@ -76,7 +74,7 @@ const Home = () => {
             </Galery>
         </div>
         <div className='center column' style={{ margin: '0rem', minWidth: '45rem' }} >
-            <InfiniteScroll dataLength={activities.length} hasMore={!end} next={() => setPage((prevPage) => prevPage + 1)} loader={"Loading..."} endMessage={"no more"} style={{ padding: '15px', overflow: 'visible' }}>
+            <InfiniteScroll dataLength={activities.length} hasMore={!end} next={() => setPage((prevPage) => prevPage + 1)} loader={<div className='center' style={{ marginTop: '3rem' }}> <Loader></Loader></div>} endMessage={"no more"} style={{ padding: '15px', overflow: 'visible' }}>
                 {activities.map((activity) => activity && <HomeNotification key={activity.id} notification={activity}></HomeNotification>)}
             </InfiniteScroll>
         </div>
