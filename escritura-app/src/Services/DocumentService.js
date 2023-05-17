@@ -120,6 +120,27 @@ async function changeVisibility(documentId) {
     }
 }
 
+async function getPrivateDocumentsByUsername(username) {
+    try {
+        const response = await Interceptor.get(url + "/private/" + username);
+        return response.data;
+    } catch (error) {
+        console.log("Esperando al refresco del token");
+        return [];
+    }
+}
+
+async function getPublicDocumentsByUsername(username) {
+    try {
+        const response = await Interceptor.get(url + "/public/" + username);
+        return response.data;
+    } catch (error) {
+        console.log("Esperando al refresco del token");
+        return [];
+    }
+}
+
+
 export default {
     getDocumentById,
     putDocument,
@@ -133,4 +154,6 @@ export default {
     getDocumentsReadByUsername,
     getDocumentsByGenreAndPage,
     changeVisibility,
+    getPrivateDocumentsByUsername,
+    getPublicDocumentsByUsername,
 };

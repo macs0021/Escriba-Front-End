@@ -40,7 +40,7 @@ const ProfileV2 = () => {
             if (data.followers.includes(TokenService.getUsername())) setIsFollowing(true);
         });
 
-        DocumentService.getDocumentsByUsername(user).then(data => {
+        DocumentService.getPublicDocumentsByUsername(user).then(data => {
             setWritten(data);
         });
     }, [user]);
@@ -106,8 +106,8 @@ const ProfileV2 = () => {
                     <p>{userData.email}</p>
 
                     <ul className="about">
-                        <li className='light' onClick={followersClick}><span className='light'>{followers.length}</span>Followers</li>
-                        <li onClick={followingClick}><span className='light'>{following.length}</span>Following</li>
+                        <li className='light clickable' onClick={followersClick}><span className='light'>{followers.length}</span>Followers</li>
+                        <li className= 'clickable' onClick={followingClick}><span className='light'>{following.length}</span>Following</li>
                         <li><span className='light'>200,543</span>Score</li>
                     </ul>
 

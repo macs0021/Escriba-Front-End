@@ -44,7 +44,7 @@ const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks, genres }) => {
         <div className='content-line'>
             <h1>{tittle}</h1>
         </div>
-        <div className='card-info-main-content'>
+        <div className='card-info-main-content column'>
             <div className='listed-content'>
                 <div className='listed-element'>Genero:
                     {genres.map(genre => (

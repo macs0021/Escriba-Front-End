@@ -70,7 +70,7 @@ const HomeNotification = ({ notification }) => {
     }
 
     return (<>
-        <div className='notification' style={{ margin: '3rem' }}>
+        <div className='notification'>
             <div className='notification-header'>
                 <div className='profile-picture-name row'>
                     <img className="small-profile-picture" src={`data:image/png;base64,${user?.image}`} alt="user" key={user?.name} />

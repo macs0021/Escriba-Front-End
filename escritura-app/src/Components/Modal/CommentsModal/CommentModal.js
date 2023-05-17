@@ -81,7 +81,7 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
                         <Comment comment={userComment} reloadContent={reloadContent} setEditing={editMode} />
                         <div className='comment-responses-button center' onClick={() => showReplies(userComment.id)}>replies</div>
                         {/* reply */}
-                        {selectReplies === userComment.id && <div className="center column">
+                        {selectReplies === userComment.id && <div className="center column" style={{marginBot: '1rem'}}>
                             {!editingReply && userReply ? (
                                 <Comment comment={userReply} reloadContent={reloadContent} setEditing={editReply} isReply={true} />
                             ) : (
@@ -113,7 +113,7 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
                             <Comment key={comment.id} comment={comment} />
                             <div className='comment-responses-button center' onClick={() => showReplies(comment.id)}>replies</div>
 
-                            {selectReplies === comment.id && <div className="center column">
+                            {selectReplies === comment.id && <div className="center column" style={{marginBot: '1rem'}}>
                                 {!editingReply && userReply ? (
                                     <Comment comment={userReply} reloadContent={reloadContent} setEditing={editReply} isReply={true} />
                                 ) : (

@@ -57,7 +57,7 @@
     color: #818181;
 }
 
-.tab:nth-child(1) {
+.tab.active {
     color: #1d1d1d;
     font-weight: 600;
 }

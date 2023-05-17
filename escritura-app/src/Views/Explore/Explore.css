@@ -25,6 +25,7 @@
 
 .explore-genres-button {
     border: none;
+    background-color: #dfdfdf;
 }
 
 .header__wrapper .cols__container .right__col nav:after {

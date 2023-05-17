@@ -31,4 +31,5 @@
 .card-info-main-content{
     display: flex;
     height: 45rem !important;
+    padding: 15px;
 }

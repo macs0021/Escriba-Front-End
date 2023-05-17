@@ -73,8 +73,8 @@ const Home = () => {
                 {testDocument && <Card card={testDocument}></Card>}
             </Galery>
         </div>
-        <div className='center column' style={{ margin: '0rem', minWidth: '45rem' }} >
-            <InfiniteScroll dataLength={activities.length} hasMore={!end} next={() => setPage((prevPage) => prevPage + 1)} loader={<div className='center' style={{ marginTop: '3rem' }}> <Loader></Loader></div>} endMessage={"no more"} style={{ padding: '15px', overflow: 'visible' }}>
+        <div className='center column home-main'>
+            <InfiniteScroll dataLength={activities.length} hasMore={!end} next={() => setPage((prevPage) => prevPage + 1)} loader={<div className='center' style={{ marginTop: '3rem' }}> <Loader></Loader></div>} endMessage={""} style={{ padding: '15px', overflowY: 'visible', overflowX: 'hidden' }}>
                 {activities.map((activity) => activity && <HomeNotification key={activity.id} notification={activity}></HomeNotification>)}
             </InfiniteScroll>
         </div>

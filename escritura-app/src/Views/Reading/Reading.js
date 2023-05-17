@@ -15,6 +15,7 @@ const Reading = () => {
     const [search, setSearch] = useState("");
     const [loadingSaved, setLoadingSaved] = useState(true);
     const [loadingReading, setLoadingReading] = useState(true);
+    const [activeTab, setActiveTab] = useState('Reading');
 
     useEffect(() => {
         DocumentService.getDocumentsSavedByUsername().then(data => {
@@ -49,8 +50,12 @@ const Reading = () => {
                 <SearchBar setValue={setSearch} value={search}></SearchBar>
             </div>
             <div className='tab-container'>
-                <div className='tab' onClick={() => changeOnReading(true)}>Reading</div>
-                <div className='tab' onClick={() => changeOnReading(false)}>Saved</div>
+                <div className={`clickable tab ${activeTab === 'Reading' ? 'active' : ''}`} onClick={() => { setActiveTab('Reading'); changeOnReading(true) }}>
+                    Reading
+                </div>
+                <div className={` clickable tab ${activeTab === 'Saved' ? 'active' : ''}`} onClick={() => { setActiveTab('Saved'); changeOnReading(false) }}>
+                    Saved
+                </div>
             </div>
             <div>
                 {!onReading ? (
