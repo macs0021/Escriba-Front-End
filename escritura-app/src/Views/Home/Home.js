@@ -37,6 +37,10 @@ const Home = () => {
             setRecommendedUsers(result);
         })
 
+        DocumentService.getRecommendation().then((result) => {
+            setTestDocument(result);
+        })
+
     }, [])
 
 
@@ -59,17 +63,11 @@ const Home = () => {
     }, [page, users]);
 
     return (<div className='home-div'>
-        <div className='user-recomendations'>
-            <div className='user-recomendations-header home-text'>
-                Users we recommend you to follow
-            </div>
-            {recommendedUsers && recommendedUsers.map((recommendedUser) => <MiniProfile user={recommendedUser} handleFollow={handleFollow}></MiniProfile>)}
-        </div>
         <div className='book-recomendations'>
             <div className='book-recomendations-header home-text'>
-                Best reviewed document today
+                Recommended document for you
             </div>
-            <Galery>
+            <Galery style={{ marginTop: '0 !important' }}>
                 {testDocument && <Card card={testDocument}></Card>}
             </Galery>
         </div>
@@ -77,6 +75,12 @@ const Home = () => {
             <InfiniteScroll dataLength={activities.length} hasMore={!end} next={() => setPage((prevPage) => prevPage + 1)} loader={<div className='center' style={{ marginTop: '3rem' }}> <Loader></Loader></div>} endMessage={""} style={{ padding: '15px', overflowY: 'visible', overflowX: 'hidden' }}>
                 {activities.map((activity) => activity && <HomeNotification key={activity.id} notification={activity}></HomeNotification>)}
             </InfiniteScroll>
+        </div>
+        <div className='user-recomendations'>
+            <div className='user-recomendations-header home-text'>
+                Users we recommend you to follow
+            </div>
+            {recommendedUsers && recommendedUsers.map((recommendedUser) => <MiniProfile user={recommendedUser} handleFollow={handleFollow}></MiniProfile>)}
         </div>
     </div>);
 }

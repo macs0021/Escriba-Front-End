@@ -6,13 +6,12 @@ import { Slider } from '@mui/material';
 
 export default function ImageGeneratorForm(props) {
 
-    const [width, setWidth] = useState(0);
-    const [height, setHeight] = useState(0);
+    const [width, setWidth] = useState(512);
+    const [height, setHeight] = useState(512);
     const [imagePrompt, setImagePrompt] = useState("");
 
 
     const setParameters = () => {
-        console.log("aa");
         props.execute({ imagePrompt: imagePrompt, width: width, height: height });
     };
 

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Interceptor from './Interceptor';
 import TokenService from './TokenService';
 
@@ -68,5 +69,15 @@ export async function getSearch(username) {
     } catch (error) {
         console.error(error);
         return null;
+    }
+}
+
+export async function checkUser(username) {
+    try {
+        const response = await axios.get("http://localhost:8080/" + url + "/exists/" + username)
+        return response.data
+    } catch (error) {
+        console.log("Esperando al refresco del token");
+        return [];
     }
 }

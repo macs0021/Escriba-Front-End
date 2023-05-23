@@ -5,7 +5,7 @@
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
     flex-direction: column;
     padding: 2rem;
-    margin: auto;
+    margin: 3rem;
 }
 
 .authentication-form-change-p {
@@ -14,7 +14,7 @@
 }
 
 .authentication-change-form {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     display: flex;
     justify-content: center;
 }
@@ -27,8 +27,21 @@
     margin-left: 0.5rem;
 }
 
-.authentication-background{
+.authentication-background {
     width: 100%;
     height: 100vh;
     background-color: #333;
+}
+
+@media (max-width: 550px) {
+    .authentication-form-card {
+        display: flex;
+        background-color: #f3f3f3;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+        flex-direction: column;
+        padding: 2rem;
+        margin: 0;
+    }
 }

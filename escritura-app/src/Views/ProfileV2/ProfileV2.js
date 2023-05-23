@@ -135,7 +135,6 @@ const ProfileV2 = () => {
                     <nav>
                         <ul>
                             <li><a className='light' href="">Written</a></li>
-                            <li><a className='light' href="">Readed</a></li>
                         </ul>
                     </nav>
                     {(written.length !== 0 || read.length !== 0) ? <div>

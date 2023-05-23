@@ -25,7 +25,7 @@ const PublishModal = ({ publishModalState, setPublishModalState, card, setEditMo
     }
 
     useEffect(() => {
-        setCanBePublished(card?.tittle.trim() !== '' && card?.synopsis.trim() !== '' && card?.synopsis.trim().split(" ").length >= 10 && card?.genres.length > 0);
+        setCanBePublished(card?.tittle?.trim() !== '' && card?.synopsis?.trim() !== '' && card?.synopsis?.trim().split(" ").length >= 10 && card?.genres.length > 0);
     }, [card]);
 
     return (<>

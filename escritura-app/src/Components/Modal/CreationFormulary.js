@@ -101,7 +101,7 @@ const CreationFormulary = ({ tittle, setTitle, selectedGenres, setSelectedGenres
                     Cover:
                 </label>
                 <div className='create-form-two-grid'>
-                    <input className='create-form-input' type="text" value={image} onChange={(event) => setImage(event.target.value)} />
+                    <input className='create-form-input' style={{height: '3rem'}} type="text" value={image} onChange={(event) => setImage(event.target.value)} />
                     <button className='create-form-cover-button button' onClick={generateCover}> Generate </button>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 
 import '../Card.css'
-import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
-import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
+import StarIcon from '@mui/icons-material/Star';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import PublicIcon from '@mui/icons-material/Public';
 
 import { Link } from 'react-router-dom';
@@ -40,11 +40,17 @@ const CardBack = ({ card, tittle, genres, creatorPicture, enableEditModal, enabl
                 </div>
                 <div className='card-stars-data'>
                     <div className='card-stars-background' onClick={enableCommentModal}>
-                        <StarOutlinedIcon className='star-icon'></StarOutlinedIcon>
-                        <StarOutlinedIcon className='star-icon'></StarOutlinedIcon>
-                        <StarOutlinedIcon className='star-icon'></StarOutlinedIcon>
-                        <StarOutlineOutlinedIcon className='star-icon'></StarOutlineOutlinedIcon>
-                        <StarOutlineOutlinedIcon className='star-icon'></StarOutlineOutlinedIcon>
+                        {(() => {
+                            const stars = [];
+                            for (let i = 1; i <= 5; i++) {
+                                if (i <= card?.rating) {
+                                    stars.push(<StarIcon className='star-icon' key={i} />);
+                                } else {
+                                    stars.push(<StarOutlineIcon className='star-icon' key={i} />);
+                                }
+                            }
+                            return stars;
+                        })()}
                     </div>
                 </div>
                 <div className='card-button-data'>

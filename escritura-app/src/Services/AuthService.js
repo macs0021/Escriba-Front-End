@@ -14,7 +14,6 @@ async function registerUser(user) {
 }
 
 async function loginUser(user) {
-    try {
         const response = await axios.post(authUrl + "/login", user);
         const token = response.data.token;
         console.log(response.data.token);
@@ -24,10 +23,6 @@ async function loginUser(user) {
         TokenService.getUsername();
 
         return response;
-
-    } catch (error) {
-        return error;
-    }
 }
 
 function logoutUser(){

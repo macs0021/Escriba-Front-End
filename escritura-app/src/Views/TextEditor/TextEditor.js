@@ -13,6 +13,7 @@ import { textAlign } from "@mui/system";
 import ImageGeneratorService from '../../Services/ImageGeneratorService';
 import TokenService from "../../Services/TokenService";
 import loadingImg from '../../files/cargaV3.gif'
+import { v4 as uuidv4 } from 'uuid';
 
 
 Quill.register('modules/imageResize', ImageResize);
@@ -161,8 +162,11 @@ export default function TextEditor() {
     //Busco la imagen insertada
     let img = quill.container.querySelector(`img[src="${loadingImg}"]`);
 
+
+    const uuid = uuidv4();
+
     //Le coloco un id para buscarla
-    img.setAttribute('id', 'mi-imagen');
+    img.setAttribute('id', 'mi-imagen' + uuid);
 
     //Le aplico el tamaño que se necesita
     img.width = width;
@@ -175,7 +179,7 @@ export default function TextEditor() {
       const base64Image = data.images[0];
 
       //Busco la imagen
-      let miImagen = document.getElementById('mi-imagen');
+      let miImagen = document.getElementById('mi-imagen' + uuid);
 
       //Le pongo el src y le quito la clase de estilos
       miImagen.src = `data:image/png;base64,${base64Image}`;
@@ -183,31 +187,9 @@ export default function TextEditor() {
     })
   };
 
-  const reloadOnButtonClick = ({ imagePrompt, width, height }) => {
-    if (actualImage == null) return;
-
-    const imgData = {
-      "prompt": imagePrompt,
-      "negative_prompt": "string",
-      "scheduler": "EulerAncestralDiscreteScheduler",
-      "image_height": height,
-      "image_width": width,
-      "num_images": 1,
-      "guidance_scale": 7,
-      "steps": 50,
-      "seed": Math.floor(Math.random() * 999999) + 1
-    }
-    ImageGeneratorService.postImg(imgData).then(data => {
-      console.log(data.images[0]);
-      if (actualImage == null) return;
-      const base64Image = data.images[0];
-      quill.updateEmbed(actualImage, { src: `data:image/png;base64,${base64Image}` });
-    })
-  };
-
-
+  
   return (<>
     <div className="container" ref={reference}></div>
-    <ImageGeneratorForm execute={handleButtonClick} reload={reloadOnButtonClick}></ImageGeneratorForm>
+    <ImageGeneratorForm execute={handleButtonClick}></ImageGeneratorForm>
   </>);
 };

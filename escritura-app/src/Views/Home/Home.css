@@ -65,7 +65,7 @@
     min-width: '45rem';
 }
 
-@media (max-width: 868px) {
+@media (max-width: 1600px) {
 
     .book-recomendations {
         visibility: hidden;
@@ -75,14 +75,5 @@
         visibility: hidden;
     }
 
-    .home-main {
-        margin: '0rem';
-        min-width: '0rem';
-        max-width: 390px;
-    }
-    .infinite-scroll-component__outerdiv{
-        max-width: 100%;
-    }
-
-
 }
+

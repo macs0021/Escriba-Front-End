@@ -78,7 +78,7 @@
         width: 21cm;
         padding: 0;
         margin: 0;
-        box-shadow: none;
+        box-shadow: none !important;
         align-self: flex-start;
         overflow: hidden;
     }
@@ -89,6 +89,9 @@
 
     html {
         overflow: hidden;
+    }
+    .image-generator{
+        display: none;
     }
 
 }

@@ -19,11 +19,14 @@ export default function Writting() {
     useEffect(() => {
         DocumentService.getPublicDocumentsByUsername(TokenService.getUsername()).then(data => {
             setPublicBooks(data);
+            console.log("MOSTRANDO RATING:" + data[0].rating)
         })
 
         DocumentService.getPrivateDocumentsByUsername(TokenService.getUsername()).then(data => {
             setPrivateBooks(data);
         })
+
+
         setLoading(false);
     }, []);
 
