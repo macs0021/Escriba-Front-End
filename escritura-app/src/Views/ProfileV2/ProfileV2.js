@@ -102,13 +102,12 @@ const ProfileV2 = () => {
                         <span></span>
                     </div>
                     <h2 className='light'>{user}</h2>
-                    <p>UX/UI Designer</p>
                     <p>{userData.email}</p>
 
                     <ul className="about">
                         <li className='light clickable' onClick={followersClick}><span className='light'>{followers.length}</span>Followers</li>
-                        <li className= 'clickable' onClick={followingClick}><span className='light'>{following.length}</span>Following</li>
-                        <li><span className='light'>200,543</span>Score</li>
+                        <li className='clickable' onClick={followingClick}><span className='light'>{following.length}</span>Following</li>
+                        <li><span className='light'>{written.length}</span>Writtings</li>
                     </ul>
 
                     <div class="content">
@@ -146,15 +145,17 @@ const ProfileV2 = () => {
             </div>
 
             <Modal modalState={usersModalState} setModalState={setUsersModalState} tittle={followModalTittle} fullscreen={true}>
-                <div className='mini-profile-container modal-space' style={{overflow:'auto'}}>
+                <div className='mini-profile-container modal-space' style={{ overflow: 'auto' }}>
                     {modalList.map((user) =>
                         <MiniProfile user={user} handleFollow={handleFollow}></MiniProfile>
                     )}
                 </div>
             </Modal>
 
-            <Modal modalState={profileEditModalState} setModalState={setProfileEditModalState}>
-                <ProfileEditFormulary userData={userData} setUserData={setUserData} setModalState={setProfileEditModalState}></ProfileEditFormulary>
+            <Modal modalState={profileEditModalState} setModalState={setProfileEditModalState} fullscreen={true}>
+                <div style={{height:'100%'}} className='center'>
+                    <ProfileEditFormulary userData={userData} setUserData={setUserData} setModalState={setProfileEditModalState}></ProfileEditFormulary>
+                </div>
             </Modal>
 
         </div>

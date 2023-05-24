@@ -150,6 +150,26 @@ async function getRecommendation() {
     }
 }
 
+async function checkOwner(documentID) {
+    try {
+        const response = await Interceptor.get(url + "/checkOwner/" + documentID);
+        return response.data;
+    } catch (error) {
+        console.log("Esperando al refresco del token");
+        return [];
+    }
+}
+
+async function checkPublic(documentID) {
+    try {
+        const response = await Interceptor.get(url + "/checkPublic/" + documentID);
+        return response.data;
+    } catch (error) {
+        console.log("Esperando al refresco del token");
+        return [];
+    }
+}
+
 
 export default {
 
@@ -168,4 +188,6 @@ export default {
     getPrivateDocumentsByUsername,
     getPublicDocumentsByUsername,
     getRecommendation,
+    checkOwner,
+    checkPublic,
 };

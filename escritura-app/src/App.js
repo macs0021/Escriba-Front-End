@@ -11,6 +11,9 @@ import Home from './Views/Home/Home';
 import Guard from './Guard/Guard';
 import ProfileV2 from './Views/ProfileV2/ProfileV2';
 import Reading from './Views/Reading/Reading';
+import DocumentGuard from './Guard/DocumentGuard';
+import PrivateDocumentGuard from './Guard/PrivateDocumentGuard';
+import UrlDoesntExistGuard from './Guard/UrlDoesntExistGuard';
 
 function App() {
 
@@ -53,14 +56,22 @@ function App() {
             <Route
               path="/documents/:id"
               element={<Guard>
-                <TextEditor />
+                <DocumentGuard>
+                  <TextEditor />
+                </DocumentGuard>
               </Guard>}
             />
             <Route
               path="/documents/read/:id"
               element={<Guard>
-                <Document />
+                <PrivateDocumentGuard>
+                  <Document />
+                </PrivateDocumentGuard>
               </Guard>}
+            />
+            <Route
+              path="*"
+              element={<Guard><UrlDoesntExistGuard /></Guard>}
             />
           </Routes>
         </div>

@@ -69,13 +69,13 @@ const ProfileEditFormulary = ({ userData, setUserData, setModalState }) => {
                 <label className='create-form-label'>
                     Description:
                 </label>
-                <textarea className='create-form-input create-form-two-grid' type="text" defaultValue={userData.description} onChange={(event) => setDescription(event.target.value)} />
+                <textarea className='create-form-two-grid' type="text" defaultValue={userData.description} onChange={(event) => setDescription(event.target.value)} />
             </div>
             <div className='formulary-line'>
                 <label className='create-form-label'>
                     Email:
                 </label>
-                <input className='create-form-input create-form-two-grid' type="text" defaultValue={userData.email} onChange={(event) => setEmail(event.target.value)} />
+                <input className='create-form-two-grid' type="text" defaultValue={userData.email} onChange={(event) => setEmail(event.target.value)} />
             </div>
             <div className='center'>
                 <button className='button' onClick={saveChanges}>Save </button>

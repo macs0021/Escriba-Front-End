@@ -1,0 +1,24 @@
+import LockIcon from '@mui/icons-material/Lock';
+import NotListedLocationIcon from '@mui/icons-material/NotListedLocation';
+
+const GuardView = ({ message, icon }) => {
+  let IconComponent;
+
+  // Asigna el icono correspondiente según el valor del parámetro "icon"
+  if (icon === 'lock') {
+    IconComponent = LockIcon;
+  } else if (icon === 'location') {
+    IconComponent = NotListedLocationIcon;
+  }
+
+  return (
+    <>
+      <div className='center column' style={{ marginTop: '15rem', color: '#333' }}>
+        <IconComponent style={{ fontSize: '15rem' }} />
+        <h1>{message}</h1>
+      </div>
+    </>
+  );
+};
+
+export default GuardView;
