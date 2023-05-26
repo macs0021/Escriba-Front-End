@@ -1,21 +1,21 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import 'quill/dist/quill.snow.css';
-import { Quill, Delta } from "react-quill";
+import { Quill } from "react-quill";
 import { useParams } from 'react-router-dom';
 import 'quill-divider';
-import ReactDOMServer from 'react-dom/server';
 import './TextEditor.css';
 import documentService from '../../Services/DocumentService'
 import ImageGeneratorForm from "../../Components/TextEditor/ImageGeneratorForm";
 
 import ImageResize from 'quill-image-resize-module-react';
-import { textAlign } from "@mui/system";
 import ImageGeneratorService from '../../Services/ImageGeneratorService';
 import TokenService from "../../Services/TokenService";
 import loadingImg from '../../files/cargaV3.gif'
 import { v4 as uuidv4 } from 'uuid';
 
+import PasteClipboard from 'ngx-quill-paste'
 
+Quill.register('modules/clipboard', PasteClipboard)
 Quill.register('modules/imageResize', ImageResize);
 
 const toolbarDesktop = {
@@ -47,12 +47,10 @@ export default function TextEditor() {
   const [quill, setQuill] = useState();
   const [docuData, setDocuData] = useState();
   const { id: documentId } = useParams();
-
-  const [isLoading, setIsLoading] = useState(false);
   const [lastSelection, setLastSelection] = useState(0);
-  const [actualImage, setActualImage] = useState(null);
-
   const [toolbarConfig, setToolbarConfig] = useState(getToolbarConfig());
+  const editorRef = useRef();
+  const scrollingContainerRef = useRef();
 
 
   useEffect(() => {
@@ -72,7 +70,7 @@ export default function TextEditor() {
     refe.innerHTML = "";
 
     const editor = document.createElement("div");
-
+    editorRef.current = editor;
     refe.append(editor);
 
     const quill = new Quill(editor, {
@@ -82,13 +80,23 @@ export default function TextEditor() {
         imageResize: {
           modules: ['Resize']
         }
-      }
+      },
+      scrollingContainer: scrollingContainerRef.current,
     });
 
     quill.on('editor-change', () => {
       if (quill.getSelection() != null)
         setLastSelection(quill.getSelection().index);
 
+    });
+
+    quill.container.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.keyCode === 13) {
+        setTimeout(() => {
+          let editor = document.querySelector('.ql-editor');
+          editor.scrollTop += 20;  // Asume que la altura de la línea es de 20px.
+        }, 1);
+      }
     });
 
     setQuill(quill);
@@ -102,12 +110,11 @@ export default function TextEditor() {
         setDocuData(data);
       });
     }
-  }, [quill]);
+  }, [quill, documentId]);
 
   //Enviando datos cada 5s
   useEffect(() => {
     const interval = setInterval(async () => {
-      setIsLoading(true);
 
       if (quill == null) return;
 
@@ -125,13 +132,11 @@ export default function TextEditor() {
 
       console.log("enviando datos: " + quill.root.innerHTML);
 
-      documentService.putDocument(documentId, document).then(data => {
-        setIsLoading(false);
-      })
+      documentService.putDocument(documentId, document);
 
     }, 5000);
     return () => clearInterval(interval);
-  }, [quill, docuData, toolbarConfig]);
+  }, [quill, docuData, toolbarConfig, documentId]);
 
   const handleButtonClick = ({ imagePrompt, width, height }) => {
 
@@ -187,9 +192,10 @@ export default function TextEditor() {
     })
   };
 
-  
+
   return (<>
     <div className="container" ref={reference}></div>
     <ImageGeneratorForm execute={handleButtonClick}></ImageGeneratorForm>
+    <div ref={scrollingContainerRef} style={{ overflowY: 'auto', maxHeight: '500px' }}></div>
   </>);
 };

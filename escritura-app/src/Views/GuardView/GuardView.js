@@ -13,7 +13,7 @@ const GuardView = ({ message, icon }) => {
 
   return (
     <>
-      <div className='center column' style={{ marginTop: '15rem', color: '#333' }}>
+      <div className='center column' style={{ marginTop: '20vh', color: '#333', padding: '15px', textAlign: 'center' }}>
         <IconComponent style={{ fontSize: '15rem' }} />
         <h1>{message}</h1>
       </div>

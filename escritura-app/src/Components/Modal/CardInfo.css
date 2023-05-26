@@ -1,5 +1,4 @@
 .content-line{
-    margin-top: 1rem;
     display: flex;
     justify-content: center;
 }
@@ -7,7 +6,6 @@
     border-top: 1px solid #E8E8E8;
 }
 .listed-content{
-    margin-top: 3rem;
     padding-bottom: 1rem;
     margin-left: 0;
 }
@@ -15,10 +13,7 @@
     margin-bottom: 0.5rem;
 }
 .text-line{
-    margin-top: 1rem;
-    display: flex;
     justify-content: center;
-    overflow: auto;
     max-height:400px;
     word-break: initial;
 }
@@ -30,6 +25,7 @@
 }
 .card-info-main-content{
     display: flex;
-    height: 30rem !important;
+    height: 35rem !important;
     padding: 15px;
+    overflow-y: scroll;
 }

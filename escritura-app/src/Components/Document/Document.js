@@ -6,18 +6,76 @@ import 'quill-divider';
 import '../../Views/TextEditor/TextEditor.css';
 import documentService from '../../Services/DocumentService'
 import ReadingService from "../../Services/ReadingService";
+import AutoScroll from "../AutoScroll/AutoScroll";
 
 export default function Document() {
   const [quill, setQuill] = useState();
   const { id: documentId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const scrollPositionRef = useRef(0);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const handleScroll = () => {
     const position = window.pageYOffset;
     scrollPositionRef.current = position;
     console.log(position);
   };
+
+  const getWordAtIndex = (content, index) => {
+    const length = content.length;
+    let start = index;
+    let end = index;
+
+    console.log(content);
+
+    if (isSeparator(content[index])) {
+      return "";
+    }
+
+    while (start > 0 && !isSeparator(content[start - 1])) {
+      start--;
+    }
+
+    while (end < length && !isSeparator(content[end])) {
+      end++;
+    }
+
+    const word = content.substring(start, end);
+
+    return word;
+  };
+
+  const isSeparator = (char) => {
+
+    const separators = [" ", ".", ",", ";", "\n", "!", "¡", "-", "?", "¿"];
+    return separators.includes(char);
+  };
+
+  const handleWordIndexChange = (index) => {
+    setSelectedIndex(index);
+    if (quill !== null) {
+      const content = quill.getText();
+      const word = getWordAtIndex(content, index);
+      console.log("Palabra: " + word)
+    }
+  };
+
+  const handleSelectionChange = useCallback(() => {
+    if (quill && quill.getSelection) {
+      const range = quill.getSelection();
+      if (range) {
+        if (range.length === 0) {
+          console.log('User cursor is at index', range.index);
+          handleWordIndexChange(range.index);
+
+        } else {
+
+        }
+      } else {
+        console.log('User cursor is not in editor');
+      }
+    }
+  }, [quill]);
 
   const reference = useCallback((refe) => {
     if (refe == null) return;
@@ -40,7 +98,7 @@ export default function Document() {
     refe.append(barContaier);
     refe.append(centerDiv);
 
-    const quill = new Quill(editor, {
+    const quillInstance = new Quill(editor, {
       theme: 'snow',
       modules: {
         'toolbar': false
@@ -48,17 +106,16 @@ export default function Document() {
       readOnly: true,
     });
 
-    setQuill(quill);
+    setQuill(quillInstance);
   }, []);
 
-  //Recibo datos al iniciar Quill.
   useEffect(() => {
     if (quill != null) {
       documentService.getDocumentById(documentId).then(data => {
-        quill.root.innerHTML = data.text;
+        quill.clipboard.dangerouslyPasteHTML(data.text);
         console.log(JSON.stringify(data));
         ReadingService.getReading(data.id).then(result => {
-          if (result == null) {
+          if (result === null) {
             ReadingService.postReading(data.id);
             window.scrollTo(0, 0);
           } else {
@@ -69,12 +126,25 @@ export default function Document() {
     }
   }, [quill]);
 
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (quill && quill.on) {
+      quill.on('selection-change', handleSelectionChange);
+    }
+
+    return () => {
+      if (quill && quill.off) {
+        quill.off('selection-change', handleSelectionChange);
+      }
+    };
+  }, [quill, handleSelectionChange]);
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -84,6 +154,10 @@ export default function Document() {
     return () => clearInterval(interval);
   }, []);
 
-
-  return <div className="container" ref={reference}></div>;
-};
+  return (
+    <>
+      <AutoScroll></AutoScroll>
+      <div className="container" ref={reference}></div>
+    </>
+  );
+}

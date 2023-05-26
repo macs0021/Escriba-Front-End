@@ -41,23 +41,26 @@ const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks, genres }) => {
     }, []);
 
     return (<>
-        <div className='content-line'>
-            <h1>{tittle}</h1>
-        </div>
-        <div className='card-info-main-content column'>
-            <div className='listed-content'>
-                <div className='listed-element'>Genero:
-                    {genres.map(genre => (
-                        <span key={genre} style={{ marginLeft: 10 }}>{genre}</span>
-                    ))}
-
-                </div>
+        <div style={{ height: '100%' }}>
+            <div className='content-line'>
+                <h1>{tittle}</h1>
             </div>
-            <div className='text-line'>
-                <p>
-                    {synopsis}
-                </p>
+            <div className='card-info-main-content column'>
+                <div className='listed-content'>
+                    <h2 className='center'>Genres </h2>
+                    <div className='listed-element'>
+                        {genres.map(genre => (
+                            <span key={genre} style={{ marginLeft: 10 }}>{genre}</span>
+                        ))}
 
+                    </div>
+                </div>
+                <div className='text-line column'>
+                    <h2 className='center' >Synopsis </h2>
+                    <p style={{ overflow: 'visible' }}>
+                        {synopsis}
+                    </p>
+                </div>
             </div>
         </div>
         <div className='content-line border-top'>
