@@ -2,7 +2,7 @@
     margin: auto;
     position: fixed;
     top: 10rem;
-    right: 6rem;
+    left: calc(50% + 420px);
     width: 20rem;
     background-color: #F3F3F3;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
@@ -51,4 +51,30 @@
     width: 5rem;
     margin: auto;
     margin-top: 1rem;
+}
+
+.generator-toggle-button {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    color: #333;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+@media (max-width: 1500px) {
+    .image-generator {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20rem;
+        background-color: #F3F3F3;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    .generator-toggle-button {
+
+        visibility: visible;
+    }
 }

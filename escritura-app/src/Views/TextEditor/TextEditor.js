@@ -195,7 +195,7 @@ export default function TextEditor() {
 
   return (<>
     <div className="container" ref={reference}></div>
-    <ImageGeneratorForm execute={handleButtonClick}></ImageGeneratorForm>
+    <ImageGeneratorForm execute={handleButtonClick} isMobile={getToolbarConfig}></ImageGeneratorForm>
     <div ref={scrollingContainerRef} style={{ overflowY: 'auto', maxHeight: '500px' }}></div>
   </>);
 };
