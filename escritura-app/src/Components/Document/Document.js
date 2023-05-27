@@ -18,6 +18,8 @@ export default function Document() {
   const [bubblePos, setBubblePos] = useState(true);
   const containerRef = useRef(null);
 
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
   const handleScroll = () => {
     const position = window.pageYOffset;
     scrollPositionRef.current = position;
@@ -73,7 +75,6 @@ export default function Document() {
       } else {
         setBubblePos(false);
       }
-      setShowBubble(true);
     }
   }, [quill, getWordAtIndex]);
 
@@ -118,6 +119,8 @@ export default function Document() {
         const target = event.target;
         const quillEditor = container.querySelector('.ql-editor');
 
+        console.log("Button: " + event.button)
+
         if (quillEditor && quillEditor.contains(target) && target.tagName === 'P') {
           setShowBubble(true);
         } else {
@@ -137,6 +140,30 @@ export default function Document() {
           } else {
             setShowBubble(false);
           }
+        });
+      }
+    };
+
+
+  }, []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    if (container) {
+      container.addEventListener('contextmenu', (event) => {
+        const target = event.target;
+        const quillEditor = container.querySelector('.ql-editor');
+        setShowBubble(false);
+      });
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('contextmenu', (event) => {
+          const target = event.target;
+          const quillEditor = container.querySelector('.ql-editor');
+          setShowBubble(false);
         });
       }
     };
@@ -179,12 +206,12 @@ export default function Document() {
 
   useEffect(() => {
     if (quill && quill.on) {
-      quill.on('selection-change', handleSelectionChange);
+      quill.on('editor-change', handleSelectionChange);
     }
 
     return () => {
       if (quill && quill.off) {
-        quill.off('selection-change', handleSelectionChange);
+        quill.off('editor-change', handleSelectionChange);
       }
     };
   }, [quill, handleSelectionChange]);
@@ -200,7 +227,7 @@ export default function Document() {
   return (
     <>
       {showBubble && <TextBubble top={bubblePos} word={selectedWord} setShowBubble={setShowBubble} />}
-      <AutoScroll></AutoScroll>
+      {<AutoScroll isMobile={isMobile} visible={(!isMobile || !showBubble)} stop={showBubble}></AutoScroll>}
       <div className="container" ref={reference}></div>
     </>
   );

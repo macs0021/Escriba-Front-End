@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Slider, IconButton } from '@mui/material';
-import { PlayArrow, Stop } from '@mui/icons-material';
+import { PlayArrow, Stop, Visibility, VisibilityOff } from '@mui/icons-material';
 import './AutoScroll.css';
 
-function AutoScroll() {
+function AutoScroll({ isMobile, visible, stop }) {
     const [scrollSpeed, setScrollSpeed] = useState(0);
     const [isAutoScrolling, setIsAutoScrolling] = useState(false);
     const [intervalId, setIntervalId] = useState(null);
+    const [isShowing, setIsShowing] = useState(!isMobile);
+    const [divStyle, setDivStyle] = useState({});
+    const isFirstRender = useRef(true);
 
     useEffect(() => {
         if (intervalId) {
@@ -28,20 +31,50 @@ function AutoScroll() {
         setIsAutoScrolling(!isAutoScrolling);
     };
 
+    const handleVisibilityToggle = () => {
+        setIsShowing(!isShowing);
+    };
+
+    useEffect(() => {
+        if (visible) {
+            setDivStyle({ visibility: 'visible' });
+        } else {
+            setDivStyle({ visibility: 'hidden' });
+        }
+    }, [visible]);
+
+
+    useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+        } else {
+            setIsAutoScrolling(!stop);
+        }
+    }, [stop]);
+
     return (
-        <div className="AutoScroll">
-            <Slider
-                orientation="vertical"
-                value={scrollSpeed}
-                onChange={(event, newValue) => setScrollSpeed(newValue)}
-                min={0}
-                max={100}
-                valueLabelDisplay="auto"
-                style={{ color: '#333' }}
-            />
-            <IconButton onClick={toggleAutoScroll}>
-                {isAutoScrolling ? <Stop /> : <PlayArrow />}
-            </IconButton>
+        <div style={divStyle}>
+            {isMobile && <div className="AutoScroll-button" onClick={handleVisibilityToggle}>
+                <div>
+                    {isShowing ? <VisibilityOff /> : <Visibility />}
+                </div>
+            </div>}
+            {(isShowing || !isMobile) && (
+                <div className="AutoScroll">
+                    <Slider
+                        orientation="vertical"
+                        value={scrollSpeed}
+                        onChange={(event, newValue) => setScrollSpeed(newValue)}
+                        min={0}
+                        max={100}
+                        valueLabelDisplay="auto"
+                        style={{ color: '#333' }}
+                    />
+                    <div onClick={toggleAutoScroll}>
+                        {isAutoScrolling ? <Stop /> : <PlayArrow />}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
