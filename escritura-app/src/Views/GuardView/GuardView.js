@@ -4,7 +4,6 @@ import NotListedLocationIcon from '@mui/icons-material/NotListedLocation';
 const GuardView = ({ message, icon }) => {
   let IconComponent;
 
-  // Asigna el icono correspondiente según el valor del parámetro "icon"
   if (icon === 'lock') {
     IconComponent = LockIcon;
   } else if (icon === 'location') {

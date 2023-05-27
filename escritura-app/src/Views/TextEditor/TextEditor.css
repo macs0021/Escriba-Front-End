@@ -7,6 +7,7 @@
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
     background-color: white;
     font-size: 1rem;
+    
 }
 
 .center-div {
@@ -77,6 +78,7 @@ html {
 
     .container .ql-editor {
         width: 21cm;
+        min-height: 0 !important;
         padding: 0;
         margin: 0;
         box-shadow: none !important;
@@ -107,11 +109,7 @@ html {
         margin-top: 0.5rem;
         box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
         background-color: white;
-        font-size: 1rem;
     }
 
-    .ql-container .ql-editor {
-        font-size: 12px;
-    }
 
 }

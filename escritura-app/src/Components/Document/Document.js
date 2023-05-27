@@ -7,26 +7,27 @@ import '../../Views/TextEditor/TextEditor.css';
 import documentService from '../../Services/DocumentService'
 import ReadingService from "../../Services/ReadingService";
 import AutoScroll from "../AutoScroll/AutoScroll";
+import TextBubble from "../TextBubble/TextBubble";
 
 export default function Document() {
   const [quill, setQuill] = useState();
   const { id: documentId } = useParams();
-  const [isLoading, setIsLoading] = useState(false);
   const scrollPositionRef = useRef(0);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [showBubble, setShowBubble] = useState(false);
+  const [selectedWord, setSelectedWord] = useState("");
+  const [bubblePos, setBubblePos] = useState(true);
+  const containerRef = useRef(null);
 
   const handleScroll = () => {
     const position = window.pageYOffset;
     scrollPositionRef.current = position;
-    console.log(position);
   };
 
-  const getWordAtIndex = (content, index) => {
+
+  const getWordAtIndex = useCallback((content, index) => {
     const length = content.length;
     let start = index;
     let end = index;
-
-    console.log(content);
 
     if (isSeparator(content[index])) {
       return "";
@@ -43,39 +44,38 @@ export default function Document() {
     const word = content.substring(start, end);
 
     return word;
-  };
+  }, []);
 
   const isSeparator = (char) => {
 
-    const separators = [" ", ".", ",", ";", "\n", "!", "¡", "-", "?", "¿"];
+    const separators = [" ", ".", ",", ";", "\n", "!", "¡", "-", "?", "¿", '"'];
     return separators.includes(char);
   };
 
-  const handleWordIndexChange = (index) => {
-    setSelectedIndex(index);
+  const handleWordIndexChange = useCallback((index) => {
     if (quill !== null) {
       const content = quill.getText();
       const word = getWordAtIndex(content, index);
-      console.log("Palabra: " + word)
-    }
-  };
-
-  const handleSelectionChange = useCallback(() => {
-    if (quill && quill.getSelection) {
-      const range = quill.getSelection();
-      if (range) {
-        if (range.length === 0) {
-          console.log('User cursor is at index', range.index);
-          handleWordIndexChange(range.index);
-
-        } else {
-
-        }
-      } else {
-        console.log('User cursor is not in editor');
+      if (word.trim() !== "") {
+        setSelectedWord(word);
       }
+      const start = content.lastIndexOf(" ", index) + 1;
+      const end = content.indexOf(" ", index);
+      const wordLength = end - start;
+      const bounds = quill.getBounds(start, wordLength);
+
+      const wordPosition = bounds.top;
+      const windowHeight = window.innerHeight;
+      const scrollPosition = window.scrollY;
+
+      if (wordPosition - scrollPosition < windowHeight / 2) {
+        setBubblePos(true);
+      } else {
+        setBubblePos(false);
+      }
+      setShowBubble(true);
     }
-  }, [quill]);
+  }, [quill, getWordAtIndex]);
 
   const reference = useCallback((refe) => {
     if (refe == null) return;
@@ -106,14 +106,46 @@ export default function Document() {
       readOnly: true,
     });
 
+    containerRef.current = refe;
     setQuill(quillInstance);
+  }, []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    if (container) {
+      container.addEventListener('click', (event) => {
+        const target = event.target;
+        const quillEditor = container.querySelector('.ql-editor');
+
+        if (quillEditor && quillEditor.contains(target) && target.tagName === 'P') {
+          setShowBubble(true);
+        } else {
+          setShowBubble(false);
+        }
+      });
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('click', (event) => {
+          const target = event.target;
+          const quillEditor = container.querySelector('.ql-editor');
+
+          if (quillEditor && quillEditor.contains(target) && target.tagName === 'P') {
+            setShowBubble(true);
+          } else {
+            setShowBubble(false);
+          }
+        });
+      }
+    };
   }, []);
 
   useEffect(() => {
     if (quill != null) {
       documentService.getDocumentById(documentId).then(data => {
         quill.clipboard.dangerouslyPasteHTML(data.text);
-        console.log(JSON.stringify(data));
         ReadingService.getReading(data.id).then(result => {
           if (result === null) {
             ReadingService.postReading(data.id);
@@ -124,7 +156,18 @@ export default function Document() {
         });
       });
     }
-  }, [quill]);
+  }, [quill, documentId]);
+
+  const handleSelectionChange = useCallback(() => {
+    if (quill && quill.getSelection) {
+      const range = quill.getSelection();
+      if (range) {
+        if (range.length === 0) {
+          handleWordIndexChange(range.index);
+        }
+      }
+    }
+  }, [quill, handleWordIndexChange]);
 
 
   useEffect(() => {
@@ -152,10 +195,11 @@ export default function Document() {
       ReadingService.putReading(documentId, scrollPositionRef.current);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [documentId]);
 
   return (
     <>
+      {showBubble && <TextBubble top={bubblePos} word={selectedWord} setShowBubble={setShowBubble} />}
       <AutoScroll></AutoScroll>
       <div className="container" ref={reference}></div>
     </>

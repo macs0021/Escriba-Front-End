@@ -25,7 +25,6 @@ const Login = () => {
             })
             .catch((error) => {
                 if (error.response && error.response.status === 401) {
-                    // La solicitud ha sido rechazada debido a falta de autenticación (401 Unauthorized)
                     setLoginError(true);
                 } else {
                     console.log("Error en la solicitud");

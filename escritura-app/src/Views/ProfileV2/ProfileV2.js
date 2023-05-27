@@ -27,7 +27,6 @@ const ProfileV2 = () => {
     const [profileImage, setProfileImage] = useState([]);
     const [profileEditModalState, setProfileEditModalState] = useState(false);
 
-    //Inicializo la vista, recogiendo datos del usuario del perfil y de sus libros
     useEffect(() => {
         if (user === null) return;
         resetStates();

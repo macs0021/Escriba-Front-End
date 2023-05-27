@@ -20,7 +20,6 @@ const DocumentGuard = ({ children }) => {
     }
 
     if (!isDocumentMine) {
-        //return <Navigate replace to="/" />;
         return <GuardView message={"Only the creator of the document is able to edit it"} icon={"lock"}></GuardView>
     }
 
