@@ -1,31 +1,44 @@
-.content-line{
+.content-line {
     display: flex;
     justify-content: center;
 }
-.border-top{
+
+.border-top {
     border-top: 1px solid #E8E8E8;
 }
-.listed-content{
+
+.listed-content {
     padding-bottom: 1rem;
     margin-left: 0;
 }
-.listed-element{
+
+.listed-element {
     margin-bottom: 0.5rem;
 }
-.text-line{
+
+.text-line {
     justify-content: center;
-    max-height:400px;
+    max-height: 400px;
     word-break: initial;
+    min-width: 0;
 }
-.buttons-line{
+
+.buttons-line {
     margin-top: 1rem;
     display: flex;
     justify-content: space-evenly;
     width: 80%;
 }
-.card-info-main-content{
+
+.card-info-main-content {
     display: flex;
     height: 35rem !important;
     padding: 15px;
     overflow-y: scroll;
+}
+
+@media (min-width: 768px) {
+    .text-line {
+        min-width: 40rem;
+    }
 }

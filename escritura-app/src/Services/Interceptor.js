@@ -1,5 +1,5 @@
 import axios from 'axios';
-import TokenService from './TokenService';
+import { getToken, setToken, refreshToken } from './TokenService';
 
 const Interceptor = axios.create({
   baseURL: 'http://localhost:8080/',
@@ -8,7 +8,7 @@ const Interceptor = axios.create({
 // Añado el token a la cabecera de todas las peticiones.
 Interceptor.interceptors.request.use(
   (config) => {
-    const token = TokenService.getToken();
+    const token = getToken();
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
       config.headers['Content-Type'] = 'application/json';
@@ -26,8 +26,8 @@ Interceptor.interceptors.response.use(
   async (error) => {
     if (error.response?.status === 401 && !error.config._retry) {
       error.config._retry = true;
-      const newToken = await TokenService.refreshToken();
-      TokenService.setToken(newToken.data.token);
+      const newToken = await refreshToken();
+      setToken(newToken.data.token);
       error.config.headers['Authorization'] = `Bearer ${newToken.data.token}`;
       return axios(error.config);
     }

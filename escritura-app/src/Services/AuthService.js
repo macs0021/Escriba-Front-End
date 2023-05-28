@@ -1,36 +1,27 @@
-import Interceptor from './Interceptor';
-import TokenService from './TokenService';
+import { setToken, dropToken, getUsername } from './TokenService';
 import axios from 'axios';
 
 const authUrl = "http://localhost:8080/auth";
 
-async function registerUser(user) {
+export async function registerUser(user) {
     try {
-        const response = await axios.post(authUrl + "/register", user);
+        const response = await axios.post(`${authUrl}/register`, user);
         return response;
     } catch (error) {
         return error;
     }
 }
 
-async function loginUser(user) {
-        const response = await axios.post(authUrl + "/login", user);
-        const token = response.data.token;
-        console.log(response.data.token);
+export async function loginUser(user) {
+    const response = await axios.post(`${authUrl}/login`, user);
+    const token = response.data.token;
 
-        TokenService.setToken(token);
+    setToken(token);
+    getUsername();
 
-        TokenService.getUsername();
-
-        return response;
+    return response;
 }
 
-function logoutUser(){
-    TokenService.dropToken();
+export function logoutUser() {
+    dropToken();
 }
-
-export default {
-    registerUser,
-    loginUser,
-    logoutUser,
-};

@@ -16,7 +16,6 @@
     width: 100px;
     height: 100px;
     overflow: hidden;
-    /* Añade esta línea para ocultar cualquier contenido que se desborde */
 }
 
 .profileImg:hover>.imgOverlay {
@@ -28,7 +27,6 @@
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    /* Añade esta línea para que la imagen se vea redonda */
 }
 
 .profileImg .imgOverlay {

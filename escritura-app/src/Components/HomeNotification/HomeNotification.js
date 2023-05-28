@@ -1,25 +1,24 @@
 import { useEffect } from 'react';
 import './HomeNotification.css'
 import { getUser } from '../../Services/UserService';
-import DocumentService from '../../Services/DocumentService';
+import { getDocumentById } from '../../Services/DocumentService';
 import { getReplyByID, getReviewByID } from '../../Services/CommentService';
 import { useState } from 'react';
 import MiniProfile from '../MiniProfile/MiniProfile'
-import { followUser, getFollowers, getFollowing } from '../../Services/UserService';
+import { followUser } from '../../Services/UserService';
 import Card from '../Card/Card'
 import Comment from '../Comment/Comment';
 import Galery from '../Galery/Galery'
 import { Link } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
 import Modal from '../Modal/Modal';
-import { BorderBottom } from '@mui/icons-material';
+
 
 
 const HomeNotification = ({ notification }) => {
 
     const [user, setUser] = useState(null);
     const [notificationData, setNotificationData] = useState(null);
-    const [extraData, setExtraData] = useState(null);
     const [document, setDocument] = useState(null);
     const [review, setReview] = useState(null);
     const [reply, setReply] = useState(null);
@@ -42,14 +41,14 @@ const HomeNotification = ({ notification }) => {
                 });
                 break;
             case "DOCUMENT":
-                DocumentService.getDocumentById(notification.entityId).then((result) => {
+                getDocumentById(notification.entityId).then((result) => {
                     setDocument(result);
                     setNotificationData(result);
                 });
                 break;
             case "REVIEW":
                 getReviewByID(notification.entityId).then((reviewResult) => {
-                    DocumentService.getDocumentById(reviewResult?.postedIn).then((documentResult) => {
+                    getDocumentById(reviewResult?.postedIn).then((documentResult) => {
                         setDocument(documentResult);
                         setReview(reviewResult);
                         setNotificationData(reviewResult);
@@ -59,7 +58,7 @@ const HomeNotification = ({ notification }) => {
             case "REPLY":
                 getReplyByID(notification.entityId).then((replyResult) => {
                     getReviewByID(replyResult.responding).then((reviewResult) => {
-                        DocumentService.getDocumentById(reviewResult?.postedIn).then((documentResult) => {
+                        getDocumentById(reviewResult?.postedIn).then((documentResult) => {
                             setDocument(documentResult);
                             setReply(replyResult);
                             setNotificationData(replyResult);
@@ -68,8 +67,10 @@ const HomeNotification = ({ notification }) => {
                     });
                 });
                 break;
+            default:
+                console.log("Tipo de entidad de notificación no reconocido");
         }
-    }, []);
+    }, [notification]);
 
     const notificationDisplay = () => {
         if (notificationData === null) return (<></>);
@@ -82,9 +83,10 @@ const HomeNotification = ({ notification }) => {
                 return (<Comment comment={notificationData}></Comment>)
             case "REPLY":
                 return (<Comment comment={notificationData} isReply={true}></Comment>)
+            default:
+                console.log("Tipo de entidad de notificación no reconocido");
         }
     }
-
     return (<>
         <div className='notification'>
             <div className='notification-header'>
@@ -118,7 +120,7 @@ const HomeNotification = ({ notification }) => {
             </div>
         </div>
         <Modal setModalState={setModalState} modalState={modalState} fullscreen={true} tittle={"Notification info"} >
-            <div className='notification-modal' style={{height: '100%' }}>
+            <div className='notification-modal' style={{ height: '100%' }}>
                 <h3 className='center'>Document</h3>
                 <Galery>
                     <Card card={document}></Card>

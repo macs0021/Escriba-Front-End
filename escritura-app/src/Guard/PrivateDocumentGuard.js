@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
-import DocumentService from '../Services/DocumentService';
-import { Navigate } from 'react-router';
+import {useParams } from 'react-router-dom';
+import { checkOwner, checkPublic } from '../Services/DocumentService';
 import GuardView from '../Views/GuardView/GuardView';
 
 const PrivateDocumentGuard = ({ children }) => {
@@ -10,11 +9,11 @@ const PrivateDocumentGuard = ({ children }) => {
     const [isDocumentPublic, setIsDocumentPublic] = useState(null);
 
     useEffect(() => {
-        DocumentService.checkPublic(id).then((result) => {
+        checkPublic(id).then((result) => {
             setIsDocumentPublic(result);
         });
 
-        DocumentService.checkOwner(id).then((result) => {
+        checkOwner(id).then((result) => {
             setIsDocumentMine(result);
         });
     }, [id]);

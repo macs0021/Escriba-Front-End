@@ -1,12 +1,10 @@
 import './App.css';
-import TextEditor from './Views/TextEditor/TextEditor';
+import DocumentEdit from './Views/Document/DocumentEdit';
+import DocumentRead from './Views/Document/DocumentRead';
 import Explore from './Views/Explore/Explore';
 import Writting from './Views/Writting/Writting'
 import Authentication from './Views/Authentication/Authentication';
-import Document from './Components/Document/Document'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import TokenService from './Services/TokenService';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Views/Home/Home';
 import Guard from './Guard/Guard';
 import ProfileV2 from './Views/ProfileV2/ProfileV2';
@@ -57,7 +55,7 @@ function App() {
               path="/documents/:id"
               element={<Guard>
                 <DocumentGuard>
-                  <TextEditor />
+                  <DocumentEdit />
                 </DocumentGuard>
               </Guard>}
             />
@@ -65,7 +63,7 @@ function App() {
               path="/documents/read/:id"
               element={<Guard>
                 <PrivateDocumentGuard>
-                  <Document />
+                  <DocumentRead />
                 </PrivateDocumentGuard>
               </Guard>}
             />

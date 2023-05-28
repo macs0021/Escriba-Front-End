@@ -1,8 +1,7 @@
 import './MiniProfile.css'
 import { Link } from 'react-router-dom';
-import TokenService from '../../Services/TokenService';
+import { getUsername } from '../../Services/TokenService';
 import { useEffect, useState } from 'react';
-import profileHolder from '../../files/profile-holder.jpg'
 
 
 const MiniProfile = ({ user, handleFollow }) => {
@@ -10,9 +9,9 @@ const MiniProfile = ({ user, handleFollow }) => {
     const [clicked, setClicked] = useState(false)
 
     useEffect(() => {
-        if (user?.followers.includes(TokenService.getUsername()))
+        if (user?.followers.includes(getUsername()))
             setClicked(true);
-    }, []);
+    }, [user]);
 
 
     const handleClick = () => {
@@ -28,7 +27,7 @@ const MiniProfile = ({ user, handleFollow }) => {
                     {user?.name}
                 </Link>
             </div>
-            {user?.name !== TokenService.getUsername() && <button className='follow-button button' onClick={() => handleClick()}>
+            {user?.name !== getUsername() && <button className='follow-button button' onClick={() => handleClick()}>
                 {clicked ? 'Unfollow' : 'Follow'}
             </button>}
         </div>

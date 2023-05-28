@@ -42,7 +42,11 @@ export default function ImageGeneratorForm({ execute, isMobile }) {
         <>
             {isMobile && (
                 <div className="button-container">
-                    <VisibilityOff className="generator-toggle-button" onClick={toggleFormVisibility} />
+                    {isFormVisible ? (
+                        <Visibility className="generator-toggle-button" onClick={toggleFormVisibility} />
+                    ) : (
+                        <VisibilityOff className="generator-toggle-button" onClick={toggleFormVisibility} />
+                    )}
                 </div>
             )}
             {(!isMobile || isFormVisible) && (

@@ -4,16 +4,17 @@ import SearchBar from '../../Components/SearchBar/SearchBar';
 import Chip from '../../Components/Chip/Chip';
 import { useState, useEffect } from 'react';
 import Card from '../../Components/Card/Card';
-import DocumentService from '../../Services/DocumentService';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import MiniProfile from '../../Components/MiniProfile/MiniProfile'
 import { followUser } from '../../Services/UserService';
-import TokenService from '../../Services/TokenService';
+import { getUsername } from '../../Services/TokenService';
 import Loader from '../../Components/Loader/Loader';
 import { getSearch } from '../../Services/UserService';
 import Modal from '../../Components/Modal/Modal';
+import { documentGenres } from '../../Utils/DocumentUtils';
+import { getDocumentsByGenreAndPage } from '../../Services/DocumentService';
 
 export default function Explore() {
 
@@ -27,42 +28,7 @@ export default function Explore() {
     const [showUsers, setShowUsers] = useState(false);
     const [usersModalState, setUsersModalState] = useState(false);
 
-    const genres = [
-        "Novel",
-        "Short Story",
-        "Poetry",
-        "Drama",
-        "Science Fiction",
-        "Fantasy",
-        "Horror",
-        "Mystery",
-        "Romance",
-        "Adventure",
-        "Humor",
-        "Historical",
-        "Detective",
-        "Western",
-        "Dystopian",
-        "Realistic",
-        "Juvenile",
-        "Children's",
-        "History",
-        "Biography and Memoir",
-        "Self-Help and Personal Development",
-        "Business and Finance",
-        "Politics and Current Affairs",
-        "Travel",
-        "Food and Gastronomy",
-        "Art and Photography",
-        "Sports and Outdoor Activities",
-        "Education and Reference",
-        "Science and Technology",
-        "Religion and Spirituality",
-        "Environment and Ecology",
-        "Philosophy and Thought",
-        "Sociology and Anthropology",
-        "Journalism and Essays"
-    ];
+    const genres = documentGenres;
 
     const handleFollow = (username) => {
         followUser(username);
@@ -70,10 +36,11 @@ export default function Explore() {
 
     useEffect(() => {
         documentsPetition();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]);
 
     const documentsPetition = () => {
-        DocumentService.getDocumentsByGenreAndPage(selectedGenres, searchBarValue, page, 12).then(data => {
+        getDocumentsByGenreAndPage(selectedGenres, searchBarValue, page, 12).then(data => {
             setCards(prevCards => prevCards.concat(data));
             if (data.length < 12) {
                 setEnd(true);
@@ -86,7 +53,7 @@ export default function Explore() {
 
     const getSearchedUsers = () => {
         getSearch(searchBarValue).then((result) => {
-            const username = TokenService.getUsername();
+            const username = getUsername();
             const updatedUsers = result.filter(user => user.name !== username);
             console.log("USERNAMES:" + JSON.stringify(updatedUsers))
             setUsers(updatedUsers);

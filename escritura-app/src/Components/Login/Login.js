@@ -1,7 +1,7 @@
-import {useState } from "react";
+import { useState } from "react";
 import './Login.css'
-import AuthService from "../../Services/AuthService";
-import TokenService from "../../Services/TokenService";
+import { loginUser } from "../../Services/AuthService";
+import { Logged } from "../../Services/TokenService";
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -17,9 +17,9 @@ const Login = () => {
 
         const userObject = { username: user, password: password };
 
-        AuthService.loginUser(userObject)
+        loginUser(userObject)
             .then((data) => {
-                if (TokenService.Logged) {
+                if (Logged) {
                     navigate('/');
                 }
             })
@@ -32,12 +32,12 @@ const Login = () => {
             });
     };
 
-    const onUserChange = (value) =>{
+    const onUserChange = (value) => {
         setUser(value);
         setLoginError(false);
     }
 
-    const onPasswordChange = (value) =>{
+    const onPasswordChange = (value) => {
         setPassword(value);
         setLoginError(false);
     }

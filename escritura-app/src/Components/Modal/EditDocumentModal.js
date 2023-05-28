@@ -1,9 +1,9 @@
 
-import Modal from "../Modal";
-import CreationFormulary from "../CreationFormulary";
+import Modal from "./Modal";
+import CreationFormulary from "../CreationFormulary/CreationFormulary";
 import { useState } from "react";
-import TokenService from "../../../Services/TokenService";
-import DocumentService from "../../../Services/DocumentService";
+import { getUsername } from "../../Services/TokenService";
+import { putDocument } from "../../Services/DocumentService";
 import { useNavigate } from "react-router";
 
 
@@ -22,7 +22,7 @@ const EditDocumentModal = ({ editModalState, setEditModalState, card, setCard })
         "cover": cover,
         "tittle": tittle,
         "synopsis": synopsis,
-        "creatorUsername": TokenService.getUsername(),
+        "creatorUsername": getUsername(),
         "genres": genres,
         "savedBy": card?.savedBy,
         "readings": card?.readings,
@@ -30,14 +30,14 @@ const EditDocumentModal = ({ editModalState, setEditModalState, card, setCard })
     };
 
     const updateDocument = () => {
-        DocumentService.putDocument(card?.id, document).then((result) => {
+        putDocument(card?.id, document).then((result) => {
             setCard(result);
         });
         setEditModalState(false);
     }
 
     const moveToEdit = () => {
-        DocumentService.putDocument(card?.id, document).then(() => {
+        putDocument(card?.id, document).then(() => {
             navigate('/documents/' + card?.id);
         })
     }

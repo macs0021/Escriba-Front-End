@@ -1,14 +1,14 @@
 import './ProfileV2.css'
 import { useEffect } from 'react';
 import Galery from '../../Components/Galery/Galery';
-import TokenService from '../../Services/TokenService';
-import DocumentService from '../../Services/DocumentService';
+import { getUsername } from '../../Services/TokenService';
+import { getPublicDocumentsByUsername } from '../../Services/DocumentService';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Card from '../../Components/Card/Card';
 import Modal from '../../Components/Modal/Modal';
 import MiniProfile from '../../Components/MiniProfile/MiniProfile';
-import ProfileEditFormulary from '../../Components/Modal/ProfileEditFormulary';
+import ProfileEditFormulary from '../../Components/ProfileEditFormulary/ProfileEditFormulary';
 import { getUser, followUser, getFollowers, getFollowing } from '../../Services/UserService';
 import NoBooksImage from '../../files/cute.png'
 
@@ -17,14 +17,12 @@ const ProfileV2 = () => {
     const [usersModalState, setUsersModalState] = useState(false);
     const [written, setWritten] = useState([]);
     const [userData, setUserData] = useState("");
-    const [read, setRead] = useState([]);
     const { username: user } = useParams();
     const [isFollowing, setIsFollowing] = useState(false);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
     const [modalList, setModalList] = useState([]);
     const [followModalTittle, setFollowModalTittle] = useState("");
-    const [profileImage, setProfileImage] = useState([]);
     const [profileEditModalState, setProfileEditModalState] = useState(false);
 
     useEffect(() => {
@@ -35,11 +33,10 @@ const ProfileV2 = () => {
             setUserData(data);
             setFollowers(data.followers);
             setFollowing(data.following);
-            setProfileImage(data.image);
-            if (data.followers.includes(TokenService.getUsername())) setIsFollowing(true);
+            if (data.followers.includes(getUsername())) setIsFollowing(true);
         });
 
-        DocumentService.getPublicDocumentsByUsername(user).then(data => {
+        getPublicDocumentsByUsername(user).then(data => {
             setWritten(data);
         });
     }, [user]);
@@ -47,16 +44,16 @@ const ProfileV2 = () => {
 
     const handleFollow = (username) => {
         followUser(username).then(data => {
-            if (user === TokenService.getUsername()) {
+            if (user === getUsername()) {
                 if (following.includes(username))
                     setFollowing(prevFollowing => prevFollowing.filter(followedUser => followedUser !== username));
                 else
                     setFollowing(prevFollowing => prevFollowing.concat(username));
             } else {
-                if (followers.includes(TokenService.getUsername()))
-                    setFollowers(prevFollowers => prevFollowers.filter(follower => follower !== TokenService.getUsername()));
+                if (followers.includes(getUsername()))
+                    setFollowers(prevFollowers => prevFollowers.filter(follower => follower !== getUsername()));
                 else
-                    setFollowers(prevFollowers => prevFollowers.concat(TokenService.getUsername()));
+                    setFollowers(prevFollowers => prevFollowers.concat(getUsername()));
             }
         })
         setIsFollowing(!isFollowing);
@@ -120,10 +117,10 @@ const ProfileV2 = () => {
                             <i class="fab fa-facebook"></i>
                             <i class="fab fa-dribbble"></i>
                         </ul>
-                        {user !== TokenService.getUsername() && <button id="main-follow-button" className='follow-button button' onClick={() => handleFollow(user)}>
+                        {user !== getUsername() && <button id="main-follow-button" className='follow-button button' onClick={() => handleFollow(user)}>
                             {isFollowing ? 'Unfollow' : isFollowing ? 'Followed' : 'Follow'}
                         </button>}
-                        {user === TokenService.getUsername() && <button id="main-follow-button" className='follow-button button' onClick={() => editProfile()}>
+                        {user === getUsername() && <button id="main-follow-button" className='follow-button button' onClick={() => editProfile()}>
                             Edit profile
                         </button>}
                     </div>
@@ -132,14 +129,14 @@ const ProfileV2 = () => {
                 <div className="right__col">
                     <nav>
                         <ul>
-                            <li><a className='light' href="">Written</a></li>
+                            <li><div className='light' href="">Written</div></li>
                         </ul>
                     </nav>
-                    {(written.length !== 0 || read.length !== 0) ? <div>
+                    {(written.length !== 0) ? <div>
                         <Galery>
                             {written.map((card) => <Card card={card} key={card.id} />)}
                         </Galery>
-                    </div> : <div className='center top-bot-margin'> <img className='no-books-image' src={NoBooksImage}></img></div>}
+                    </div> : <div className='center top-bot-margin'> <img className='no-books-image' src={NoBooksImage} alt='no-books'></img></div>}
                 </div>
             </div>
 
@@ -152,7 +149,7 @@ const ProfileV2 = () => {
             </Modal>
 
             <Modal modalState={profileEditModalState} setModalState={setProfileEditModalState} fullscreen={true}>
-                <div style={{height:'100%'}} className='center'>
+                <div style={{ height: '100%' }} className='center'>
                     <ProfileEditFormulary userData={userData} setUserData={setUserData} setModalState={setProfileEditModalState}></ProfileEditFormulary>
                 </div>
             </Modal>

@@ -1,14 +1,12 @@
 import Modal from "../Modal/Modal";
 import './CreateDocumentButton.css'
-import CreationFormulary from "../Modal/CreationFormulary";
+import CreationFormulary from "../CreationFormulary/CreationFormulary";
 import { useState } from "react";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import DocumentService from "../../Services/DocumentService";
-import TokenService from "../../Services/TokenService";
+import { postDocument } from "../../Services/DocumentService";
+import { getUsername } from '../../Services/TokenService';
 import sizeImage from '../../files/sizeImage.png'
-import ImageGeneratorService from '../../Services/ImageGeneratorService';
 import { useNavigate } from 'react-router-dom';
-import loadingImg from '../../files/cargaV3.gif';
 
 const CreateDocumentButton = () => {
 
@@ -27,17 +25,23 @@ const CreateDocumentButton = () => {
     }
 
     const createDocument = (event) => {
-
         event.preventDefault();
 
-        const document = { "privateText": "", "cover": cover, "tittle": title, "synopsis": synopsis, "creatorUsername": TokenService.getUsername(), "genres": selectedGenres, "readings": [] };
-        console.log("User: " + TokenService.getUsername());
+        const document = {
+            "privateText": "",
+            "cover": cover,
+            "tittle": title ? title : "Unnamed document",
+            "synopsis": synopsis,
+            "creatorUsername": getUsername(),
+            "genres": selectedGenres,
+            "readings": []
+        };
 
-        DocumentService.postDocument(document).then(data => {
+        postDocument(document).then(data => {
             navigate('/documents/' + data);
         });
-    }
-
+    };
+    
     return (<>
         <div className='CDB-background' onClick={onClick}>
             <div className="CDB-inner-div">

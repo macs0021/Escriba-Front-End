@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Slider, IconButton } from '@mui/material';
+import { Slider } from '@mui/material';
 import { PlayArrow, Stop, Visibility, VisibilityOff } from '@mui/icons-material';
 import './AutoScroll.css';
 
@@ -25,6 +25,7 @@ function AutoScroll({ isMobile, visible, stop }) {
         setIntervalId(id);
 
         return () => clearInterval(id);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [scrollSpeed, isAutoScrolling]);
 
     const toggleAutoScroll = () => {

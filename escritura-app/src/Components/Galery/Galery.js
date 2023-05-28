@@ -1,8 +1,4 @@
 import './Galery.css';
-import Card from '../Card/Card'
-import Modal from '../Modal/Modal'
-import { useState } from 'react';
-
 
 export default function Galery({ children }) {
 

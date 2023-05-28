@@ -2,13 +2,13 @@
 import './Card.css'
 import Modal from '../Modal/Modal'
 import { useEffect, useState } from 'react';
-import CardInfo from '../Modal/CardInfo'
+import CardInfo from '../CardInfo/CardInfo'
 import CardBack from './CardBack.js/CardBack';
-import DeleteDocumentModal from '../Modal/DeleteDocumentModal/DeleteDocumentModal';
-import EditDocumentModal from '../Modal/EditDocumentModal/EditDocumentModal';
-import CommentModal from '../Modal/CommentsModal/CommentModal';
+import DeleteDocumentModal from '../Modal/DeleteDocumentModal';
+import EditDocumentModal from '../Modal/EditDocumentModal';
+import CommentModal from '../Modal/CommentModal';
 import { getUser } from '../../Services/UserService';
-import PublishModal from '../Modal/PublishModal/PublishModal';
+import PublishModal from '../Modal/PublishModal';
 
 export default function Card({ card, addUnsavedBooks }) {
     //Estados de las modales
@@ -99,7 +99,7 @@ export default function Card({ card, addUnsavedBooks }) {
             <PublishModal card={document} publishModalState={publishModalState} setPublishModalState={setPublishModalState} setEditModalState={setEditModalState} isPublic={isPublished} setIsPublic={setIsPublished}></PublishModal>
 
             <Modal modalState={modalState} setModalState={setModalState} fullscreen={true}>
-                    <CardInfo data={card} genres={document?.genres} tittle={document?.tittle} synopsis={document?.synopsis} addUnsavedBooks={addUnsavedBooks} />
+                <CardInfo data={card} genres={document?.genres} tittle={document?.tittle} synopsis={document?.synopsis} addUnsavedBooks={addUnsavedBooks} />
             </Modal>
         </>
     );

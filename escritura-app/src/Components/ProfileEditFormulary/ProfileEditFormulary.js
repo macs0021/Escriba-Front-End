@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import './ProfileEditFormulary.css'
-import DefaultProfilePicture from '../../files/DefaultProfilePicture.jpg'
 import imageToBase64 from 'image-to-base64/browser'
-import UserService from '../../Services/UserService';
 import { putUser } from '../../Services/UserService';
 
 
@@ -27,15 +25,6 @@ const ProfileEditFormulary = ({ userData, setUserData, setModalState }) => {
         };
     };
 
-    function handleDescription(event) {
-        console.log(event.target.value);
-        if (event.target.value === '' || event.target.value===null) {
-            setDescription(userData.description);
-        } else {
-            setDescription(event.target.value);
-        }
-    }
-
     const saveChanges = (event) => {
         event.preventDefault();
         const saveUser = { "id": userData.id, "name": userData.name, "email": email, "description": description, "image": image }
@@ -50,7 +39,7 @@ const ProfileEditFormulary = ({ userData, setUserData, setModalState }) => {
                 <div className="center top-bot-margin">
                     <label htmlFor="file-input" className="file-label">
                         <div class="profileImg">
-                            <img src={`data:image/png;base64,${image}`} />
+                            <img src={`data:image/png;base64,${image}`} alt='profile-img'/>
                             <div class='imgOverlay'>
                                 <div class='oBody'></div>
                             </div>

@@ -1,12 +1,10 @@
 import { useEffect } from "react";
-import Modal from "../Modal";
-import CommentPosting from "../../CommentPosting/CommentPosting";
-import Comment from "../../Comment/Comment";
+import Modal from "./Modal";
+import CommentPosting from "../CommentPosting/CommentPosting";
+import Comment from "../Comment/Comment";
 import { useState } from "react";
-import { getReviewsOfDocument, getRepliesOfReview } from "../../../Services/CommentService";
-import TokenService from "../../../Services/TokenService";
-import './CommentModal.css'
-import { SelectAllRounded } from "@mui/icons-material";
+import { getReviewsOfDocument, getRepliesOfReview } from "../../Services/CommentService";
+import { getUsername } from "../../Services/TokenService";
 
 const CommentModal = ({ documentId, modalState, setModalState }) => {
 
@@ -20,15 +18,16 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
 
     useEffect(() => {
         reloadContent();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const reloadContent = () => {
         getReviewsOfDocument(documentId).then((result) => {
 
-            const userComment = result.find(comment => comment.postedBy === TokenService.getUsername());
+            const userComment = result.find(comment => comment.postedBy === getUsername());
             setUserComment(userComment);
 
-            const othersComments = result.filter(comment => comment.postedBy !== TokenService.getUsername());
+            const othersComments = result.filter(comment => comment.postedBy !== getUsername());
 
             const sortedComments = othersComments.sort((a, b) => {
                 const dateA = new Date(a.postedAt);
@@ -43,7 +42,7 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
     const getReplies = (commentID) => {
         if (commentID === -1) return;
         getRepliesOfReview(commentID).then((result) => {
-            const reply = result.find(comment => comment.postedBy === TokenService.getUsername());
+            const reply = result.find(comment => comment.postedBy === getUsername());
             setUserReply(reply);
             const updatedReplies = result.filter(comment => comment !== reply);
             setActualReplies(updatedReplies);
@@ -75,13 +74,13 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
 
     return (<>
         <Modal modalState={modalState} setModalState={closeModalAndEditMode} tittle={"Comments"} fullscreen={true}>
-            <div  className = 'modal-space'style={{overflowY: 'auto'}}>
+            <div className='modal-space' style={{ overflowY: 'auto' }}>
                 <div className="comments-container">
                     {userComment && !editing ? (<>
                         <Comment comment={userComment} reloadContent={reloadContent} setEditing={editMode} />
                         <div className='comment-responses-button center' onClick={() => showReplies(userComment.id)}>replies</div>
                         {/* reply */}
-                        {selectReplies === userComment.id && <div className="center column" style={{marginBot: '1rem'}}>
+                        {selectReplies === userComment.id && <div className="center column" style={{ marginBot: '1rem' }}>
                             {!editingReply && userReply ? (
                                 <Comment comment={userReply} reloadContent={reloadContent} setEditing={editReply} isReply={true} />
                             ) : (
@@ -113,7 +112,7 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
                             <Comment key={comment.id} comment={comment} />
                             <div className='comment-responses-button center' onClick={() => showReplies(comment.id)}>replies</div>
 
-                            {selectReplies === comment.id && <div className="center column" style={{marginBot: '1rem'}}>
+                            {selectReplies === comment.id && <div className="center column" style={{ marginBot: '1rem' }}>
                                 {!editingReply && userReply ? (
                                     <Comment comment={userReply} reloadContent={reloadContent} setEditing={editReply} isReply={true} />
                                 ) : (

@@ -1,7 +1,7 @@
 import './CommentPosting.css'
 import { postComment, putComment } from '../../Services/CommentService'
 import { useState } from 'react'
-import TokenService from '../../Services/TokenService';
+import { getUsername } from '../../Services/TokenService';
 import StarIcon from '@mui/icons-material/Star';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
@@ -17,7 +17,7 @@ const CommentPosting = ({ documentId, reloadContent, setEditing, editing, commen
 
     const postingComment = () => {
 
-        const post = { "text": text, "postedBy": TokenService.getUsername(), "postedIn": documentId, "rating": review, "commentType": "", "responding": respondingTo }
+        const post = { "text": text, "postedBy": getUsername(), "postedIn": documentId, "rating": review, "commentType": "", "responding": respondingTo }
 
         if (!isReply) {
             post.commentType = "REVIEW";

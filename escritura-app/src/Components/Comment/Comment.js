@@ -9,7 +9,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { deleteComment } from '../../Services/CommentService';
 import Modal from '../Modal/Modal';
-import TokenService from '../../Services/TokenService';
+import { getUsername } from '../../Services/TokenService';
 
 const Comment = ({ comment, reloadContent, setEditing, isReply }) => {
 
@@ -21,7 +21,7 @@ const Comment = ({ comment, reloadContent, setEditing, isReply }) => {
         getUser(comment?.postedBy).then((result) => {
             setCommentImage(result.image);
         })
-    }, []);
+    }, [comment?.postedBy]);
 
     const onDeleteClick = () => {
         deleteComment(comment?.id).then(() => {
@@ -61,7 +61,7 @@ const Comment = ({ comment, reloadContent, setEditing, isReply }) => {
                                 return stars;
                             })()}
                         </div>}
-                        {comment?.postedBy === TokenService.getUsername() && <div className='center'>
+                        {comment?.postedBy === getUsername() && <div className='center'>
                             <DeleteIcon onClick={() => setDeleteModal(true)}></DeleteIcon>
                             <EditIcon onClick={() => setEditing(true)}></EditIcon>
                         </div>}

@@ -1,13 +1,12 @@
-import Modal from "../Modal";
-import Card from "../../Card/Card";
-import DocumentService from "../../../Services/DocumentService";
+import Modal from "./Modal";
+import { deleteDocument } from "../../Services/DocumentService";
 
 
 const DeleteDocumentModal = ({ deleteWarningModalState, setDeleteWarningModalState, card, setDeleted }) => {
 
     const OnDeleteClick = (event) => {
         event.stopPropagation();
-        DocumentService.deleteDocument(card.id).then(data => {
+        deleteDocument(card.id).then(data => {
             setDeleted(true);
         });
         setDeleteWarningModalState(false);

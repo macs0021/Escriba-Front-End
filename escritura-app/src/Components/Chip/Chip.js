@@ -12,7 +12,7 @@ const Chips = ({ id, data, onClick, active }) => {
         else {
             document.getElementById(id).setAttribute('class', 'unselected-chip selectable');
         }
-    }, []);
+    }, [active, id]);
 
     const changeState = () => {
         if (selected) {

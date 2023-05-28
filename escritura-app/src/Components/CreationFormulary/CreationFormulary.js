@@ -1,54 +1,18 @@
 import './CreationFormulary.css'
 import Chip from '../Chip/Chip'
-import sizeImage from '../../files/sizeImage.png'
-import ImageGeneratorService from '../../Services/ImageGeneratorService';
+import { generateImage } from "../../Services/ImageGeneratorService";
 import loadingImg from '../../files/cargaV3.gif';
 
 import React, { useState } from 'react';
+import { documentGenres } from '../../Utils/DocumentUtils';
 
-const genres = [
-    "Novel",
-    "Short Story",
-    "Poetry",
-    "Drama",
-    "Science Fiction",
-    "Fantasy",
-    "Horror",
-    "Mystery",
-    "Romance",
-    "Adventure",
-    "Humor",
-    "Historical",
-    "Detective",
-    "Western",
-    "Dystopian",
-    "Realistic",
-    "Juvenile",
-    "Children's",
-    "History",
-    "Biography and Memoir",
-    "Self-Help and Personal Development",
-    "Business and Finance",
-    "Politics and Current Affairs",
-    "Travel",
-    "Food and Gastronomy",
-    "Art and Photography",
-    "Sports and Outdoor Activities",
-    "Education and Reference",
-    "Science and Technology",
-    "Religion and Spirituality",
-    "Environment and Ecology",
-    "Philosophy and Thought",
-    "Sociology and Anthropology",
-    "Journalism and Essays"
-];
+const genres = documentGenres;
 
 const CreationFormulary = ({ tittle, setTitle, selectedGenres, setSelectedGenres, synopsis, setSynopsis, cover, setCover }) => {
 
     const [tempCover, setTemCover] = useState(cover);
     const [image, setImage] = useState("");
 
-    //Gestión de los géneros
     const handleGenreClick = (genre) => {
         if (selectedGenres.includes(genre)) {
             setSelectedGenres(selectedGenres.filter((g) => g !== genre));
@@ -57,7 +21,6 @@ const CreationFormulary = ({ tittle, setTitle, selectedGenres, setSelectedGenres
         }
     };
 
-    //Generador de portada
     const generateCover = (event) => {
         event.preventDefault();
 
@@ -78,7 +41,7 @@ const CreationFormulary = ({ tittle, setTitle, selectedGenres, setSelectedGenres
 
         console.log("PIDIENDO PORTADA");
 
-        ImageGeneratorService.postImg(imgData).then(data => {
+        generateImage(imgData).then(data => {
             console.log("imagen generada: " + data.images[0])
             setTemCover(`data:image/png;base64,${data.images[0]}`);
             setCover(`data:image/png;base64,${data.images[0]}`);
@@ -101,20 +64,20 @@ const CreationFormulary = ({ tittle, setTitle, selectedGenres, setSelectedGenres
                     Cover:
                 </label>
                 <div className='create-form-two-grid'>
-                    <input className='create-form-input' style={{height: '3rem'}} type="text" value={image} onChange={(event) => setImage(event.target.value)} />
+                    <input className='create-form-input' style={{ height: '3rem' }} type="text" value={image} onChange={(event) => setImage(event.target.value)} />
                     <button className='create-form-cover-button button' onClick={generateCover}> Generate </button>
                 </div>
             </div>
 
             <div className='cover-portrait'>
-                <img className='cover' src={tempCover}></img>
+                <img className='cover' src={tempCover} alt='document-cover'></img>
             </div>
 
             <div className='create-form-two-grid row'>
                 <label className='create-form-label create-form-two-grid row'>
                     Synopsis:
                 </label>
-                <p className={synopsis.trim().split(" ").length>=10 ? 'create-form-two-grid info-accepted' : 'create-form-two-grid info'}>You need to write a synopsis of at least 10 words in order to publish your document</p>
+                <p className={synopsis.trim().split(" ").length >= 10 ? 'create-form-two-grid info-accepted' : 'create-form-two-grid info'}>You need to write a synopsis of at least 10 words in order to publish your document</p>
             </div>
             <div className='center-element vertical'>
                 <textarea onChange={(event) => setSynopsis(event.target.value)} defaultValue={synopsis} className='sinopsis-input'></textarea>
@@ -124,7 +87,7 @@ const CreationFormulary = ({ tittle, setTitle, selectedGenres, setSelectedGenres
                 <label className='create-form-label create-form-two-grid row'>
                     Genres:
                 </label>
-                <p className={selectedGenres.length!==0 ? 'create-form-two-grid info-accepted' : 'create-form-two-grid info'}>You need to select at least one of this in order to publish your document</p>
+                <p className={selectedGenres.length !== 0 ? 'create-form-two-grid info-accepted' : 'create-form-two-grid info'}>You need to select at least one of this in order to publish your document</p>
             </div>
 
             <div className='center-element'>

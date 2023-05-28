@@ -1,16 +1,12 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import './navBar.css'
 import { Link } from 'react-router-dom';
-import TokenService from '../../Services/TokenService';
+import { dropToken, getUsername } from '../../Services/TokenService';
 import { useNavigate } from 'react-router-dom';
 import BurguerButton from '../BurguerButton/BuguerButton';
 import { useState } from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HomeIcon from '@mui/icons-material/Home';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import CreateIcon from '@mui/icons-material/Create';
 import Person2Icon from '@mui/icons-material/Person2';
 import SearchIcon from '@mui/icons-material/Search';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
@@ -22,7 +18,7 @@ function NavBar() {
   const [clicked, setClicked] = useState(false);
 
   const handleLogout = () => {
-    TokenService.dropToken();
+    dropToken();
     navigate("/authentication")
   };
 
@@ -54,7 +50,7 @@ function NavBar() {
           <CustomLink to="/write" className='item' onClick={linkClick}><HistoryEduIcon className='button-icon' /> Writting</CustomLink>
         </div>
         <div>
-          <CustomLink to={`/profile/${TokenService.getUsername()}`} className='item' onClick={linkClick}><Person2Icon className='button-icon' />Profile</CustomLink>
+          <CustomLink to={`/profile/${getUsername()}`} className='item' onClick={linkClick}><Person2Icon className='button-icon' />Profile</CustomLink>
         </div>
         <div>
           <CustomLink to="/explore" className='item' onClick={linkClick}><SearchIcon className='button-icon'></SearchIcon>Explore</CustomLink>
@@ -78,10 +74,8 @@ function CustomLink({ to, children, ...props }) {
   const path = window.location.pathname;
 
   return (
-    <a className={path === to ? "active" : ""}>
-      <Link to={to} {...props}>
-        {children}
-      </Link>
-    </a>
+    <Link to={to} {...props} className={path === to ? "active" : ""}>
+      {children}
+    </Link>
   )
 }

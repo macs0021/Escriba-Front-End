@@ -1,13 +1,11 @@
-import { Token } from '@mui/icons-material';
 import React from 'react';
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import NavBar from '../Components/NavBar/navBar';
-import TokenService from '../Services/TokenService';
-import { useEffect } from 'react';
+import { Logged } from '../Services/TokenService';
 
 const Guard = ({ children }) => {
 
-    if (!TokenService.Logged()) {
+    if (!Logged()) {
         return <Navigate replace to="/authentication" />
     }
     return <>

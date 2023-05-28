@@ -3,13 +3,13 @@ import 'quill/dist/quill.snow.css';
 import { Quill } from "react-quill";
 import { useParams } from 'react-router-dom';
 import 'quill-divider';
-import './TextEditor.css';
-import documentService from '../../Services/DocumentService'
-import ImageGeneratorForm from "../../Components/TextEditor/ImageGeneratorForm";
+import './Document.css';
+import { putDocument, getDocumentById } from "../../Services/DocumentService";
+import ImageGeneratorForm from "../../Components/ImageGeneratorForm/ImageGeneratorForm";
 
 import ImageResize from 'quill-image-resize-module-react';
-import ImageGeneratorService from '../../Services/ImageGeneratorService';
-import TokenService from "../../Services/TokenService";
+import { generateImage } from "../../Services/ImageGeneratorService";
+import { getUsername } from "../../Services/TokenService";
 import loadingImg from '../../files/cargaV3.gif'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -37,7 +37,7 @@ const toolbarMobile = [
   [{ 'list': 'ordered' }, { 'list': 'bullet' }],
 ];
 
-export default function TextEditor() {
+export default function DocumentEdit() {
   const [quill, setQuill] = useState();
   const [docuData, setDocuData] = useState();
   const { id: documentId } = useParams();
@@ -101,7 +101,7 @@ export default function TextEditor() {
   // Recojo datos del servidor
   useEffect(() => {
     if (quill != null) {
-      documentService.getDocumentById(documentId).then(data => {
+      getDocumentById(documentId).then(data => {
         quill.root.innerHTML = data.text;
         setDocuData(data);
       });
@@ -119,7 +119,7 @@ export default function TextEditor() {
         "cover": docuData.cover,
         "tittle": docuData.tittle,
         "synopsis": docuData.synopsis,
-        "creatorUsername": TokenService.getUsername(),
+        "creatorUsername": getUsername(),
         "genres": docuData.genres,
         "savedBy": docuData.savedBy,
         "readings": docuData.readings,
@@ -127,7 +127,7 @@ export default function TextEditor() {
 
       console.log("enviando datos: " + quill.root.innerHTML);
 
-      documentService.putDocument(documentId, document);
+      putDocument(documentId, document);
 
     }, 5000);
     return () => clearInterval(interval);
@@ -172,7 +172,7 @@ export default function TextEditor() {
     img.style.aspectRatio = `${width} / ${height}`;
     img.style.shapeOutside = 'content-box';
 
-    ImageGeneratorService.postImg(imgData).then(data => {
+    generateImage(imgData).then(data => {
       // Obtengo el src de la imagen
       const base64Image = data.images[0];
 

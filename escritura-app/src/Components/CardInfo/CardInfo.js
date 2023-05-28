@@ -1,15 +1,12 @@
 import './CardInfo.css'
-import DocumentService from '../../Services/DocumentService';
-import ReadingService from '../../Services/ReadingService';
-
+import { userSavesDocument, userUnsavesDocument } from '../../Services/DocumentService';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import TokenService from '../../Services/TokenService';
+import { getUsername } from '../../Services/TokenService';
 
 const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks, genres }) => {
 
     const [saved, setSaved] = useState(false);
-
 
     const navigate = useNavigate();
 
@@ -21,11 +18,11 @@ const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks, genres }) => {
         event.preventDefault();
         console.log("guardando " + data.id);
         if (!saved) {
-            DocumentService.userSavesDocument(data.id).then(data => {
+            userSavesDocument(data.id).then(data => {
                 setSaved(!saved);
             });
         } else if (saved) {
-            DocumentService.userUnsavesDocument(data.id).then(data => {
+            userUnsavesDocument(data.id).then(data => {
                 setSaved(!saved);
             });
             console.log("Añadiendo id: " + data.id);
@@ -37,8 +34,8 @@ const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks, genres }) => {
 
     useEffect(() => {
         const savedByList = data.savedBy;
-        setSaved(savedByList.includes(TokenService.getUsername()));
-    }, []);
+        setSaved(savedByList.includes(getUsername()));
+    }, [data]);
 
     return (<>
         <div style={{ height: '100%' }}>
@@ -49,16 +46,19 @@ const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks, genres }) => {
                 <div className='listed-content'>
                     <h2 className='center'>Genres </h2>
                     <div className='listed-element'>
-                        {genres.map(genre => (
-                            <span key={genre} style={{ marginLeft: 10 }}>{genre}</span>
-                        ))}
-
+                        {genres.length > 0 ? (
+                            genres.map(genre => (
+                                <span key={genre} style={{ marginLeft: 10 }}>{genre}</span>
+                            ))
+                        ) : (
+                            <span>There are no genres yet</span>
+                        )}
                     </div>
                 </div>
                 <div className='text-line column'>
                     <h2 className='center' >Synopsis </h2>
                     <p style={{ overflow: 'visible' }}>
-                        {synopsis}
+                        {synopsis ? synopsis : "There is not a synopsis yet"}
                     </p>
                 </div>
             </div>

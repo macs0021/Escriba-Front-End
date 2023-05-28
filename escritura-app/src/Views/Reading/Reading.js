@@ -1,9 +1,8 @@
-import './Reading.css'
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import Galery from '../../Components/Galery/Galery';
 import Card from '../../Components/Card/Card';
 import { useEffect, useState } from 'react';
-import DocumentService from '../../Services/DocumentService';
+import { getDocumentsSavedByUsername, getDocumentsReadByUsername } from '../../Services/DocumentService';
 import Loader from '../../Components/Loader/Loader';
 
 const Reading = () => {
@@ -18,11 +17,11 @@ const Reading = () => {
     const [activeTab, setActiveTab] = useState('Reading');
 
     useEffect(() => {
-        DocumentService.getDocumentsSavedByUsername().then(data => {
+        getDocumentsSavedByUsername().then(data => {
             setSavedBooks(data);
             setLoadingSaved(false);
         })
-        DocumentService.getDocumentsReadByUsername().then(data => {
+        getDocumentsReadByUsername().then(data => {
             setReadingBooks(data);
             setLoadingReading(false);
         })

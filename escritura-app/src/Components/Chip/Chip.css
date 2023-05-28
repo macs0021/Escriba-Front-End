@@ -9,6 +9,7 @@
     width: auto;
     border: 1px solid #333;
     justify-content: center;
+    text-align: center;
 }
 
 .selected-chip {
@@ -20,6 +21,7 @@
     padding: 2px 8px;
     margin: 4px;
     border: 1px solid #333;
+    text-align: center;
 }
 
 .selectable {

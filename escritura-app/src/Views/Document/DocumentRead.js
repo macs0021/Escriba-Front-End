@@ -3,13 +3,13 @@ import 'quill/dist/quill.snow.css';
 import { Quill } from "react-quill";
 import { useParams } from 'react-router-dom';
 import 'quill-divider';
-import '../../Views/TextEditor/TextEditor.css';
-import documentService from '../../Services/DocumentService'
-import ReadingService from "../../Services/ReadingService";
-import AutoScroll from "../AutoScroll/AutoScroll";
-import TextBubble from "../TextBubble/TextBubble";
+import './Document.css';
+import { getDocumentById } from "../../Services/DocumentService";
+import { putReading, postReading, getReading } from "../../Services/ReadingService";
+import AutoScroll from "../../Components/AutoScroll/AutoScroll";
+import TextBubble from "../../Components/TextBubble/TextBubble";
 
-export default function Document() {
+export default function DocumentRead() {
   const [quill, setQuill] = useState();
   const { id: documentId } = useParams();
   const scrollPositionRef = useRef(0);
@@ -128,7 +128,6 @@ export default function Document() {
         }
       });
     }
-
     return () => {
       if (container) {
         container.removeEventListener('click', (event) => {
@@ -143,26 +142,18 @@ export default function Document() {
         });
       }
     };
-
-
   }, []);
 
   useEffect(() => {
     const container = containerRef.current;
-
     if (container) {
       container.addEventListener('contextmenu', (event) => {
-        const target = event.target;
-        const quillEditor = container.querySelector('.ql-editor');
         setShowBubble(false);
       });
     }
-
     return () => {
       if (container) {
         container.removeEventListener('contextmenu', (event) => {
-          const target = event.target;
-          const quillEditor = container.querySelector('.ql-editor');
           setShowBubble(false);
         });
       }
@@ -171,11 +162,11 @@ export default function Document() {
 
   useEffect(() => {
     if (quill != null) {
-      documentService.getDocumentById(documentId).then(data => {
+      getDocumentById(documentId).then(data => {
         quill.clipboard.dangerouslyPasteHTML(data.text);
-        ReadingService.getReading(data.id).then(result => {
+        getReading(data.id).then(result => {
           if (result === null) {
-            ReadingService.postReading(data.id);
+            postReading(data.id);
             window.scrollTo(0, 0);
           } else {
             window.scrollTo(0, result.readingSpot);
@@ -219,7 +210,7 @@ export default function Document() {
   useEffect(() => {
     const interval = setInterval(async () => {
       console.log("enviando: " + scrollPositionRef.current);
-      ReadingService.putReading(documentId, scrollPositionRef.current);
+      putReading(documentId, scrollPositionRef.current);
     }, 5000);
     return () => clearInterval(interval);
   }, [documentId]);

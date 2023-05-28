@@ -1,7 +1,6 @@
 import { useState } from "react";
 import './Register.css'
-import AuthService from "../../Services/AuthService";
-import DefaultProfilePicture from '../../files/DefaultProfilePicture.jpg'
+import { registerUser } from "../../Services/AuthService";
 import imageToBase64 from 'image-to-base64/browser'
 import { checkUser } from "../../Services/UserService";
 
@@ -53,7 +52,7 @@ const Register = (props) => {
           };
   
           // Registro el usuario
-          AuthService.registerUser(userObject)
+          registerUser(userObject)
             .then((data) => {
               console.log(data);
               props.setInRegister(false);

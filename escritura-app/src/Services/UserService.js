@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Interceptor from './Interceptor';
-import TokenService from './TokenService';
+import { getUsername } from './TokenService';
 
 const url = "user";
 
@@ -25,7 +25,7 @@ export async function putUser(id, user) {
 
 export async function followUser(following) {
     try {
-        const response = await Interceptor.patch(`${url}/${following}/followers/${TokenService.getUsername()}`)
+        const response = await Interceptor.patch(`${url}/${following}/followers/${getUsername()}`)
         return response.data;
     } catch (error) {
         console.error("Esperando al refresco del token");

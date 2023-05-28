@@ -1,12 +1,12 @@
 import Galery from '../../Components/Galery/Galery'
 import './Writting.css';
 import { useState, useEffect } from 'react';
-import TokenService from '../../Services/TokenService';
+import { getUsername } from '../../Services/TokenService';
 import Card from '../../Components/Card/Card';
 import CreateDocumentButton from '../../Components/CreateDocumentButton/CreateDocumentButton';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import Loader from '../../Components/Loader/Loader';
-import DocumentService from '../../Services/DocumentService';
+import { getPublicDocumentsByUsername, getPrivateDocumentsByUsername } from '../../Services/DocumentService';
 
 export default function Writting() {
 
@@ -17,12 +17,12 @@ export default function Writting() {
     const [privateBooks, setPrivateBooks] = useState([]);
 
     useEffect(() => {
-        DocumentService.getPublicDocumentsByUsername(TokenService.getUsername()).then(data => {
+        getPublicDocumentsByUsername(getUsername()).then(data => {
             setPublicBooks(data);
             console.log("MOSTRANDO RATING:" + data[0].rating)
         })
 
-        DocumentService.getPrivateDocumentsByUsername(TokenService.getUsername()).then(data => {
+        getPrivateDocumentsByUsername(getUsername()).then(data => {
             setPrivateBooks(data);
         })
 

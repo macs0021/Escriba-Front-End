@@ -1,6 +1,5 @@
-import Modal from "../Modal";
-import Card from "../../Card/Card";
-import DocumentService from "../../../Services/DocumentService";
+import Modal from "./Modal";
+import { changeVisibility } from "../../Services/DocumentService";
 import { useState, useEffect } from "react";
 
 
@@ -9,16 +8,13 @@ const PublishModal = ({ publishModalState, setPublishModalState, card, setEditMo
     const [canBePublished, setCanBePublished] = useState(false);
 
     const onActionClick = () => {
-        console.log("entro");
         if (canBePublished) {
-            console.log("publishing...");
-            DocumentService.changeVisibility(card?.id).then(() => {
+            changeVisibility(card?.id).then(() => {
                 setIsPublic(!isPublic);
                 setPublishModalState(false);
             });
 
         } else {
-            console.log("not publishing...");
             setPublishModalState(false);
             setEditModalState(true);
         }
