@@ -59,13 +59,19 @@ const Reading = () => {
             <div>
                 {!onReading ? (
                     !loadingSaved ? (
-                        <Galery>
-                            {savedBooksToShow
-                                .filter((book) => book.tittle && book.tittle.includes(String(search)))
-                                .map((card) => (
-                                    <Card card={card} key={card.id} addUnsavedBooks={addUnsavedBooks} />
-                                ))}
-                        </Galery>
+                        savedBooks.length === 0 ? (
+                            <h2 className='center' style={{ textAlign: 'center', color: '#333', height: '30rem' }}>
+                                Here you can access the books you saved for later reading. Explore and start saving some books!
+                            </h2>
+                        ) : (
+                            <Galery>
+                                {savedBooksToShow
+                                    .filter((book) => book.tittle && book.tittle.includes(String(search)))
+                                    .map((card) => (
+                                        <Card card={card} key={card.id} addUnsavedBooks={addUnsavedBooks} />
+                                    ))}
+                            </Galery>
+                        )
                     ) : (
                         <div className='center'>
                             <Loader />
@@ -73,11 +79,18 @@ const Reading = () => {
                     )
                 ) : (
                     !loadingReading ? (
-                        <Galery>
-                            {readingBooks.filter((book) => book.tittle && book.tittle.includes(String(search))).map((card) => (
-                                <Card card={card} key={card.id} addUnsavedBooks={addUnsavedBooks} />
-                            ))}
-                        </Galery>) : (
+                        readingBooks.length === 0 ? (
+                            <h2 className='center' style={{ textAlign: 'center', color: '#333', height: '30rem' }}>
+                                Here you can access the books you started reading. Explore and start reading some books!
+                            </h2>
+                        ) : (
+                            <Galery>
+                                {readingBooks.filter((book) => book.tittle && book.tittle.includes(String(search))).map((card) => (
+                                    <Card card={card} key={card.id} addUnsavedBooks={addUnsavedBooks} />
+                                ))}
+                            </Galery>
+                        )
+                    ) : (
                         <div className='center'>
                             <Loader />
                         </div>

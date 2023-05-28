@@ -1,11 +1,31 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
+
+
 body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
   background-color: #dfdfdf;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
 }
 
 .container {
@@ -25,7 +45,7 @@ body {
   color: #818181;
 }
 
-textarea{
+textarea {
   resize: none;
 }
 
@@ -105,6 +125,7 @@ textarea{
 .red {
   background-color: #c94c4c;
 }
-label{
+
+label {
   color: #333;
 }

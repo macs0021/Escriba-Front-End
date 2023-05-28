@@ -90,10 +90,10 @@ const ProfileV2 = () => {
     }
 
     return (<>
-        <div class="header__wrapper">
-            <div class="cols__container">
-                <div class="left__col">
-                    <div class="img__container">
+        <div class="profile-header">
+            <div class="profile-columns-container">
+                <div class="left-col">
+                    <div class="img-container">
                         <img src={`data:image/png;base64,${userData.image}`} alt="user" />
                         <span></span>
                     </div>
@@ -126,10 +126,10 @@ const ProfileV2 = () => {
                     </div>
                 </div>
 
-                <div className="right__col">
+                <div className="right-col">
                     <nav>
                         <ul>
-                            <li><div className='light' href="">Written</div></li>
+                            <li><div className='tab active' href="">Written</div></li>
                         </ul>
                     </nav>
                     {(written.length !== 0) ? <div>

@@ -21,29 +21,30 @@ const Home = () => {
     const [recommendedUsers, setRecommendedUsers] = useState([]);
     const [documentRecommendation, setDocumentRecommendation] = useState(null);
 
+    //Controlador para el seguimiento de un usuario
     const handleFollow = (username) => {
         followUser(username);
     }
 
     useEffect(() => {
+        //Pido los usuarios a los que estoy siguiendo
         getFollowing(getUsername()).then((result) => {
-            console.log("PIDO USERS")
             if (result !== []) {
                 setUsers(result.map(user => user.name));
             }
         })
+        //Pido recomendaciones de usuarios a los que seguir
         getRecommendations(getUsername()).then((result) => {
             setRecommendedUsers(result);
         })
-
+        //Pido la recomendación de un libro
         getRecommendation().then((result) => {
             setDocumentRecommendation(result);
         })
 
     }, [])
 
-
-
+    //Pido cinco notificaciones de usuarios a los que sigo
     useEffect(() => {
         if (users.length > 0) {
             getActivityOfUsers(5, page, users).then((result) => {
@@ -71,9 +72,20 @@ const Home = () => {
             </Galery>
         </div>
         <div className='center column home-main'>
-            <InfiniteScroll dataLength={activities.length} hasMore={!end} next={() => setPage((prevPage) => prevPage + 1)} loader={<div className='center' style={{ marginTop: '3rem' }}> <Loader></Loader></div>} endMessage={""} style={{ padding: '15px', overflowY: 'visible', overflowX: 'hidden' }}>
-                {activities.map((activity) => activity && <HomeNotification key={activity.id} notification={activity}></HomeNotification>)}
-            </InfiniteScroll>
+            {activities.length === 0 ? (
+                <h2 className='center' style={{height: '20rem', color: '#333', textAlign: 'center', padding: '15px'}}>Start following users to see their activity!</h2>
+            ) : (
+                <InfiniteScroll
+                    dataLength={activities.length}
+                    hasMore={!end}
+                    next={() => setPage((prevPage) => prevPage + 1)}
+                    loader={<div className='center' style={{ marginTop: '3rem' }}><Loader></Loader></div>}
+                    endMessage={""}
+                    style={{ padding: '15px', overflowY: 'visible', overflowX: 'hidden' }}
+                >
+                    {activities.map((activity) => activity && <HomeNotification key={activity.id} notification={activity}></HomeNotification>)}
+                </InfiniteScroll>
+            )}
         </div>
         <div className='user-recomendations'>
             <div className='user-recomendations-header home-text'>
