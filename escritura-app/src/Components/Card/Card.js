@@ -28,7 +28,7 @@ export default function Card({ card, addUnsavedBooks }) {
     useEffect(() => {
         if (card?.creatorUsername) {
             getUser(card?.creatorUsername).then(data => {
-                setCreatorPicture(data.image);
+                setCreatorPicture(data?.image);
             });
         }
     }, [card?.creatorUsername]);

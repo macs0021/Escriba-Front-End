@@ -18,13 +18,13 @@ const Comment = ({ comment, reloadContent, setEditing, isReply }) => {
     const [commentImage, setCommentImage] = useState("");
 
     useEffect(() => {
-        getUser(comment.postedBy).then((result) => {
+        getUser(comment?.postedBy).then((result) => {
             setCommentImage(result.image);
         })
     }, []);
 
     const onDeleteClick = () => {
-        deleteComment(comment.id).then(() => {
+        deleteComment(comment?.id).then(() => {
             reloadContent();
         })
     }
@@ -37,13 +37,13 @@ const Comment = ({ comment, reloadContent, setEditing, isReply }) => {
                         <div className='row'>
                             <img
                                 src={`data:image/png;base64,${commentImage}`}
-                                alt={`${comment.postedBy}'s avatar`}
+                                alt={`${comment?.postedBy}'s avatar`}
                                 className="comment-avatar"
                             />
                             <div className='comment-date-name'>
-                                <h4 className="comment-info">{comment.postedBy}</h4>
+                                <h4 className="comment-info">{comment?.postedBy}</h4>
                                 <p className="comment-info" style={{ fontSize: '12px' }}>
-                                    {new Date(comment.postedAt).toLocaleDateString()}
+                                    {new Date(comment?.postedAt).toLocaleDateString()}
                                 </p>
                             </div>
 
@@ -52,7 +52,7 @@ const Comment = ({ comment, reloadContent, setEditing, isReply }) => {
                             {(() => {
                                 const stars = [];
                                 for (let i = 1; i <= 5; i++) {
-                                    if (i <= comment.rating) {
+                                    if (i <= comment?.rating) {
                                         stars.push(<StarIcon className='star-icon' key={i} />);
                                     } else {
                                         stars.push(<StarOutlineIcon className='star-icon' key={i} />);
@@ -61,14 +61,14 @@ const Comment = ({ comment, reloadContent, setEditing, isReply }) => {
                                 return stars;
                             })()}
                         </div>}
-                        {comment.postedBy === TokenService.getUsername() && <div className='center'>
+                        {comment?.postedBy === TokenService.getUsername() && <div className='center'>
                             <DeleteIcon onClick={() => setDeleteModal(true)}></DeleteIcon>
                             <EditIcon onClick={() => setEditing(true)}></EditIcon>
                         </div>}
                     </div>
                 </div>
                 <div className="comment-text">
-                    <p>{comment.text}</p>
+                    <p>{comment?.text}</p>
                 </div>
             </div>
         </div>

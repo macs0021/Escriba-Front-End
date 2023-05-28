@@ -37,26 +37,22 @@ const toolbarMobile = [
   [{ 'list': 'ordered' }, { 'list': 'bullet' }],
 ];
 
-function getToolbarConfig() {
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-  return isMobile ? toolbarMobile : toolbarDesktop;
-}
-
 export default function TextEditor() {
-
   const [quill, setQuill] = useState();
   const [docuData, setDocuData] = useState();
   const { id: documentId } = useParams();
   const [lastSelection, setLastSelection] = useState(0);
-  const [toolbarConfig, setToolbarConfig] = useState(getToolbarConfig());
+  const [isTablet, setIsTablet] = useState(window.matchMedia("(max-width: 1500px)").matches);
+  const [isMobile, setIsMobile] = useState(window.matchMedia("(max-width: 760px)").matches);
   const editorRef = useRef();
   const scrollingContainerRef = useRef();
 
+  const toolbarConfig = isMobile ? toolbarMobile : toolbarDesktop;
 
   useEffect(() => {
     const handleResize = () => {
-      setToolbarConfig(getToolbarConfig());
-      console.log(getToolbarConfig());
+      setIsTablet(window.matchMedia("(max-width: 1500px)").matches);
+      setIsMobile(window.matchMedia("(max-width: 760px)").matches);
     };
 
     window.addEventListener('resize', handleResize);
@@ -102,7 +98,7 @@ export default function TextEditor() {
     setQuill(quill);
   }, [toolbarConfig]);
 
-  //Recojo datos del servidor
+  // Recojo datos del servidor
   useEffect(() => {
     if (quill != null) {
       documentService.getDocumentById(documentId).then(data => {
@@ -112,10 +108,9 @@ export default function TextEditor() {
     }
   }, [quill, documentId]);
 
-  //Enviando datos cada 5s
+  // Enviando datos cada 5s
   useEffect(() => {
     const interval = setInterval(async () => {
-
       if (quill == null) return;
 
       const document = {
@@ -139,7 +134,6 @@ export default function TextEditor() {
   }, [quill, docuData, toolbarConfig, documentId]);
 
   const handleButtonClick = ({ imagePrompt, width, height }) => {
-
     console.log("prompt: " + imagePrompt);
     console.log("width: " + width);
     console.log("height: " + height);
@@ -158,44 +152,44 @@ export default function TextEditor() {
       "seed": seed,
     }
 
-    //Busco la posicion donde insertar la imagen
+    // Busco la posicion donde insertar la imagen
     const index = lastSelection;
 
-    //Inserto la imagen con el elemento de carga
+    // Inserto la imagen con el elemento de carga
     quill.insertEmbed(index, 'image', loadingImg);
 
-    //Busco la imagen insertada
+    // Busco la imagen insertada
     let img = quill.container.querySelector(`img[src="${loadingImg}"]`);
-
 
     const uuid = uuidv4();
 
-    //Le coloco un id para buscarla
+    // Le coloco un id para buscarla
     img.setAttribute('id', 'mi-imagen' + uuid);
 
-    //Le aplico el tamaño que se necesita
+    // Le aplico el tamaño que se necesita
     img.width = width;
     img.className = 'loading-img';
     img.style.aspectRatio = `${width} / ${height}`;
     img.style.shapeOutside = 'content-box';
 
     ImageGeneratorService.postImg(imgData).then(data => {
-      //Obtengo el src de la imagen
+      // Obtengo el src de la imagen
       const base64Image = data.images[0];
 
-      //Busco la imagen
+      // Busco la imagen
       let miImagen = document.getElementById('mi-imagen' + uuid);
 
-      //Le pongo el src y le quito la clase de estilos
+      // Le pongo el src y le quito la clase de estilos
       miImagen.src = `data:image/png;base64,${base64Image}`;
       miImagen.className = "";
-    })
+    });
   };
 
-
-  return (<>
-    <div className="container" ref={reference}></div>
-    <ImageGeneratorForm execute={handleButtonClick} isMobile={getToolbarConfig}></ImageGeneratorForm>
-    <div ref={scrollingContainerRef} style={{ overflowY: 'auto', maxHeight: '500px' }}></div>
-  </>);
+  return (
+    <>
+      <div className="container" ref={reference}></div>
+      <ImageGeneratorForm execute={handleButtonClick} isMobile={isTablet}></ImageGeneratorForm>
+      <div ref={scrollingContainerRef} style={{ overflowY: 'auto', maxHeight: '500px' }}></div>
+    </>
+  );
 };

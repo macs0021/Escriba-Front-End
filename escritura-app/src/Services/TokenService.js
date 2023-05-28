@@ -10,7 +10,7 @@ function getToken() {
 }
 
 async function refreshToken() {
-    const token = this.getToken();
+    const token = getToken();
     return axios.post('http://localhost:8080/auth/refresh', { "token": token });
 }
 

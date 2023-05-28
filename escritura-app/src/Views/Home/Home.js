@@ -37,9 +37,9 @@ const Home = () => {
             setRecommendedUsers(result);
         })
 
-        DocumentService.getRecommendation().then((result) => {
+        /*DocumentService.getRecommendation().then((result) => {
             setTestDocument(result);
-        })
+        })*/
 
     }, [])
 

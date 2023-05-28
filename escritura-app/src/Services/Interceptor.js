@@ -24,7 +24,7 @@ Interceptor.interceptors.request.use(
 Interceptor.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response.status === 401 && !error.config._retry) {
+    if (error.response?.status === 401 && !error.config._retry) {
       error.config._retry = true;
       const newToken = await TokenService.refreshToken();
       TokenService.setToken(newToken.data.token);
