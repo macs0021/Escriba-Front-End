@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import 'quill-divider';
 import './Document.css';
 import { getDocumentById } from "../../Services/DocumentService";
-import { putReading, postReading, getReading } from "../../Services/ReadingService";
+import { putReading, postReading, getReading, checkReading } from "../../Services/ReadingService";
 import AutoScroll from "../../Components/AutoScroll/AutoScroll";
 import TextBubble from "../../Components/TextBubble/TextBubble";
 
@@ -164,14 +164,16 @@ export default function DocumentRead() {
     if (quill != null) {
       getDocumentById(documentId).then(data => {
         quill.clipboard.dangerouslyPasteHTML(data.text);
-        getReading(data.id).then(result => {
-          if (result === null) {
+        checkReading(data.id).then((result) => {
+          if (result===true) {
+            getReading(data.id).then((readingResult) => {
+              window.scrollTo(0, readingResult.readingSpot);
+            })
+          } else {
             postReading(data.id);
             window.scrollTo(0, 0);
-          } else {
-            window.scrollTo(0, result.readingSpot);
           }
-        });
+        })
       });
     }
   }, [quill, documentId]);
@@ -187,7 +189,7 @@ export default function DocumentRead() {
     }
   }, [quill, handleWordIndexChange]);
 
-
+  //useEffect que escucha el scroll
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
@@ -195,6 +197,7 @@ export default function DocumentRead() {
     };
   }, []);
 
+  //useEffect que se encarga de escuchar las pulsaciones sobre la vista
   useEffect(() => {
     if (quill && quill.on) {
       quill.on('editor-change', handleSelectionChange);
@@ -207,9 +210,9 @@ export default function DocumentRead() {
     };
   }, [quill, handleSelectionChange]);
 
+  //useEffect que se encarga de enviar el scroll
   useEffect(() => {
     const interval = setInterval(async () => {
-      console.log("enviando: " + scrollPositionRef.current);
       putReading(documentId, scrollPositionRef.current);
     }, 5000);
     return () => clearInterval(interval);

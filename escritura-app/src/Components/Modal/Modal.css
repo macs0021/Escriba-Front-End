@@ -22,6 +22,7 @@
     border-radius: 5px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding: 20px;
+    padding-bottom: 0;
 }
 
 .notification-modal {
@@ -30,12 +31,16 @@
     padding: 20px;
 }
 
+.creation-formulary-modal {
+    overflow-y: scroll;
+    padding: 20px;
+    padding-bottom: 0;
+    max-height: 45rem;
+}
+
 @media (max-width: 768px) {
-
-
     .modal-container {
         width: 350px;
-
     }
 
     .modal-container p {
@@ -53,6 +58,7 @@
         min-height: 100% !important;
         border-radius: 0;
         padding: 20px;
+        padding-bottom: 0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -88,7 +94,6 @@
     align-items: center;
     height: 2rem;
     justify-content: space-between;
-    margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #E8E8E8;
 }

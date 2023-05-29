@@ -13,6 +13,16 @@ export async function getReading(id) {
   }
 }
 
+export async function checkReading(id) {
+  try {
+    const response = await Interceptor.get(`${url}/check/${getUsername()}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
 export async function putReading(id, spot) {
   try {
     const reading = {'username': getUsername(), 'document': id,'readingSpot': spot};

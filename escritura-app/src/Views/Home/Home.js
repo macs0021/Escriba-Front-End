@@ -38,9 +38,9 @@ const Home = () => {
             setRecommendedUsers(result);
         })
         //Pido la recomendación de un libro
-        getRecommendation().then((result) => {
+       /* getRecommendation().then((result) => {
             setDocumentRecommendation(result);
-        })
+        })*/
 
     }, [])
 
@@ -81,7 +81,7 @@ const Home = () => {
                     next={() => setPage((prevPage) => prevPage + 1)}
                     loader={<div className='center' style={{ marginTop: '3rem' }}><Loader></Loader></div>}
                     endMessage={""}
-                    style={{ padding: '15px', overflowY: 'visible', overflowX: 'hidden' }}
+                    className='infinity-scroll-home'
                 >
                     {activities.map((activity) => activity && <HomeNotification key={activity.id} notification={activity}></HomeNotification>)}
                 </InfiniteScroll>

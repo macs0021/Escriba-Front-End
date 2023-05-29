@@ -4,8 +4,6 @@
   box-sizing: border-box;
 }
 
-
-
 body {
   width: 100%;
   margin: 0;
@@ -128,4 +126,10 @@ textarea {
 
 label {
   color: #333;
+}
+
+.buttons-line {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
 }

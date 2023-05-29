@@ -45,7 +45,7 @@ const EditDocumentModal = ({ editModalState, setEditModalState, card, setCard })
 
     return (<>
         <Modal modalState={editModalState} setModalState={setEditModalState} tittle={"Edit document"} fullscreen={true}>
-            <div className='modal-content'>
+            <div className='creation-formulary-modal'>
                 <CreationFormulary card={card} tittle={tittle} cover={cover} synopsis={synopsis} setCover={setCover} setTitle={setTittle} setSynopsis={setSynopsis} selectedGenres={genres} setSelectedGenres={SetGenres}></CreationFormulary>
             </div>
             <div className='center'>

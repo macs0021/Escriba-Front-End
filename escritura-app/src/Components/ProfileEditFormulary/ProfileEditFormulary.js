@@ -6,7 +6,7 @@ import { putUser } from '../../Services/UserService';
 
 const ProfileEditFormulary = ({ userData, setUserData, setModalState }) => {
 
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState(userData.email);
     const [description, setDescription] = useState(userData.description);
     const [image, setImage] = useState(userData.image);
     
