@@ -3,6 +3,7 @@ import './Register.css'
 import { registerUser } from "../../Services/AuthService";
 import imageToBase64 from 'image-to-base64/browser'
 import { checkUser } from "../../Services/UserService";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 
 const Register = (props) => {
@@ -21,7 +22,7 @@ const Register = (props) => {
     event.preventDefault();
 
     let blankField = false;
-  
+
     if (name.trim() === "") {
       setUserError("You must fill the username field");
       blankField = true;
@@ -38,7 +39,8 @@ const Register = (props) => {
       setConfirmPasswordError("You must confirm your password");
       blankField = true;
     }
-  
+
+
     if (!blankField && userError === "" && emailError === "" && passwordError === "" && confirmPasswordError === "") {
       // Convierto la imagen a encode64 para su envío
       imageToBase64(
@@ -50,20 +52,14 @@ const Register = (props) => {
             password: password,
             profileImage: base64String,
           };
-  
+
           // Registro el usuario
           registerUser(userObject)
             .then((data) => {
               console.log(data);
               props.setInRegister(false);
             })
-            .catch((err) => {
-              console.log("error converting img to encode64");
-            });
         })
-        .catch((err) => {
-          console.log("error converting img to encode64");
-        });
     }
   };
 
@@ -74,7 +70,6 @@ const Register = (props) => {
       setUserError("The username must have at least 4 characters");
     } else {
       checkUser(value).then((result) => {
-        console.log(JSON.stringify(result));
         if (!result) {
           setUserError("");
         } else {
@@ -123,7 +118,9 @@ const Register = (props) => {
         <div className="center">
           <h2 className="register-tittle">Register now</h2>
         </div>
-
+        <div className="center">
+          <MenuBookIcon style={{ fontSize: '200px', color: '#333' }}></MenuBookIcon>
+        </div>
         <div className="row">
           <p className="">Username </p>
           <p className="register-form-error">{userError}</p>

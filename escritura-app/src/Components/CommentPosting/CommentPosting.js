@@ -31,7 +31,6 @@ const CommentPosting = ({ documentId, reloadContent, setEditing, editing, commen
                 reloadContent();
             })
         } else {
-            console.log("Posting a comment...");
             postComment(post).then(() => {
                 reloadContent();
             })

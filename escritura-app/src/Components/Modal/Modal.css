@@ -78,8 +78,8 @@
     }
 
     .modal-space {
-        max-height: 100%;
-        height: 100%;
+        max-height: 100% !important;
+        height: 100% !important;
         padding-left: 0;
         padding-right: 0;
     }

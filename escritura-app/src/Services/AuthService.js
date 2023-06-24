@@ -16,9 +16,9 @@ export async function loginUser(user) {
     const response = await axios.post(`${authUrl}/login`, user);
     const token = response.data.token;
 
-    setToken(token);
-    getUsername();
-
+    if (token !== null) {
+        setToken(token);
+    }
     return response;
 }
 

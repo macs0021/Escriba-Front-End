@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "https://e400-34-73-104-172.ngrok-free.app";
+const url = "https://3adb-34-172-123-17.ngrok-free.app";
 
 export async function generateImage(postData) {
   const options = {

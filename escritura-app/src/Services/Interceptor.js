@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { getToken, setToken, refreshToken } from './TokenService';
+import { logoutUser } from './AuthService';
+import { useNavigate } from 'react-router-dom';
 
 const Interceptor = axios.create({
   baseURL: 'http://localhost:8080/',
 });
+
 
 // Añado el token a la cabecera de todas las peticiones.
 Interceptor.interceptors.request.use(
@@ -30,6 +33,10 @@ Interceptor.interceptors.response.use(
       setToken(newToken.data.token);
       error.config.headers['Authorization'] = `Bearer ${newToken.data.token}`;
       return axios(error.config);
+    }else if(error.config._retry){
+      const navigate = useNavigate();
+      logoutUser();
+      navigate("/authentication")
     }
     throw error;
   }

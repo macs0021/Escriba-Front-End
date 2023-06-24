@@ -3,6 +3,7 @@ import './Login.css'
 import { loginUser } from "../../Services/AuthService";
 import { Logged } from "../../Services/TokenService";
 import { useNavigate } from 'react-router-dom';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 const Login = () => {
 
@@ -45,6 +46,9 @@ const Login = () => {
     return (
         <form className="login-form" onSubmit={handleSubmit}>
             <h2 className="login-tittle center">Login now</h2>
+            <div className="center">
+                <MenuBookIcon style={{ fontSize: '200px', color: '#333' }}></MenuBookIcon>
+            </div>
             <div className="">
                 <p className="">Email</p>
             </div>
@@ -55,7 +59,6 @@ const Login = () => {
             <div className="center column">
                 <button type="submit" className="button">Login</button>
             </div>
-
         </form>
     );
 

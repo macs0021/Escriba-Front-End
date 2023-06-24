@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {useParams } from 'react-router-dom';
 import { checkOwner, checkPublic } from '../Services/DocumentService';
 import GuardView from '../Views/GuardView/GuardView';
+import Loader from '../Components/Loader/Loader';
 
 const PrivateDocumentGuard = ({ children }) => {
     const { id } = useParams();
@@ -19,7 +20,7 @@ const PrivateDocumentGuard = ({ children }) => {
     }, [id]);
 
     if (isDocumentPublic === null || isDocumentMine === null) {
-        return <div>Cargando...</div>;
+        return <div className='center'><Loader /></div>;
     }
 
     if (!isDocumentPublic && !isDocumentMine) {

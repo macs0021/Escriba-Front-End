@@ -76,8 +76,8 @@ const Comment = ({ comment, reloadContent, setEditing, isReply }) => {
             <p>Are you sure you want to delete this comment?</p>
             <p>You can't undo this action</p>
             <div className='space-evenly'>
-                <button className='delete-button' onClick={onDeleteClick}>Delete</button>
-                <button onClick={() => setDeleteModal(false)}>Cancel</button>
+                <button className='delete-button button' onClick={onDeleteClick}>Delete</button>
+                <button className='button' onClick={() => setDeleteModal(false)}>Cancel</button>
             </div>
         </Modal>
 

@@ -40,7 +40,7 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
     }
 
     const getReplies = (commentID) => {
-        if (commentID === -1 || !(comments.some(comment => comment.id === commentID))) return;
+        if (commentID === -1 || (!(comments.some(comment => comment.id === commentID)) && commentID !== userComment.id)) return;
         getRepliesOfReview(commentID).then((result) => {
             const reply = result.find(comment => comment.postedBy === getUsername());
             setUserReply(reply);

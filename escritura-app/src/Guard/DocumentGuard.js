@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { checkOwner } from '../Services/DocumentService';
 import GuardView from '../Views/GuardView/GuardView';
+import Loader from '../Components/Loader/Loader';
 
 const DocumentGuard = ({ children }) => {
     const { id } = useParams();
@@ -15,7 +16,7 @@ const DocumentGuard = ({ children }) => {
     }, [id]);
 
     if (isDocumentMine === null) {
-        return <div>Cargando...</div>;
+        return <div className='center'><Loader /></div>;
     }
 
     if (!isDocumentMine) {

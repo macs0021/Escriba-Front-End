@@ -38,7 +38,7 @@ const Home = () => {
             setRecommendedUsers(result);
         })
         //Pido la recomendación de un libro
-       /* getRecommendation().then((result) => {
+        /*getRecommendation().then((result) => {
             setDocumentRecommendation(result);
         })*/
 
@@ -73,7 +73,7 @@ const Home = () => {
         </div>
         <div className='center column home-main'>
             {activities.length === 0 ? (
-                <h2 className='center' style={{height: '20rem', color: '#333', textAlign: 'center', padding: '15px'}}>Start following users to see their activity!</h2>
+                <h2 className='center' style={{ height: '20rem', color: '#333', textAlign: 'center', padding: '15px' }}>Start following users to see their activity!</h2>
             ) : (
                 <InfiniteScroll
                     dataLength={activities.length}

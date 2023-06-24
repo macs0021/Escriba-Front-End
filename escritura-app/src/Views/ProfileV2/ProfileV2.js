@@ -148,7 +148,7 @@ const ProfileV2 = () => {
                 </div>
             </Modal>
 
-            <Modal modalState={profileEditModalState} setModalState={setProfileEditModalState} fullscreen={true}>
+            <Modal modalState={profileEditModalState} setModalState={setProfileEditModalState} fullscreen={true} tittle={"Edit profile data"}>
                 <div style={{ height: '100%' }} className='center'>
                     <ProfileEditFormulary userData={userData} setUserData={setUserData} setModalState={setProfileEditModalState}></ProfileEditFormulary>
                 </div>
