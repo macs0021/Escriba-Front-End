@@ -49,7 +49,8 @@ function AutoScroll({ isMobile, visible, stop }) {
         if (isFirstRender.current) {
             isFirstRender.current = false;
         } else {
-            setIsAutoScrolling(!stop);
+            if (stop)
+                setIsAutoScrolling(!stop);
         }
     }, [stop]);
 

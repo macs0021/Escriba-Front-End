@@ -29,7 +29,6 @@ const Reading = () => {
 
     function addUnsavedBooks(book) {
         setUnsavedBooks([...unsavedBooks, book]);
-        console.log("quitando libro: " + unsavedBooks);
     }
 
     const savedBooksToShow = savedBooks.filter(card => !unsavedBooks.find(book => book.id === card.id));

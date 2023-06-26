@@ -11,6 +11,7 @@ import { getUser } from '../../Services/UserService';
 import PublishModal from '../Modal/PublishModal';
 
 export default function Card({ card, addUnsavedBooks }) {
+
     //Estados de las modales
     const [modalState, setModalState] = useState(false);
     const [deleteWarningModalState, setDeleteWarningModalState] = useState(false);
@@ -25,13 +26,9 @@ export default function Card({ card, addUnsavedBooks }) {
 
     const [document, setDocument] = useState(card);
 
-    useEffect(() => {
-        if (card?.creatorUsername) {
-            getUser(card?.creatorUsername).then(data => {
-                setCreatorPicture(data?.image);
-            });
-        }
-    }, [card?.creatorUsername]);
+    /*useEffect(() => {
+
+    }, [card?.creatorUsername]);*/
 
     const enableDeleteModal = (event) => {
         event.stopPropagation();
@@ -46,6 +43,13 @@ export default function Card({ card, addUnsavedBooks }) {
     const OnCardClick = (event) => {
         event.stopPropagation();
         setIsFlipped(!isFlipped);
+        if (!isFlipped && creatorPicture === "") {
+            if (card?.creatorUsername) {
+                getUser(card?.creatorUsername).then(data => {
+                    setCreatorPicture(data?.image);
+                });
+            }
+        }
     }
 
     const openInfo = (event) => {

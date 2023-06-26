@@ -2,7 +2,8 @@ import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 
 export function setToken(token) {
-  localStorage.setItem("token", token);
+  if (token !== null)
+    localStorage.setItem("token", token);
 }
 
 export function getToken() {
@@ -11,7 +12,8 @@ export function getToken() {
 
 export async function refreshToken() {
   const token = getToken();
-  return axios.post('http://localhost:8080/auth/refresh', { "token": token });
+  const response = await axios.post('http://localhost:8080/auth/refresh', { "token": token });
+  return response;
 }
 
 export function Logged() {

@@ -28,6 +28,7 @@ const Home = () => {
 
     useEffect(() => {
         //Pido los usuarios a los que estoy siguiendo
+        console.log("PIDO USUARIOS HOME")
         getFollowing(getUsername()).then((result) => {
             if (result !== []) {
                 setUsers(result.map(user => user.name));
@@ -38,9 +39,9 @@ const Home = () => {
             setRecommendedUsers(result);
         })
         //Pido la recomendación de un libro
-        /*getRecommendation().then((result) => {
+        getRecommendation().then((result) => {
             setDocumentRecommendation(result);
-        })*/
+        })
 
     }, [])
 

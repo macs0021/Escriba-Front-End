@@ -123,6 +123,7 @@ export async function getDocumentsSavedByUsername() {
 
 export async function getDocumentsReadByUsername() {
   try {
+    console.log("PARTE DENTRO");
     const response = await Interceptor.get(url + "/read/" + getUsername());
     return response.data;
   } catch (error) {

@@ -19,7 +19,6 @@ export default function Writting() {
     useEffect(() => {
         getPublicDocumentsByUsername(getUsername()).then(data => {
             setPublicBooks(data);
-            console.log("MOSTRANDO RATING:" + data[0].rating)
         })
 
         getPrivateDocumentsByUsername(getUsername()).then(data => {

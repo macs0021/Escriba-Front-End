@@ -56,8 +56,8 @@ const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks, genres }) => {
                     </div>
                 </div>
                 <div className='text-line column'>
+                    <p style={{ overflow: 'visible', marginTop: '4rem' }}>
                     <h2 className='center' >Synopsis </h2>
-                    <p style={{ overflow: 'visible' }}>
                         {synopsis ? synopsis : "There is not a synopsis yet"}
                     </p>
                 </div>

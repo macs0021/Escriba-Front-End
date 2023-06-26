@@ -24,7 +24,7 @@ const CommentPosting = ({ documentId, reloadContent, setEditing, editing, commen
         }else{
             post.commentType = "RESPONSE";
         }
-
+        
         if (editing) {
             putComment(comment.id, post).then(() => {
                 setEditing(false);
@@ -38,9 +38,8 @@ const CommentPosting = ({ documentId, reloadContent, setEditing, editing, commen
 
     }
 
-
     return (<>
-        <div className='comment-posting'>
+        <div style={{marginTop: '3rem'}}>
             <div className="center">
                 <input onChange={(event) => setText(event.target.value)} defaultValue={text} className='comment-text-area' />
             </div>

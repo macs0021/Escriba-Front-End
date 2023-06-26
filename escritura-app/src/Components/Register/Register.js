@@ -50,6 +50,7 @@ const Register = (props) => {
           const userObject = {
             username: name,
             password: password,
+            email: email,
             profileImage: base64String,
           };
 

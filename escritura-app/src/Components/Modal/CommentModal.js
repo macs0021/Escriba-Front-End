@@ -17,9 +17,11 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
     const [actualReplies, setActualReplies] = useState([]);
 
     useEffect(() => {
-        reloadContent();
+        if (modalState) {
+            reloadContent();
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [modalState]);
 
     const reloadContent = () => {
         getReviewsOfDocument(documentId).then((result) => {
