@@ -1,5 +1,5 @@
 import Galery from '../../Components/Galery/Galery'
-import './Writting.css';
+import './ReadingWritting.css';
 import { useState, useEffect } from 'react';
 import { getUsername } from '../../Services/TokenService';
 import Card from '../../Components/Card/Card';

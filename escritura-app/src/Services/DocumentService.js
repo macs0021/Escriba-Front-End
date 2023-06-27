@@ -44,7 +44,6 @@ export async function putDocument(documentId, document) {
 
 export async function getAllDocuments(page, pageSize) {
   try {
-    console.log(`${url}/all?page=${page}&pageSize=${pageSize}`);
     const response = await Interceptor.get(`${url}/all?page=${page}&pageSize=${pageSize}`);
     return response.data;
   } catch (error) {
@@ -67,10 +66,8 @@ export async function getDocumentsByUsername(username) {
 }
 
 export async function deleteDocument(documentId) {
-  console.log("BORRANDO");
   try {
     const response = await Interceptor.delete(url + "/" + documentId);
-    console.log("BORRANDO: " + documentId);
     return response;
   } catch (error) {
     if (error.response && error.response.status === 401) {
@@ -123,7 +120,6 @@ export async function getDocumentsSavedByUsername() {
 
 export async function getDocumentsReadByUsername() {
   try {
-    console.log("PARTE DENTRO");
     const response = await Interceptor.get(url + "/read/" + getUsername());
     return response.data;
   } catch (error) {

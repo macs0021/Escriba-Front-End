@@ -2,6 +2,7 @@ import SearchBar from '../../Components/SearchBar/SearchBar';
 import Galery from '../../Components/Galery/Galery';
 import Card from '../../Components/Card/Card';
 import { useEffect, useState } from 'react';
+import './ReadingWritting.css';
 import { getDocumentsSavedByUsername, getDocumentsReadByUsername } from '../../Services/DocumentService';
 import Loader from '../../Components/Loader/Loader';
 

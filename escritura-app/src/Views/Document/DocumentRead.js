@@ -119,8 +119,6 @@ export default function DocumentRead() {
         const target = event.target;
         const quillEditor = container.querySelector('.ql-editor');
 
-        console.log("Button: " + event.button)
-
         if (quillEditor && quillEditor.contains(target) && target.tagName === 'P') {
           setShowBubble(true);
         } else {

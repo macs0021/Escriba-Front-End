@@ -73,34 +73,27 @@
         min-width: 0;
         width: 21rem;
     }
-
     .comment-info {
         margin: 0;
         display: flex;
         width: 30% !important;
     }
-
     .star-icon {
         font-size: 1.2rem !important;
     }
-
     .comment-date-name {
         width: 4rem;
     }
-
     .comment-header {
         align-items: center;
         width: 100%;
     }
-
     .comment-container.reply {
         width: 30rem;
     }
 }
 
 @media (max-width: 550px) {
-    
-
     .comment-container.reply {
         width: 20rem;
     }

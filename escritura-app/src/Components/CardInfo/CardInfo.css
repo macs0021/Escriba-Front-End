@@ -17,20 +17,19 @@
     text-align: center;
 }
 
+.card-info-main-content {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 15px;
+    overflow-y: auto;
+}
 .text-line {
     justify-content: center;
-    max-height: 400px;
     word-break: initial;
     min-width: 0;
     text-align: center;
 }
-.card-info-main-content {
-    display: flex;
-    height: 35rem !important;
-    padding: 15px;
-    overflow-y: scroll;
-}
-
 @media (min-width: 768px) {
     .text-line {
         min-width: 40rem;

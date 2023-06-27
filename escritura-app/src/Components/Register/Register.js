@@ -57,7 +57,6 @@ const Register = (props) => {
           // Registro el usuario
           registerUser(userObject)
             .then((data) => {
-              console.log(data);
               props.setInRegister(false);
             })
         })
@@ -120,28 +119,28 @@ const Register = (props) => {
           <h2 className="register-tittle">Register now</h2>
         </div>
         <div className="center">
-          <MenuBookIcon style={{ fontSize: '200px', color: '#333' }}></MenuBookIcon>
+          <MenuBookIcon style={{ fontSize: '8rem', color: '#333' }}></MenuBookIcon>
         </div>
         <div className="row">
-          <p className="">Username </p>
+          <p className="register-text">Username </p>
           <p className="register-form-error">{userError}</p>
         </div>
         <input type="text" placeholder="User" value={name} onChange={(event) => onUsernameChange(event.target.value)} />
 
         <div className="row">
-          <p className="">Email</p>
+          <p className="register-text">Email</p>
           <p className="register-form-error">{emailError}</p>
         </div>
         <input type="text" placeholder="Email" value={email} onChange={(event) => onEmailChange(event.target.value)} />
 
         <div className="row">
-          <p className="">Password </p>
+          <p className="register-text">Password </p>
           <p className="register-form-error">{passwordError}</p>
         </div>
         <input type="password" placeholder="Password" value={password} onChange={(event) => onPasswordChange(event.target.value)} />
 
         <div className="row">
-          <p className="">Confirm password </p>
+          <p className="register-text">Confirm password </p>
           <p className="register-form-error">{confirmPasswordError}</p>
         </div>
         <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(event) => onConfirmPasswordChange(event.target.value)} />

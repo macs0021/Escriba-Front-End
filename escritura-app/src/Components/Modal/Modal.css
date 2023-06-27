@@ -16,7 +16,7 @@
     max-width: 800px;
     min-width: 300px;
     min-height: 6.25rem;
-    max-height: 95%;
+    max-height: 98%;
     background-color: #f3f3f3;
     position: relative;
     border-radius: 5px;
@@ -27,7 +27,7 @@
 
 .notification-modal {
     overflow-y: scroll;
-    max-height: 40rem;
+    max-height: 75vh;
     padding: 20px;
 }
 
@@ -35,7 +35,14 @@
     overflow-y: scroll;
     padding: 20px;
     padding-bottom: 0;
-    max-height: 45rem;
+    max-height: 70vh;
+}
+
+.comments-container {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @media (max-width: 768px) {
@@ -47,6 +54,13 @@
         width: 300px;
         word-wrap: break-word;
         overflow-wrap: break-word;
+    }
+
+    .creation-formulary-modal {
+        overflow-y: scroll;
+        padding: 20px;
+        padding-bottom: 0;
+        max-height: 100% !important;
     }
 
     .fullscreen {
@@ -85,7 +99,11 @@
     }
 
     .card-info-modal {
-        min-width: 0 !important;
+        overflow-y: scroll;
+        max-height: 100% !important;
+        height: 95% !important;
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
@@ -137,7 +155,7 @@
 }
 
 .modal-space {
-    max-height: 40rem;
+    max-height: 75vh;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -150,5 +168,8 @@
 }
 
 .card-info-modal {
-    min-width: 40rem;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

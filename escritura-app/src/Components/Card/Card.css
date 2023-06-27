@@ -3,8 +3,8 @@
     background-color: #f3f3f3;
     position: relative;
     cursor: pointer;
-    height: 23.5rem;
-    width: 17rem;
+    height: 376px;
+    width: 272px;
     display: flex;
     justify-content: center;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
@@ -184,7 +184,8 @@
     height: 1px;
     width: 100%;
 }
-.card-profile-data{
+
+.card-profile-data {
     display: flex;
     align-items: center;
     width: 100%;
@@ -237,21 +238,23 @@
     box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.18);
 }
 
-.card-link{
+.card-link {
     color: #333;
 }
-.card-link:hover{
+
+.card-link:hover {
     color: #333;
     font-weight: bold;
 }
-.icon-gap{
+
+.icon-gap {
     display: flex;
     gap: 1rem;
     align-items: center;
 }
-.delete-button{
+
+.delete-button {
     background-color: #c94c4c;
 }
-@media only screen and (max-width: 768px) {
-    
-  }
+
+@media (max-height: 800px) {}

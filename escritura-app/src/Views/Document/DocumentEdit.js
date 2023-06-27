@@ -125,8 +125,6 @@ export default function DocumentEdit() {
         "readings": docuData.readings,
       };
 
-      console.log("enviando datos: " + quill.root.innerHTML);
-
       putDocument(documentId, document);
 
     }, 5000);
@@ -134,10 +132,7 @@ export default function DocumentEdit() {
   }, [quill, docuData, toolbarConfig, documentId]);
 
   const handleButtonClick = ({ imagePrompt, width, height }) => {
-    console.log("prompt: " + imagePrompt);
-    console.log("width: " + width);
-    console.log("height: " + height);
-
+    
     const seed = Math.floor(Math.random() * 999999) + 1;
 
     const imgData = {

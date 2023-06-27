@@ -1,4 +1,4 @@
-import { setToken, dropToken, getUsername } from './TokenService';
+import { setToken, dropToken } from './TokenService';
 import axios from 'axios';
 
 const authUrl = "http://localhost:8080/auth";

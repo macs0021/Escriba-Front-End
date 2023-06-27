@@ -25,15 +25,11 @@ const Chips = ({ id, data, onClick, active }) => {
 
         setSelected(!selected);
     }
-
     return (
         <span id={id} className='unselected-chip selectable' onClick={changeState}>
             {data}
 
         </span>
     );
-
-
 }
-
 export default Chips;

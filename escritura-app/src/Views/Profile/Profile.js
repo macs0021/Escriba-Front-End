@@ -1,4 +1,4 @@
-import './ProfileV2.css'
+import './Profile.css'
 import { useEffect } from 'react';
 import Galery from '../../Components/Galery/Galery';
 import { getUsername } from '../../Services/TokenService';
@@ -29,7 +29,6 @@ const ProfileV2 = () => {
         if (user === null) return;
         resetStates();
         getUser(user).then(data => {
-
             setUserData(data);
             setFollowers(data.followers);
             setFollowing(data.following);

@@ -28,7 +28,6 @@ const Home = () => {
 
     useEffect(() => {
         //Pido los usuarios a los que estoy siguiendo
-        console.log("PIDO USUARIOS HOME")
         getFollowing(getUsername()).then((result) => {
             if (result !== []) {
                 setUsers(result.map(user => user.name));
@@ -49,7 +48,6 @@ const Home = () => {
     useEffect(() => {
         if (users.length > 0) {
             getActivityOfUsers(5, page, users).then((result) => {
-                console.log("PROBANDO: " + result)
                 if (!result || result.length < 5) {
                     setEnd(true);
                 } else {

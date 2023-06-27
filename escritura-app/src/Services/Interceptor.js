@@ -1,7 +1,5 @@
 import axios from 'axios';
 import { getToken, setToken, refreshToken } from './TokenService';
-import { logoutUser } from './AuthService';
-import { useNavigate } from 'react-router-dom';
 
 const Interceptor = axios.create({
   baseURL: 'http://localhost:8080/',
@@ -11,8 +9,6 @@ const Interceptor = axios.create({
 Interceptor.interceptors.request.use(
   (config) => {
     const token = getToken();
-    console.log("ENVIANDO TOKEN " + token)
-    console.log(`Making a ${config.method.toUpperCase()} request to ${config.url}`);
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
       config.headers['Content-Type'] = 'application/json';
@@ -50,7 +46,6 @@ Interceptor.interceptors.response.use(
       }
       return freshTokenPromise
         .then((token) => {
-          console.log("ENVIANDO TOKEN EN REFRESCO" + token)
           originalRequest.headers['Authorization'] = 'Bearer ' + token;
           return axios(originalRequest);
         })

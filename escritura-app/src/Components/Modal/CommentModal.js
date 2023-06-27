@@ -81,7 +81,6 @@ const CommentModal = ({ documentId, modalState, setModalState }) => {
                     {userComment && !editing ? (<>
                         <Comment comment={userComment} reloadContent={reloadContent} setEditing={editMode} />
                         <div className='comment-responses-button center' onClick={() => showReplies(userComment.id)}>replies</div>
-                        {/* reply */}
                         {selectReplies === userComment.id && <div className="center column" style={{ marginBot: '1rem' }}>
                             {!editingReply && userReply ? (
                                 <Comment comment={userReply} reloadContent={reloadContent} setEditing={editReply} isReply={true} />

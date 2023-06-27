@@ -47,13 +47,13 @@ const Login = () => {
         <form className="login-form" onSubmit={handleSubmit}>
             <h2 className="login-tittle center">Login now</h2>
             <div className="center">
-                <MenuBookIcon style={{ fontSize: '200px', color: '#333' }}></MenuBookIcon>
+                <MenuBookIcon style={{ fontSize: '8rem', color: '#333' }}></MenuBookIcon>
             </div>
             <div className="">
-                <p className="">Email</p>
+                <p className="login-text">User</p>
             </div>
             <input type="text" placeholder="User" value={user} onChange={(event) => onUserChange(event.target.value)} />
-            <p className="">Password</p>
+            <p className="login-text">Password</p>
             <input type="password" placeholder="Contraseña" value={password} onChange={(event) => onPasswordChange(event.target.value)} />
             {loginError && <p className="login-form-error center">Incorrect credentials</p>}
             <div className="center column">

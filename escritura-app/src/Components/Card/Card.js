@@ -1,7 +1,7 @@
 
 import './Card.css'
 import Modal from '../Modal/Modal'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CardInfo from '../CardInfo/CardInfo'
 import CardBack from './CardBack.js/CardBack';
 import DeleteDocumentModal from '../Modal/DeleteDocumentModal';
@@ -25,10 +25,6 @@ export default function Card({ card, addUnsavedBooks }) {
     const [isPublished, setIsPublished] = useState(card?.public);
 
     const [document, setDocument] = useState(card);
-
-    /*useEffect(() => {
-
-    }, [card?.creatorUsername]);*/
 
     const enableDeleteModal = (event) => {
         event.stopPropagation();
@@ -103,7 +99,9 @@ export default function Card({ card, addUnsavedBooks }) {
             <PublishModal card={document} publishModalState={publishModalState} setPublishModalState={setPublishModalState} setEditModalState={setEditModalState} isPublic={isPublished} setIsPublic={setIsPublished}></PublishModal>
 
             <Modal modalState={modalState} setModalState={setModalState} fullscreen={true}>
-                <CardInfo data={card} genres={document?.genres} tittle={document?.tittle} synopsis={document?.synopsis} addUnsavedBooks={addUnsavedBooks} />
+                <div className='card-info-modal'>
+                    <CardInfo data={card} genres={document?.genres} tittle={document?.tittle} synopsis={document?.synopsis} addUnsavedBooks={addUnsavedBooks} />
+                </div>
             </Modal>
         </>
     );

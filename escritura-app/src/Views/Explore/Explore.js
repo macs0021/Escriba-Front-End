@@ -55,7 +55,6 @@ export default function Explore() {
         getSearch(searchBarValue).then((result) => {
             const username = getUsername();
             const updatedUsers = result.filter(user => user.name !== username);
-            console.log("USERNAMES:" + JSON.stringify(updatedUsers))
             setUsers(updatedUsers);
         });
     }

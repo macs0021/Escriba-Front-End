@@ -14,6 +14,7 @@ const Modal = ({ children, modalState, setModalState, tittle, fullscreen }) => {
             document.body.style.overflow = 'auto';
         };
     }, [modalState]);
+    
     return (
         <>
             {modalState &&

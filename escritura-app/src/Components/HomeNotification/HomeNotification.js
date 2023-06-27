@@ -120,7 +120,7 @@ const HomeNotification = ({ notification }) => {
             </div>
         </div>
         <Modal setModalState={setModalState} modalState={modalState} fullscreen={true} tittle={"Notification info"} >
-            <div className='notification-modal' style={{ height: '100%' }}>
+            <div className='notification-modal'>
                 <h3 className='center'>Document</h3>
                 <Galery>
                     <Card card={document}></Card>

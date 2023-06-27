@@ -2,13 +2,13 @@ import './App.css';
 import DocumentEdit from './Views/Document/DocumentEdit';
 import DocumentRead from './Views/Document/DocumentRead';
 import Explore from './Views/Explore/Explore';
-import Writting from './Views/Writting/Writting'
+import Writting from './Views/Writting and Reading/Writting'
 import Authentication from './Views/Authentication/Authentication';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Views/Home/Home';
 import Guard from './Guard/Guard';
-import ProfileV2 from './Views/ProfileV2/ProfileV2';
-import Reading from './Views/Reading/Reading';
+import Profile from './Views/Profile/Profile';
+import Reading from './Views/Writting and Reading/Reading';
 import DocumentGuard from './Guard/DocumentGuard';
 import PrivateDocumentGuard from './Guard/PrivateDocumentGuard';
 import UrlDoesntExistGuard from './Guard/UrlDoesntExistGuard';
@@ -24,7 +24,7 @@ function App() {
             <Route
               path="/profile/:username"
               element={<Guard>
-                <ProfileV2 />
+                <Profile />
               </Guard>}
             />
             <Route

@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  font-size: 1rem;
   text-align: center;
   width: 100%;
 }
@@ -22,6 +23,7 @@
   border-radius: 4px;
   box-sizing: border-box;
   margin-bottom: 10px;
+  height: 2rem;
 }
 
 .register-tittle {
@@ -40,7 +42,6 @@
 
 .register-button {
   margin-top: 1rem;
-
 }
 
 .register-form input[type="text"]::placeholder,
@@ -50,9 +51,53 @@
   color: #ccc;
 }
 
-@media (max-width: 550px) {
+@media (max-height: 800px) {
   .register-form {
     justify-content: space-around;
-    height: 90%;
+  }
+
+  .register-text {
+    font-size: 0.8rem !important;
+    /* Disminuye aún más el tamaño de fuente en pantallas muy pequeñas */
+  }
+
+  .register-form input[type="text"],
+  .register-form input[type="email"],
+  .register-form input[type="password"] {
+    height: 1.6rem;
+    /* Disminuye aún más la altura en pantallas muy pequeñas */
+    margin-bottom: -0.25rem;
+    margin-top: -0.5rem;
+  }
+
+  .register-form-error {
+    color: #D8000C;
+    font-size: 0.8rem !important;
+    
+  }
+
+  .register-tittle {
+    font-size: 1.6em;
+  }
+}
+
+
+@media (max-height: 550px) {
+  .register-form {
+    justify-content: space-around;
+  }
+
+  .register-form label {
+    font-size: 0.7rem;
+  }
+
+  .register-form input[type="text"],
+  .register-form input[type="email"],
+  .register-form input[type="password"] {
+    height: 1.6rem;
+  }
+
+  .register-tittle {
+    font-size: 1.6em;
   }
 }

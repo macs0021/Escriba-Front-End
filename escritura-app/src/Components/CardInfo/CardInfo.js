@@ -37,8 +37,9 @@ const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks, genres }) => {
         setSaved(savedByList.includes(getUsername()));
     }, [data]);
 
-    return (<>
-        <div style={{ height: '100%' }}>
+    return (
+    <>
+        <div>
             <div className='content-line'>
                 <h1>{tittle}</h1>
             </div>
@@ -56,20 +57,19 @@ const CardInfo = ({ data, tittle, synopsis, addUnsavedBooks, genres }) => {
                     </div>
                 </div>
                 <div className='text-line column'>
-                    <p style={{ overflow: 'visible', marginTop: '4rem' }}>
-                    <h2 className='center' >Synopsis </h2>
+                    <h2 className='center'>Synopsis </h2>
+                    <div style={{ overflow: 'visible', marginTop: '0.5rem', alignItems: 'flex-start', textOverflow: 'revert' }}>
                         {synopsis ? synopsis : "There is not a synopsis yet"}
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div className='content-line border-top'>
+        <div className='content-line border-top' style={{marginTop: 'auto'}}>
             <div className='buttons-line'>
                 <button className='accept-button button' onClick={save}>{saved ? 'Unsave' : 'Save'}</button>
                 <button className='accept-button button' onClick={read}>Read</button>
             </div>
         </div>
-
     </>);
 }
 

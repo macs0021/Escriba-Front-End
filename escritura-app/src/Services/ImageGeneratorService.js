@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "https://8c32-35-185-128-50.ngrok-free.app";
+const url = process.env.REACT_APP_IMAGE_GENERATOR_API_URL;
 
 export async function generateImage(postData) {
   const options = {
